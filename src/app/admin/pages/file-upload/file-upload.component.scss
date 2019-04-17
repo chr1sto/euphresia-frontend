@@ -1,0 +1,42 @@
+mat-card
+{
+    max-width: 480px;
+    max-height: 300px;
+}
+
+mat-card img{
+    max-height: calc(180px);
+    object-fit:scale-down;
+}
+
+.container
+{
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+}
+
+h1
+{
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 20px;
+}
+
+.file-upload-float
+{
+    position: fixed;
+    z-index: 3;
+    bottom: 20px;
+    right: 20px;
+}
+
+.add-file-icon
+{
+    font-size: 72px !important;
+    color: #1a237e;
+}
+
+.file-item
+{
+    margin: 20px;
+}

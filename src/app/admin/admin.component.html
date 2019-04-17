@@ -52,6 +52,16 @@
                         Accounts
                     </span>
                 </mat-toolbar-row>
+                <mat-toolbar-row class="nav-item" routerLink="file-upload" [class.is-active]="this.router.url==='/admin/file-upload'">
+                    <span>
+                        <i class="material-icons">
+                            cloud_upload
+                        </i>
+                    </span>
+                    <span>
+                        Upload
+                    </span>
+                </mat-toolbar-row>
                 <mat-toolbar-row class="nav-section">
                     <span>Game</span>
                 </mat-toolbar-row>
@@ -75,6 +85,47 @@
                         Characters
                     </span>
                 </mat-toolbar-row>
+                <mat-toolbar-row class="nav-item" routerLink="game-patches" [class.is-active]="this.router.url==='/admin/game-patches'">
+                    <span>
+                        <i class="material-icons">
+                            update
+                        </i>
+                    </span>
+                    <span>
+                        Patches
+                    </span>
+                </mat-toolbar-row>
+                <mat-toolbar-row class="nav-item" routerLink="game-downloads" [class.is-active]="this.router.url==='/admin/game-downloads'">
+                    <span>
+                        <i class="material-icons">
+                            cloud_download
+                        </i>
+                    </span>
+                    <span>
+                        Downloads
+                    </span>
+                </mat-toolbar-row>
+                <mat-toolbar-row class="nav-item" routerLink="game-items" [class.is-active]="this.router.url==='/admin/game-items'">
+                    <span>
+                        <i class="material-icons">
+                            view_list
+                        </i>
+                    </span>
+                    <span>
+                        Items
+                    </span>
+                </mat-toolbar-row>
+                <mat-toolbar-row class="nav-item" routerLink="game-activity" [class.is-active]="this.router.url==='/admin/game-activity'">
+                    <span>
+                        <i class="material-icons">
+                            history
+                        </i>
+                    </span>
+                    <span>
+                        Activity
+                    </span>
+                </mat-toolbar-row>
+
                 <mat-toolbar-row class="nav-section">
                     <span>Development</span>
                 </mat-toolbar-row>

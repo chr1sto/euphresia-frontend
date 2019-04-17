@@ -8,6 +8,7 @@ import { NewsManagmentComponent } from './pages/news-managment/news-managment.co
 import { GeneralAccountsComponent } from './pages/general-accounts/general-accounts.component';
 import { GameDashboardComponent } from './pages/game-dashboard/game-dashboard.component';
 import { DeveloperEventsComponent } from './pages/developer-events/developer-events.component';
+import { FileUploadComponent } from './pages/file-upload/file-upload.component';
 
 const routes : Routes =
 [
@@ -40,6 +41,10 @@ const routes : Routes =
             {
                 path: 'developer-events',
                 component: DeveloperEventsComponent
+            },
+            {
+                path: 'file-upload',
+                component: FileUploadComponent
             }
         ]
     }

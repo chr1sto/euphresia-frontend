@@ -16,6 +16,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { ServiceStatusItemComponent } from './components/service-status-item/service-status-item.component';
 import {MatTableModule} from '@angular/material/table';
+import { FileUploadComponent } from './pages/file-upload/file-upload.component';
 
 
 
@@ -27,7 +28,8 @@ import {MatTableModule} from '@angular/material/table';
         NewsManagmentComponent,
         GameDashboardComponent,
         DeveloperEventsComponent,
-        ServiceStatusItemComponent
+        ServiceStatusItemComponent,
+        FileUploadComponent
     ],
     imports: [
       CommonModule,
