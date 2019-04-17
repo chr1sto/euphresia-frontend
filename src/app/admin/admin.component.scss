@@ -1,0 +1,100 @@
+//TODO ADD TO THEME
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+.main-toolbar
+{
+    background-color: #212121;
+}
+
+mat-toolbar span
+{
+    color: white;
+}
+
+mat-drawer
+{
+    width: 200px;
+}
+
+mat-drawer-container
+{
+    height: 100vh;
+}
+
+.logo
+{
+ 
+    height: 100%;
+    width: 200px;
+    text-align: center;
+    margin: -16px;
+}
+
+.logo h1
+{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%); 
+    color: rgba(255,255,255,0.8);
+    font-family: 'Roboto', sans-serif;
+    font-size: 32px;
+}
+
+.sidenav-toolbar
+{
+    background-color: transparent;
+}
+
+.sidenav-toolbar .material-icons
+{
+    padding: 5px;
+    font-size: 30px;
+}
+
+.nav
+{
+    background-color: #FF3CAC;
+    background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);   
+    height: 100%;
+    width: 100%;
+}
+
+.nav-section
+{
+
+}
+
+.nav-item
+{
+    font-size:16px;
+    height: 36px;
+}
+
+.nav-item:hover
+{
+    background-color: rgba(221, 221, 221, 0.2);
+    cursor: pointer;
+}
+
+.nav-item .material-icons
+{
+    padding: 8px;
+    font-size: 26px;
+}
+
+.fill-space {
+    flex: 1 1 auto;
+  }
+
+.is-active
+{
+    background-color: rgba(24, 22, 22, 0.2);
+}
+
+.container
+{
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+}

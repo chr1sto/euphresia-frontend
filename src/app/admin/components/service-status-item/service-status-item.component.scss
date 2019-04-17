@@ -1,0 +1,20 @@
+.fill-space {
+    flex: 1 1 auto;
+  }
+
+.is-online
+{
+    background-image: linear-gradient(to bottom, #21c012, #249b18, #237719, #1f5617, #193613) !important;
+    color: White;
+}
+
+.is-offline
+{
+    background-image: linear-gradient(to bottom, #d10000, #a70012, #7c0117, #520814, #2a080a) !important;
+    color: White;
+}
+
+.is-maintenance
+{
+    background-image: linear-gradient(to bottom, #f8ed00, #ffcf00, #ffb000, #ff9000, #ff6f00) !important;
+}

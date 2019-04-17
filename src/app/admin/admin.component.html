@@ -1,1 +1,103 @@
-WORKS!
+<mat-toolbar class="main-toolbar">
+    <mat-toolbar-row>
+        <span>Orbit</span>
+        <span class="fill-space"></span>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+            <ngx-avatar name="{{this.auth.userInfo.email}}" size="32"></ngx-avatar>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+                <span>Logout</span>
+            </button>
+            <button mat-menu-item>
+                <span>Go back To Homepage</span>
+            </button>
+        </mat-menu>
+    </mat-toolbar-row>
+</mat-toolbar>
+<mat-drawer-container>
+    <mat-drawer mode="side" opened>
+        <div class="nav">
+            <mat-toolbar class="sidenav-toolbar">
+                <mat-toolbar-row class="nav-section">
+                    <span>General</span>
+                </mat-toolbar-row>
+                <mat-toolbar-row class="nav-item" routerLink="dashboard" [class.is-active]="this.router.url==='/admin'">
+                    <span>
+                        <i class="material-icons">
+                            dashboard
+                        </i>
+                    </span>
+                    <span>
+                        Dashboard
+                    </span>
+                </mat-toolbar-row>
+                <mat-toolbar-row class="nav-item" routerLink="news" [class.is-active]="this.router.url==='/admin/news'">
+                    <span>
+                        <i class="material-icons">
+                            insert_drive_file
+                        </i>
+                    </span>
+                    <span>
+                        News
+                    </span>
+                </mat-toolbar-row>
+                <mat-toolbar-row class="nav-item" routerLink="accounts" [class.is-active]="this.router.url==='/admin/accounts'">
+                    <span>
+                        <i class="material-icons">
+                            account_box
+                        </i>
+                    </span>
+                    <span>
+                        Accounts
+                    </span>
+                </mat-toolbar-row>
+                <mat-toolbar-row class="nav-section">
+                    <span>Game</span>
+                </mat-toolbar-row>
+                <mat-toolbar-row class="nav-item" routerLink="game-dashboard" [class.is-active]="this.router.url==='/admin/game-dashboard'">
+                    <span>
+                        <i class="material-icons">
+                            dashboard
+                        </i>
+                    </span>
+                    <span>
+                        Dashboard
+                    </span>
+                </mat-toolbar-row>
+                <mat-toolbar-row class="nav-item">
+                    <span>
+                        <i class="material-icons">
+                            person
+                        </i>
+                    </span>
+                    <span>
+                        Characters
+                    </span>
+                </mat-toolbar-row>
+                <mat-toolbar-row class="nav-section">
+                    <span>Development</span>
+                </mat-toolbar-row>
+                <mat-toolbar-row class="nav-item" routerLink="developer-events" [class.is-active]="this.router.url==='/admin/developer-events'">
+                    <span>
+                        <i class="material-icons">
+                            event
+                        </i>
+                    </span>
+                    <span>
+                        Events
+                    </span>
+                </mat-toolbar-row>
+            </mat-toolbar>
+        </div>
+    </mat-drawer>
+    <mat-drawer-content>
+        <div class="container">
+            <router-outlet>
+
+            </router-outlet>
+        </div>
+
+    </mat-drawer-content>
+</mat-drawer-container>
+

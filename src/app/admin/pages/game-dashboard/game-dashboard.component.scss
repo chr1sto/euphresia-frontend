@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+  }
+
+  .service-status-item
+  {
+      width: 300px;
+      margin: 20px;
+  }
+
+h1
+{
+    font-family: 'Roboto', sans-serif;
+}

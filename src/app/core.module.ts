@@ -1,10 +1,12 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { API_BASE_URL, AccountService } from './shared/services/generated.services';
+import { API_BASE_URL, AccountService, ServiceStatusService, GameEventService } from './shared/services/generated.services';
 import { JwtInterceptor } from './shared/helpers/jwt.interceptor';
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthenticationService } from './shared/services/auth.service';
 import { AdminGuardService } from './shared/guards/admin-guard';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
+import { AvatarModule } from "ngx-avatar";
 
 export class AppConsts
 {
@@ -19,7 +21,9 @@ export function getBaseUrl() : string {
     {
         imports:[
             CommonModule,
-            HttpClientModule
+            HttpClientModule,
+            BrowserAnimationsModule,
+            AvatarModule
         ],
         declarations:[],
         providers: []
@@ -43,7 +47,9 @@ export class CoreModule
                 {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
                 AccountService,
                 AuthenticationService,
-                AdminGuardService
+                AdminGuardService,
+                ServiceStatusService,
+                GameEventService
             ]
         }
     }

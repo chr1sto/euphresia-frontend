@@ -1170,7 +1170,7 @@ export class ServiceStatusService {
     /**
      * @return Success
      */
-    recentHidden(): Observable<ServiceStatusViewModel[]> {
+    recentHidden(): Observable<ApiResultOfIEnumerableOfServiceStatusViewModel> {
         let url_ = this.baseUrl + "/api/v1/service-status/recent-hidden";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1189,14 +1189,14 @@ export class ServiceStatusService {
                 try {
                     return this.processRecentHidden(<any>response_);
                 } catch (e) {
-                    return <Observable<ServiceStatusViewModel[]>><any>_observableThrow(e);
+                    return <Observable<ApiResultOfIEnumerableOfServiceStatusViewModel>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<ServiceStatusViewModel[]>><any>_observableThrow(response_);
+                return <Observable<ApiResultOfIEnumerableOfServiceStatusViewModel>><any>_observableThrow(response_);
         }));
     }
 
-    protected processRecentHidden(response: HttpResponseBase): Observable<ServiceStatusViewModel[]> {
+    protected processRecentHidden(response: HttpResponseBase): Observable<ApiResultOfIEnumerableOfServiceStatusViewModel> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
@@ -1207,11 +1207,7 @@ export class ServiceStatusService {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            if (resultData200 && resultData200.constructor === Array) {
-                result200 = [] as any;
-                for (let item of resultData200)
-                    result200!.push(ServiceStatusViewModel.fromJS(item));
-            }
+            result200 = resultData200 ? ApiResultOfIEnumerableOfServiceStatusViewModel.fromJS(resultData200) : new ApiResultOfIEnumerableOfServiceStatusViewModel();
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -1219,14 +1215,14 @@ export class ServiceStatusService {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<ServiceStatusViewModel[]>(<any>null);
+        return _observableOf<ApiResultOfIEnumerableOfServiceStatusViewModel>(<any>null);
     }
 
     /**
      * @param model (optional) 
      * @return Success
      */
-    serviceStatusPost(model: ServiceStatusViewModel | null | undefined): Observable<ServiceStatusViewModel> {
+    serviceStatusPost(model: ServiceStatusViewModel | null | undefined): Observable<ApiResultOfServiceStatusViewModel> {
         let url_ = this.baseUrl + "/api/v1/service-status";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1249,14 +1245,14 @@ export class ServiceStatusService {
                 try {
                     return this.processServiceStatusPost(<any>response_);
                 } catch (e) {
-                    return <Observable<ServiceStatusViewModel>><any>_observableThrow(e);
+                    return <Observable<ApiResultOfServiceStatusViewModel>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<ServiceStatusViewModel>><any>_observableThrow(response_);
+                return <Observable<ApiResultOfServiceStatusViewModel>><any>_observableThrow(response_);
         }));
     }
 
-    protected processServiceStatusPost(response: HttpResponseBase): Observable<ServiceStatusViewModel> {
+    protected processServiceStatusPost(response: HttpResponseBase): Observable<ApiResultOfServiceStatusViewModel> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
@@ -1267,14 +1263,14 @@ export class ServiceStatusService {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = resultData200 ? ServiceStatusViewModel.fromJS(resultData200) : new ServiceStatusViewModel();
+            result200 = resultData200 ? ApiResultOfServiceStatusViewModel.fromJS(resultData200) : new ApiResultOfServiceStatusViewModel();
             return _observableOf(result200);
             }));
         } else if (status === 400) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result400: any = null;
             let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = resultData400 ? ServiceStatusViewModel.fromJS(resultData400) : new ServiceStatusViewModel();
+            result400 = resultData400 ? ApiResultOfServiceStatusViewModel.fromJS(resultData400) : new ApiResultOfServiceStatusViewModel();
             return throwException("A server error occurred.", status, _responseText, _headers, result400);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -1282,7 +1278,7 @@ export class ServiceStatusService {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<ServiceStatusViewModel>(<any>null);
+        return _observableOf<ApiResultOfServiceStatusViewModel>(<any>null);
     }
 
     /**
@@ -1343,7 +1339,7 @@ export class ServiceStatusService {
      * @param model (optional) 
      * @return Success
      */
-    serviceStatusPatch(model: ServiceStatusViewModel | null | undefined): Observable<ServiceStatusViewModel> {
+    serviceStatusPatch(model: ServiceStatusViewModel | null | undefined): Observable<ApiResultOfServiceStatusViewModel> {
         let url_ = this.baseUrl + "/api/v1/service-status";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1366,14 +1362,14 @@ export class ServiceStatusService {
                 try {
                     return this.processServiceStatusPatch(<any>response_);
                 } catch (e) {
-                    return <Observable<ServiceStatusViewModel>><any>_observableThrow(e);
+                    return <Observable<ApiResultOfServiceStatusViewModel>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<ServiceStatusViewModel>><any>_observableThrow(response_);
+                return <Observable<ApiResultOfServiceStatusViewModel>><any>_observableThrow(response_);
         }));
     }
 
-    protected processServiceStatusPatch(response: HttpResponseBase): Observable<ServiceStatusViewModel> {
+    protected processServiceStatusPatch(response: HttpResponseBase): Observable<ApiResultOfServiceStatusViewModel> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
@@ -1384,14 +1380,14 @@ export class ServiceStatusService {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = resultData200 ? ServiceStatusViewModel.fromJS(resultData200) : new ServiceStatusViewModel();
+            result200 = resultData200 ? ApiResultOfServiceStatusViewModel.fromJS(resultData200) : new ApiResultOfServiceStatusViewModel();
             return _observableOf(result200);
             }));
         } else if (status === 400) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result400: any = null;
             let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = resultData400 ? ServiceStatusViewModel.fromJS(resultData400) : new ServiceStatusViewModel();
+            result400 = resultData400 ? ApiResultOfServiceStatusViewModel.fromJS(resultData400) : new ApiResultOfServiceStatusViewModel();
             return throwException("A server error occurred.", status, _responseText, _headers, result400);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -1399,7 +1395,7 @@ export class ServiceStatusService {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<ServiceStatusViewModel>(<any>null);
+        return _observableOf<ApiResultOfServiceStatusViewModel>(<any>null);
     }
 }
 
@@ -2259,6 +2255,66 @@ export interface INewsPostViewModel {
     createdOn?: Date | null;
 }
 
+export class ApiResultOfIEnumerableOfServiceStatusViewModel implements IApiResultOfIEnumerableOfServiceStatusViewModel {
+    data?: ServiceStatusViewModel[] | null;
+    success?: boolean | null;
+    errors?: string[] | null;
+
+    constructor(data?: IApiResultOfIEnumerableOfServiceStatusViewModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            if (data["data"] && data["data"].constructor === Array) {
+                this.data = [] as any;
+                for (let item of data["data"])
+                    this.data!.push(ServiceStatusViewModel.fromJS(item));
+            }
+            this.success = data["success"] !== undefined ? data["success"] : <any>null;
+            if (data["errors"] && data["errors"].constructor === Array) {
+                this.errors = [] as any;
+                for (let item of data["errors"])
+                    this.errors!.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): ApiResultOfIEnumerableOfServiceStatusViewModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new ApiResultOfIEnumerableOfServiceStatusViewModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (this.data && this.data.constructor === Array) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        data["success"] = this.success !== undefined ? this.success : <any>null;
+        if (this.errors && this.errors.constructor === Array) {
+            data["errors"] = [];
+            for (let item of this.errors)
+                data["errors"].push(item);
+        }
+        return data; 
+    }
+}
+
+export interface IApiResultOfIEnumerableOfServiceStatusViewModel {
+    data?: ServiceStatusViewModel[] | null;
+    success?: boolean | null;
+    errors?: string[] | null;
+}
+
 export class ServiceStatusViewModel implements IServiceStatusViewModel {
     id?: string | null;
     service!: string;
@@ -2305,6 +2361,58 @@ export interface IServiceStatusViewModel {
     service: string;
     timeStamp?: Date | null;
     state?: number | null;
+}
+
+export class ApiResultOfServiceStatusViewModel implements IApiResultOfServiceStatusViewModel {
+    data?: ServiceStatusViewModel | null;
+    success?: boolean | null;
+    errors?: string[] | null;
+
+    constructor(data?: IApiResultOfServiceStatusViewModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.data = data["data"] ? ServiceStatusViewModel.fromJS(data["data"]) : <any>null;
+            this.success = data["success"] !== undefined ? data["success"] : <any>null;
+            if (data["errors"] && data["errors"].constructor === Array) {
+                this.errors = [] as any;
+                for (let item of data["errors"])
+                    this.errors!.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): ApiResultOfServiceStatusViewModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new ApiResultOfServiceStatusViewModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["data"] = this.data ? this.data.toJSON() : <any>null;
+        data["success"] = this.success !== undefined ? this.success : <any>null;
+        if (this.errors && this.errors.constructor === Array) {
+            data["errors"] = [];
+            for (let item of this.errors)
+                data["errors"].push(item);
+        }
+        return data; 
+    }
+}
+
+export interface IApiResultOfServiceStatusViewModel {
+    data?: ServiceStatusViewModel | null;
+    success?: boolean | null;
+    errors?: string[] | null;
 }
 
 export class SwaggerException extends Error {
