@@ -152,6 +152,134 @@ export class AccountService {
         }
         return _observableOf<ApiResultOfRegisterViewModel>(<any>null);
     }
+
+    /**
+     * @param index (optional) 
+     * @param count (optional) 
+     * @param searchText (optional) 
+     * @return Success
+     */
+    account(index?: number | null | undefined, count?: number | null | undefined, searchText?: string | null | undefined): Observable<ApiResultOfPagedResultDataOfIPagedListOfApplicationUser> {
+        let url_ = this.baseUrl + "/api/v1/account?";
+        if (index !== undefined)
+            url_ += "index=" + encodeURIComponent("" + index) + "&"; 
+        if (count !== undefined)
+            url_ += "count=" + encodeURIComponent("" + count) + "&"; 
+        if (searchText !== undefined)
+            url_ += "searchText=" + encodeURIComponent("" + searchText) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processAccount(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processAccount(<any>response_);
+                } catch (e) {
+                    return <Observable<ApiResultOfPagedResultDataOfIPagedListOfApplicationUser>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ApiResultOfPagedResultDataOfIPagedListOfApplicationUser>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processAccount(response: HttpResponseBase): Observable<ApiResultOfPagedResultDataOfIPagedListOfApplicationUser> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? ApiResultOfPagedResultDataOfIPagedListOfApplicationUser.fromJS(resultData200) : new ApiResultOfPagedResultDataOfIPagedListOfApplicationUser();
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result400 = resultData400 ? ApiResultOfPagedResultDataOfIPagedListOfApplicationUser.fromJS(resultData400) : new ApiResultOfPagedResultDataOfIPagedListOfApplicationUser();
+            return throwException("A server error occurred.", status, _responseText, _headers, result400);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ApiResultOfPagedResultDataOfIPagedListOfApplicationUser>(<any>null);
+    }
+
+    /**
+     * @return Success
+     */
+    accountGetByid(id: string): Observable<ApiResultOfApplicationUser> {
+        let url_ = this.baseUrl + "/api/v1/account/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processAccountGetByid(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processAccountGetByid(<any>response_);
+                } catch (e) {
+                    return <Observable<ApiResultOfApplicationUser>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ApiResultOfApplicationUser>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processAccountGetByid(response: HttpResponseBase): Observable<ApiResultOfApplicationUser> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? ApiResultOfApplicationUser.fromJS(resultData200) : new ApiResultOfApplicationUser();
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result400 = resultData400 ? ApiResultOfApplicationUser.fromJS(resultData400) : new ApiResultOfApplicationUser();
+            return throwException("A server error occurred.", status, _responseText, _headers, result400);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ApiResultOfApplicationUser>(<any>null);
+    }
 }
 
 @Injectable({
@@ -1246,6 +1374,81 @@ export class NewsService {
 @Injectable({
     providedIn: 'root'
 })
+export class RolesService {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl ? baseUrl : "";
+    }
+
+    /**
+     * @return Success
+     */
+    rolesGetByuserid(userId: string): Observable<ApiResultOfStringOf> {
+        let url_ = this.baseUrl + "/api/v1/roles/{userid}";
+        if (userId === undefined || userId === null)
+            throw new Error("The parameter 'userId' must be defined.");
+        url_ = url_.replace("{userId}", encodeURIComponent("" + userId)); 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processRolesGetByuserid(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processRolesGetByuserid(<any>response_);
+                } catch (e) {
+                    return <Observable<ApiResultOfStringOf>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ApiResultOfStringOf>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processRolesGetByuserid(response: HttpResponseBase): Observable<ApiResultOfStringOf> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? ApiResultOfStringOf.fromJS(resultData200) : new ApiResultOfStringOf();
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result400 = resultData400 ? ApiResultOfStringOf.fromJS(resultData400) : new ApiResultOfStringOf();
+            return throwException("A server error occurred.", status, _responseText, _headers, result400);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ApiResultOfStringOf>(<any>null);
+    }
+}
+
+@Injectable({
+    providedIn: 'root'
+})
 export class ServiceStatusService {
     private http: HttpClient;
     private baseUrl: string;
@@ -1728,6 +1931,262 @@ export class ApiResultOfRegisterViewModel implements IApiResultOfRegisterViewMod
 
 export interface IApiResultOfRegisterViewModel {
     data?: RegisterViewModel | null;
+    success?: boolean | null;
+    errors?: string[] | null;
+}
+
+export class ApiResultOfPagedResultDataOfIPagedListOfApplicationUser implements IApiResultOfPagedResultDataOfIPagedListOfApplicationUser {
+    data?: PagedResultDataOfIPagedListOfApplicationUser | null;
+    success?: boolean | null;
+    errors?: string[] | null;
+
+    constructor(data?: IApiResultOfPagedResultDataOfIPagedListOfApplicationUser) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.data = data["data"] ? PagedResultDataOfIPagedListOfApplicationUser.fromJS(data["data"]) : <any>null;
+            this.success = data["success"] !== undefined ? data["success"] : <any>null;
+            if (data["errors"] && data["errors"].constructor === Array) {
+                this.errors = [] as any;
+                for (let item of data["errors"])
+                    this.errors!.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): ApiResultOfPagedResultDataOfIPagedListOfApplicationUser {
+        data = typeof data === 'object' ? data : {};
+        let result = new ApiResultOfPagedResultDataOfIPagedListOfApplicationUser();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["data"] = this.data ? this.data.toJSON() : <any>null;
+        data["success"] = this.success !== undefined ? this.success : <any>null;
+        if (this.errors && this.errors.constructor === Array) {
+            data["errors"] = [];
+            for (let item of this.errors)
+                data["errors"].push(item);
+        }
+        return data; 
+    }
+}
+
+export interface IApiResultOfPagedResultDataOfIPagedListOfApplicationUser {
+    data?: PagedResultDataOfIPagedListOfApplicationUser | null;
+    success?: boolean | null;
+    errors?: string[] | null;
+}
+
+export class PagedResultDataOfIPagedListOfApplicationUser implements IPagedResultDataOfIPagedListOfApplicationUser {
+    content?: ApplicationUser[] | null;
+    recordCount?: number | null;
+    currentIndex?: number | null;
+    currentCountPerPage?: number | null;
+    pageCount?: number | null;
+
+    constructor(data?: IPagedResultDataOfIPagedListOfApplicationUser) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            if (data["content"] && data["content"].constructor === Array) {
+                this.content = [] as any;
+                for (let item of data["content"])
+                    this.content!.push(ApplicationUser.fromJS(item));
+            }
+            this.recordCount = data["recordCount"] !== undefined ? data["recordCount"] : <any>null;
+            this.currentIndex = data["currentIndex"] !== undefined ? data["currentIndex"] : <any>null;
+            this.currentCountPerPage = data["currentCountPerPage"] !== undefined ? data["currentCountPerPage"] : <any>null;
+            this.pageCount = data["pageCount"] !== undefined ? data["pageCount"] : <any>null;
+        }
+    }
+
+    static fromJS(data: any): PagedResultDataOfIPagedListOfApplicationUser {
+        data = typeof data === 'object' ? data : {};
+        let result = new PagedResultDataOfIPagedListOfApplicationUser();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (this.content && this.content.constructor === Array) {
+            data["content"] = [];
+            for (let item of this.content)
+                data["content"].push(item.toJSON());
+        }
+        data["recordCount"] = this.recordCount !== undefined ? this.recordCount : <any>null;
+        data["currentIndex"] = this.currentIndex !== undefined ? this.currentIndex : <any>null;
+        data["currentCountPerPage"] = this.currentCountPerPage !== undefined ? this.currentCountPerPage : <any>null;
+        data["pageCount"] = this.pageCount !== undefined ? this.pageCount : <any>null;
+        return data; 
+    }
+}
+
+export interface IPagedResultDataOfIPagedListOfApplicationUser {
+    content?: ApplicationUser[] | null;
+    recordCount?: number | null;
+    currentIndex?: number | null;
+    currentCountPerPage?: number | null;
+    pageCount?: number | null;
+}
+
+export class ApplicationUser implements IApplicationUser {
+    id?: string | null;
+    userName?: string | null;
+    normalizedUserName?: string | null;
+    email?: string | null;
+    normalizedEmail?: string | null;
+    emailConfirmed?: boolean | null;
+    passwordHash?: string | null;
+    securityStamp?: string | null;
+    concurrencyStamp?: string | null;
+    phoneNumber?: string | null;
+    phoneNumberConfirmed?: boolean | null;
+    twoFactorEnabled?: boolean | null;
+    lockoutEnd?: Date | null;
+    lockoutEnabled?: boolean | null;
+    accessFailedCount?: number | null;
+
+    constructor(data?: IApplicationUser) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.id = data["id"] !== undefined ? data["id"] : <any>null;
+            this.userName = data["userName"] !== undefined ? data["userName"] : <any>null;
+            this.normalizedUserName = data["normalizedUserName"] !== undefined ? data["normalizedUserName"] : <any>null;
+            this.email = data["email"] !== undefined ? data["email"] : <any>null;
+            this.normalizedEmail = data["normalizedEmail"] !== undefined ? data["normalizedEmail"] : <any>null;
+            this.emailConfirmed = data["emailConfirmed"] !== undefined ? data["emailConfirmed"] : <any>null;
+            this.passwordHash = data["passwordHash"] !== undefined ? data["passwordHash"] : <any>null;
+            this.securityStamp = data["securityStamp"] !== undefined ? data["securityStamp"] : <any>null;
+            this.concurrencyStamp = data["concurrencyStamp"] !== undefined ? data["concurrencyStamp"] : <any>null;
+            this.phoneNumber = data["phoneNumber"] !== undefined ? data["phoneNumber"] : <any>null;
+            this.phoneNumberConfirmed = data["phoneNumberConfirmed"] !== undefined ? data["phoneNumberConfirmed"] : <any>null;
+            this.twoFactorEnabled = data["twoFactorEnabled"] !== undefined ? data["twoFactorEnabled"] : <any>null;
+            this.lockoutEnd = data["lockoutEnd"] ? new Date(data["lockoutEnd"].toString()) : <any>null;
+            this.lockoutEnabled = data["lockoutEnabled"] !== undefined ? data["lockoutEnabled"] : <any>null;
+            this.accessFailedCount = data["accessFailedCount"] !== undefined ? data["accessFailedCount"] : <any>null;
+        }
+    }
+
+    static fromJS(data: any): ApplicationUser {
+        data = typeof data === 'object' ? data : {};
+        let result = new ApplicationUser();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id !== undefined ? this.id : <any>null;
+        data["userName"] = this.userName !== undefined ? this.userName : <any>null;
+        data["normalizedUserName"] = this.normalizedUserName !== undefined ? this.normalizedUserName : <any>null;
+        data["email"] = this.email !== undefined ? this.email : <any>null;
+        data["normalizedEmail"] = this.normalizedEmail !== undefined ? this.normalizedEmail : <any>null;
+        data["emailConfirmed"] = this.emailConfirmed !== undefined ? this.emailConfirmed : <any>null;
+        data["passwordHash"] = this.passwordHash !== undefined ? this.passwordHash : <any>null;
+        data["securityStamp"] = this.securityStamp !== undefined ? this.securityStamp : <any>null;
+        data["concurrencyStamp"] = this.concurrencyStamp !== undefined ? this.concurrencyStamp : <any>null;
+        data["phoneNumber"] = this.phoneNumber !== undefined ? this.phoneNumber : <any>null;
+        data["phoneNumberConfirmed"] = this.phoneNumberConfirmed !== undefined ? this.phoneNumberConfirmed : <any>null;
+        data["twoFactorEnabled"] = this.twoFactorEnabled !== undefined ? this.twoFactorEnabled : <any>null;
+        data["lockoutEnd"] = this.lockoutEnd ? this.lockoutEnd.toISOString() : <any>null;
+        data["lockoutEnabled"] = this.lockoutEnabled !== undefined ? this.lockoutEnabled : <any>null;
+        data["accessFailedCount"] = this.accessFailedCount !== undefined ? this.accessFailedCount : <any>null;
+        return data; 
+    }
+}
+
+export interface IApplicationUser {
+    id?: string | null;
+    userName?: string | null;
+    normalizedUserName?: string | null;
+    email?: string | null;
+    normalizedEmail?: string | null;
+    emailConfirmed?: boolean | null;
+    passwordHash?: string | null;
+    securityStamp?: string | null;
+    concurrencyStamp?: string | null;
+    phoneNumber?: string | null;
+    phoneNumberConfirmed?: boolean | null;
+    twoFactorEnabled?: boolean | null;
+    lockoutEnd?: Date | null;
+    lockoutEnabled?: boolean | null;
+    accessFailedCount?: number | null;
+}
+
+export class ApiResultOfApplicationUser implements IApiResultOfApplicationUser {
+    data?: ApplicationUser | null;
+    success?: boolean | null;
+    errors?: string[] | null;
+
+    constructor(data?: IApiResultOfApplicationUser) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.data = data["data"] ? ApplicationUser.fromJS(data["data"]) : <any>null;
+            this.success = data["success"] !== undefined ? data["success"] : <any>null;
+            if (data["errors"] && data["errors"].constructor === Array) {
+                this.errors = [] as any;
+                for (let item of data["errors"])
+                    this.errors!.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): ApiResultOfApplicationUser {
+        data = typeof data === 'object' ? data : {};
+        let result = new ApiResultOfApplicationUser();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["data"] = this.data ? this.data.toJSON() : <any>null;
+        data["success"] = this.success !== undefined ? this.success : <any>null;
+        if (this.errors && this.errors.constructor === Array) {
+            data["errors"] = [];
+            for (let item of this.errors)
+                data["errors"].push(item);
+        }
+        return data; 
+    }
+}
+
+export interface IApiResultOfApplicationUser {
+    data?: ApplicationUser | null;
     success?: boolean | null;
     errors?: string[] | null;
 }
@@ -2504,6 +2963,66 @@ export class ApiResultOfNewsPostViewModel implements IApiResultOfNewsPostViewMod
 
 export interface IApiResultOfNewsPostViewModel {
     data?: NewsPostViewModel | null;
+    success?: boolean | null;
+    errors?: string[] | null;
+}
+
+export class ApiResultOfStringOf implements IApiResultOfStringOf {
+    data?: string[] | null;
+    success?: boolean | null;
+    errors?: string[] | null;
+
+    constructor(data?: IApiResultOfStringOf) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            if (data["data"] && data["data"].constructor === Array) {
+                this.data = [] as any;
+                for (let item of data["data"])
+                    this.data!.push(item);
+            }
+            this.success = data["success"] !== undefined ? data["success"] : <any>null;
+            if (data["errors"] && data["errors"].constructor === Array) {
+                this.errors = [] as any;
+                for (let item of data["errors"])
+                    this.errors!.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): ApiResultOfStringOf {
+        data = typeof data === 'object' ? data : {};
+        let result = new ApiResultOfStringOf();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (this.data && this.data.constructor === Array) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item);
+        }
+        data["success"] = this.success !== undefined ? this.success : <any>null;
+        if (this.errors && this.errors.constructor === Array) {
+            data["errors"] = [];
+            for (let item of this.errors)
+                data["errors"].push(item);
+        }
+        return data; 
+    }
+}
+
+export interface IApiResultOfStringOf {
+    data?: string[] | null;
     success?: boolean | null;
     errors?: string[] | null;
 }

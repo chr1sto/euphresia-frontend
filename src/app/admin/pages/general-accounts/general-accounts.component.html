@@ -1,1 +1,29 @@
-ACCOUNT WORKS
+<h1>Accounts</h1>
+
+<div class="container">
+    <mat-form-field>
+        <input [(ngModel)]="searchText" (keyup)="search($event.target.value)" matInput placeholder="Search">
+    </mat-form-field>
+    <table mat-table [dataSource]="accounts" class="mat-elevation-z8">
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> Email </th>
+            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+        </ng-container>
+        <ng-container matColumnDef="username">
+            <th mat-header-cell *matHeaderCellDef> Username </th>
+            <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="mail-confirmed">
+            <th mat-header-cell *matHeaderCellDef> Mail Confirmed </th>
+            <td mat-cell *matCellDef="let element"> {{element.emailConfirmed}} </td>
+        </ng-container>   
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr class="row" mat-row *matRowDef="let row; columns: displayedColumns;" (click)="open(row)"></tr>
+    </table>
+    <mat-paginator [length]="accountsPageCount"
+        [pageSize]="25"
+        [pageSizeOptions]="[25]"
+        (page)="changePage($event)">
+    </mat-paginator>
+</div>
