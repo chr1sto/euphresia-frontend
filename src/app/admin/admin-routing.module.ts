@@ -9,6 +9,7 @@ import { GeneralAccountsComponent } from './pages/general-accounts/general-accou
 import { GameDashboardComponent } from './pages/game-dashboard/game-dashboard.component';
 import { DeveloperEventsComponent } from './pages/developer-events/developer-events.component';
 import { FileUploadComponent } from './pages/file-upload/file-upload.component';
+import { NewsDetailComponent } from './pages/news-detail/news-detail.component';
 
 const routes : Routes =
 [
@@ -45,6 +46,14 @@ const routes : Routes =
             {
                 path: 'file-upload',
                 component: FileUploadComponent
+            },
+            {
+                path: 'news-detail/:id',
+                component: NewsDetailComponent
+            },
+            {
+                path: 'news-detail',
+                component: NewsDetailComponent
             }
         ]
     }

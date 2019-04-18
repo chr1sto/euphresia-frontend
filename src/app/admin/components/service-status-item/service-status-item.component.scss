@@ -2,6 +2,7 @@
     flex: 1 1 auto;
   }
 
+  /*
 .is-online
 {
     background-image: linear-gradient(to bottom, #21c012, #249b18, #237719, #1f5617, #193613) !important;
@@ -18,3 +19,43 @@
 {
     background-image: linear-gradient(to bottom, #f8ed00, #ffcf00, #ffb000, #ff9000, #ff6f00) !important;
 }
+*/
+
+mat-card.is-online
+{
+    border: 20px double pink;
+    border-image: linear-gradient(to bottom, #21c012, #249b18, #237719, #1f5617, #193613) 20 stretch;
+    background-color: rgba(36, 155, 24, 0.2) !important;
+}
+
+mat-card.is-offline
+{
+    border: 20px double pink;
+    border-image: linear-gradient(to bottom, #d10000, #a70012, #7c0117, #520814, #2a080a) 20 stretch;
+    background-color: rgba(209, 0, 0, 0.2) !important;
+}
+
+mat-card.is-maintenance
+{
+    border: 20px double pink;
+    border-image: linear-gradient(to bottom, #f8ed00, #ffcf00, #ffb000, #ff9000, #ff6f00) 20 stretch;
+    background-color: rgba(248, 237, 0, 0.2) !important;
+}
+
+/*
+.wrapper
+{
+    width: 100%;
+    border-top: 10px solid #47c465;
+    border-bottom:10px solid #00deff;
+    background-image: 
+    linear-gradient(#47c465, #00deff),
+    linear-gradient(#47c465, #00deff)
+    ;
+
+    background-size:10px 100%;
+    background-position:0 0, 100% 0;
+    background-repeat:no-repeat;
+    padding: 16px;
+}
+*/

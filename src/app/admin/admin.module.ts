@@ -17,6 +17,14 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { ServiceStatusItemComponent } from './components/service-status-item/service-status-item.component';
 import {MatTableModule} from '@angular/material/table';
 import { FileUploadComponent } from './pages/file-upload/file-upload.component';
+import { FroalaViewModule, FroalaEditorModule } from 'angular-froala-wysiwyg';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { NewsDetailComponent } from './pages/news-detail/news-detail.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import {MatRadioModule} from '@angular/material/radio';
+
 
 
 
@@ -29,7 +37,8 @@ import { FileUploadComponent } from './pages/file-upload/file-upload.component';
         GameDashboardComponent,
         DeveloperEventsComponent,
         ServiceStatusItemComponent,
-        FileUploadComponent
+        FileUploadComponent,
+        NewsDetailComponent
     ],
     imports: [
       CommonModule,
@@ -42,7 +51,14 @@ import { FileUploadComponent } from './pages/file-upload/file-upload.component';
       MatMenuModule,
       MatCardModule,
       MatGridListModule,
-      MatTableModule
+      MatTableModule,
+      MatPaginatorModule,
+      MatFormFieldModule,
+      MatInputModule,
+      MatRadioModule,
+      FroalaEditorModule.forRoot(), 
+      FroalaViewModule.forRoot(),
+      FormsModule
     ],
     bootstrap:[
         AdminComponent

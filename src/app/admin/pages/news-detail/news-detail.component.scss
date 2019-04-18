@@ -1,0 +1,20 @@
+h1
+{
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 20px;
+}
+
+.container
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-form > * {
+    width: 100%;
+}
+
+td mat-form-field
+{
+    width: 90%;
+}

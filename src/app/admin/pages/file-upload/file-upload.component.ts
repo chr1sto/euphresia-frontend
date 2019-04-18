@@ -44,7 +44,7 @@ export class FileUploadComponent implements OnInit{
   public delete(item: string): void
   {
     let id : string = item.split('.')[0];
-    this.fileUploadService.fileUploadDelete(id).subscribe(
+    this.fileUploadService.fileUploadDeleteWithid(id).subscribe(
       e => this.getAll(),
       x => console.log(x)
     );

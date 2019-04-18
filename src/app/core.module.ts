@@ -1,5 +1,5 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { API_BASE_URL, AccountService, ServiceStatusService, GameEventService } from './shared/services/generated.services';
+import { API_BASE_URL, AccountService, ServiceStatusService, GameEventService, NewsService } from './shared/services/generated.services';
 import { JwtInterceptor } from './shared/helpers/jwt.interceptor';
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -8,6 +8,7 @@ import { AdminGuardService } from './shared/guards/admin-guard';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import { AvatarModule } from "ngx-avatar";
 import { CustomFileUploadService } from './shared/services/custom-file-upload.service';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 export class AppConsts
 {
@@ -51,7 +52,8 @@ export class CoreModule
                 AdminGuardService,
                 ServiceStatusService,
                 GameEventService,
-                CustomFileUploadService
+                CustomFileUploadService,
+                NewsService
             ]
         }
     }

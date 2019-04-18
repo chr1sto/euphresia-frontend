@@ -1,0 +1,70 @@
+<h1 *ngIf="createNew">
+    Create new News Post
+</h1>
+
+<h1 *ngIf="!createNew">
+    Edit News Post
+</h1>
+
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            Information
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form class="edit-form">
+            <mat-form-field>
+                <input [(ngModel)]="data.caption" matInput placeholder="Title" name ="data.caption" type="text">
+            </mat-form-field>
+
+            <table>
+                <td>
+                    <mat-form-field>
+                        <input [(ngModel)]="data.imageUrlSmallTile" matInput placeholder="Small Tile Image Url" name ="data.imageUrlSmallTile" type="text">
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field>
+                        <input [(ngModel)]="data.imageUrlBigTile" matInput placeholder="Big Tile Image Url" name ="data.imageUrlBigTile" type="text">
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field>
+                        <input [(ngModel)]="data.imageUrlBanner" matInput placeholder="Banner Image Url" name ="data.imageUrlBanner" type="text">
+                    </mat-form-field>
+                </td>
+            </table>
+            <!--
+            <mat-radio-group aria-label="Type">
+                <mat-radio-button value="1">Announcment</mat-radio-button>
+                <mat-radio-button value="2">Patchnotes</mat-radio-button>
+            </mat-radio-group>
+            -->
+        </form>
+        <mat-card-actions>
+            <button mat-raised-button color="primary" (click)="save()">Save</button>
+            <button mat-raised-button color="primary" (click)="publish()">Publish</button>
+            <button mat-raised-button color="warn" (click)="publish()">Delete</button>
+        </mat-card-actions>
+    </mat-card-content>
+</mat-card>
+
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            Content
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="editor">
+            <div [froalaEditor] [(froalaModel)]="data.content">Hello, Froala!</div>
+        </div>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="save()">Save</button>
+        <button mat-raised-button color="primary" (click)="publish()">Publish</button>
+        <button mat-raised-button color="warn" (click)="publish()">Delete</button>
+    </mat-card-actions>
+</mat-card>
+
