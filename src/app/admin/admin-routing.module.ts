@@ -10,6 +10,8 @@ import { GameDashboardComponent } from './pages/game-dashboard/game-dashboard.co
 import { DeveloperEventsComponent } from './pages/developer-events/developer-events.component';
 import { FileUploadComponent } from './pages/file-upload/file-upload.component';
 import { NewsDetailComponent } from './pages/news-detail/news-detail.component';
+import { AccountInfoItemComponent } from './components/account-info-item/account-info-item.component';
+import { AccountDetailComponent } from './pages/account-detail/account-detail.component';
 
 const routes : Routes =
 [
@@ -54,6 +56,10 @@ const routes : Routes =
             {
                 path: 'news-detail',
                 component: NewsDetailComponent
+            },
+            {
+                path: 'account-detail/:id',
+                component: AccountDetailComponent
             }
         ]
     }

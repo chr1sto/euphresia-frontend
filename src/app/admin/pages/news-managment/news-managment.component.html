@@ -2,7 +2,8 @@
     <div class="wrapper">
         <h1>Unpublished News</h1>
 
-        <mat-paginator [length]="unpublishedNewsPageCount"
+        <mat-paginator
+        [length]="unpublishedNewsRecordCount"
         [pageSize]="10"
         [pageSizeOptions]="[10]"
         (page)="changePage($event,false)">
@@ -22,17 +23,18 @@
             </ng-container>   
         
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="open(row)"></tr>
+            <tr mat-row class="row" *matRowDef="let row; columns: displayedColumns;" (click)="open(row)"></tr>
         </table>
     </div>
 
     <div class="wrapper">
         <h1>Published News</h1>
 
-        <mat-paginator [length]="publishedNewsPageCount"
+        <mat-paginator 
+                    [length]="publishedNewsRecordCount"
                     [pageSize]="10"
                     [pageSizeOptions]="[10]"
-                    (page)="changePage($event,false)">
+                    (page)="changePage($event,true)">
         </mat-paginator>
         <table mat-table [dataSource]="publishedNews" class="mat-elevation-z8">
             <ng-container matColumnDef="title">
@@ -51,7 +53,7 @@
             </ng-container>   
         
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="open(row)"></tr>
+            <tr mat-row class="row" *matRowDef="let row; columns: displayedColumns;" (click)="open(row)"></tr>
         </table>
     </div>
 </div>

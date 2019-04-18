@@ -12,10 +12,12 @@ export class NewsManagmentComponent implements OnInit {
     publishedNews : Array<NewsPostViewModel>
     publishedNewSelectedPage : number = 0;
     publishedNewsPageCount : number = 0;
+    publishedNewsRecordCount : number = 0;
 
     unpublishedNews : Array<NewsPostViewModel>
     unpublishedNewSelectedPage : number = 0;
     unpublishedNewsPageCount : number = 0;
+    unpublishedNewsRecordCount : number = 0;
 
     displayedColumns: string[] = ['title', 'date', 'tags'];
 
@@ -30,12 +32,16 @@ export class NewsManagmentComponent implements OnInit {
 
     updatePublished()
     {
+        console.log("xxx")
         this.newsService.newsGet(this.publishedNewSelectedPage,10)
         .pipe(
             map(
                 x => {
+                    console.log(x)
                     this.publishedNews = x.data.content;
                     this.publishedNewsPageCount = x.data.pageCount;
+                    this.publishedNewsRecordCount = x.data.recordCount;
+                    console.log(x);
                 }
             )
         ).subscribe();
@@ -49,6 +55,7 @@ export class NewsManagmentComponent implements OnInit {
                 x => {
                     this.unpublishedNews = x.data.content;
                     this.unpublishedNewsPageCount = x.data.pageCount;
+                    this.unpublishedNewsRecordCount = x.data.recordCount;
                 }
             )
         ).subscribe();
@@ -57,7 +64,6 @@ export class NewsManagmentComponent implements OnInit {
 
     changePage(event : any, published : boolean)
     {
-        console.log(event);
         if(published)
         {
             this.publishedNewSelectedPage = event.pageIndex;

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AccountService, ApplicationUser } from 'src/app/shared/services/generated.services';
 import { map, debounceTime, distinctUntilChanged, mergeMap } from 'rxjs/operators';
 import { Subject, Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'general-accounts',
@@ -12,6 +13,7 @@ export class GeneralAccountsComponent implements OnInit{
   accounts : Array<ApplicationUser>
   accountsCurrentPageIndex : number = 0;
   accountsPageCount : number = 0;
+  accountsRecordCount : number = 0;
   searchText : string = "";
   searchTextChanged = new Subject<string>();
   subscription : Subscription
@@ -33,7 +35,7 @@ export class GeneralAccountsComponent implements OnInit{
       ).subscribe();
   }
 
-  constructor(private accountService : AccountService)
+  constructor(private accountService : AccountService, private router : Router)
   {
 
   }
@@ -46,6 +48,7 @@ export class GeneralAccountsComponent implements OnInit{
        result => {
          this.accounts = result.data.content;
          this.accountsPageCount = result.data.pageCount;
+         this.accountsRecordCount = result.data.recordCount;
        } 
       )
     ).subscribe();
@@ -53,7 +56,7 @@ export class GeneralAccountsComponent implements OnInit{
 
   open(row : any)
   {
-
+    this.router.navigate(['/admin/account-detail/'+row.id])
   }
 
   search(value: string)

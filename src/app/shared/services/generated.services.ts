@@ -159,7 +159,7 @@ export class AccountService {
      * @param searchText (optional) 
      * @return Success
      */
-    account(index?: number | null | undefined, count?: number | null | undefined, searchText?: string | null | undefined): Observable<ApiResultOfPagedResultDataOfIPagedListOfApplicationUser> {
+    account(index?: number | null | undefined, count?: number | null | undefined, searchText?: string | null | undefined): Observable<ApiResultOfPagedResultDataOfIEnumerableOfApplicationUser> {
         let url_ = this.baseUrl + "/api/v1/account?";
         if (index !== undefined)
             url_ += "index=" + encodeURIComponent("" + index) + "&"; 
@@ -184,14 +184,14 @@ export class AccountService {
                 try {
                     return this.processAccount(<any>response_);
                 } catch (e) {
-                    return <Observable<ApiResultOfPagedResultDataOfIPagedListOfApplicationUser>><any>_observableThrow(e);
+                    return <Observable<ApiResultOfPagedResultDataOfIEnumerableOfApplicationUser>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<ApiResultOfPagedResultDataOfIPagedListOfApplicationUser>><any>_observableThrow(response_);
+                return <Observable<ApiResultOfPagedResultDataOfIEnumerableOfApplicationUser>><any>_observableThrow(response_);
         }));
     }
 
-    protected processAccount(response: HttpResponseBase): Observable<ApiResultOfPagedResultDataOfIPagedListOfApplicationUser> {
+    protected processAccount(response: HttpResponseBase): Observable<ApiResultOfPagedResultDataOfIEnumerableOfApplicationUser> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
@@ -202,14 +202,14 @@ export class AccountService {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = resultData200 ? ApiResultOfPagedResultDataOfIPagedListOfApplicationUser.fromJS(resultData200) : new ApiResultOfPagedResultDataOfIPagedListOfApplicationUser();
+            result200 = resultData200 ? ApiResultOfPagedResultDataOfIEnumerableOfApplicationUser.fromJS(resultData200) : new ApiResultOfPagedResultDataOfIEnumerableOfApplicationUser();
             return _observableOf(result200);
             }));
         } else if (status === 400) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result400: any = null;
             let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = resultData400 ? ApiResultOfPagedResultDataOfIPagedListOfApplicationUser.fromJS(resultData400) : new ApiResultOfPagedResultDataOfIPagedListOfApplicationUser();
+            result400 = resultData400 ? ApiResultOfPagedResultDataOfIEnumerableOfApplicationUser.fromJS(resultData400) : new ApiResultOfPagedResultDataOfIEnumerableOfApplicationUser();
             return throwException("A server error occurred.", status, _responseText, _headers, result400);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -217,7 +217,7 @@ export class AccountService {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<ApiResultOfPagedResultDataOfIPagedListOfApplicationUser>(<any>null);
+        return _observableOf<ApiResultOfPagedResultDataOfIEnumerableOfApplicationUser>(<any>null);
     }
 
     /**
@@ -879,6 +879,60 @@ export class GameAccountService {
         }
         return _observableOf<ApiResultOfGameAccountViewModel>(<any>null);
     }
+
+    /**
+     * @return Success
+     */
+    gameAccountGetByid(id: string): Observable<ApiResultOfIPagedListOfGameAccountViewModel> {
+        let url_ = this.baseUrl + "/api/v1/game-account/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGameAccountGetByid(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGameAccountGetByid(<any>response_);
+                } catch (e) {
+                    return <Observable<ApiResultOfIPagedListOfGameAccountViewModel>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ApiResultOfIPagedListOfGameAccountViewModel>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGameAccountGetByid(response: HttpResponseBase): Observable<ApiResultOfIPagedListOfGameAccountViewModel> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? ApiResultOfIPagedListOfGameAccountViewModel.fromJS(resultData200) : new ApiResultOfIPagedListOfGameAccountViewModel();
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ApiResultOfIPagedListOfGameAccountViewModel>(<any>null);
+    }
 }
 
 @Injectable({
@@ -1020,7 +1074,7 @@ export class NewsService {
      * @param count (optional) 
      * @return Success
      */
-    unpublished(index?: number | null | undefined, count?: number | null | undefined): Observable<ApiResultOfPagedResultDataOfIPagedListOfNewsPostViewModel> {
+    unpublished(index?: number | null | undefined, count?: number | null | undefined): Observable<ApiResultOfPagedResultDataOfIEnumerableOfNewsPostViewModel> {
         let url_ = this.baseUrl + "/api/v1/news/unpublished?";
         if (index !== undefined)
             url_ += "index=" + encodeURIComponent("" + index) + "&"; 
@@ -1043,14 +1097,14 @@ export class NewsService {
                 try {
                     return this.processUnpublished(<any>response_);
                 } catch (e) {
-                    return <Observable<ApiResultOfPagedResultDataOfIPagedListOfNewsPostViewModel>><any>_observableThrow(e);
+                    return <Observable<ApiResultOfPagedResultDataOfIEnumerableOfNewsPostViewModel>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<ApiResultOfPagedResultDataOfIPagedListOfNewsPostViewModel>><any>_observableThrow(response_);
+                return <Observable<ApiResultOfPagedResultDataOfIEnumerableOfNewsPostViewModel>><any>_observableThrow(response_);
         }));
     }
 
-    protected processUnpublished(response: HttpResponseBase): Observable<ApiResultOfPagedResultDataOfIPagedListOfNewsPostViewModel> {
+    protected processUnpublished(response: HttpResponseBase): Observable<ApiResultOfPagedResultDataOfIEnumerableOfNewsPostViewModel> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
@@ -1061,7 +1115,7 @@ export class NewsService {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = resultData200 ? ApiResultOfPagedResultDataOfIPagedListOfNewsPostViewModel.fromJS(resultData200) : new ApiResultOfPagedResultDataOfIPagedListOfNewsPostViewModel();
+            result200 = resultData200 ? ApiResultOfPagedResultDataOfIEnumerableOfNewsPostViewModel.fromJS(resultData200) : new ApiResultOfPagedResultDataOfIEnumerableOfNewsPostViewModel();
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -1069,7 +1123,7 @@ export class NewsService {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<ApiResultOfPagedResultDataOfIPagedListOfNewsPostViewModel>(<any>null);
+        return _observableOf<ApiResultOfPagedResultDataOfIEnumerableOfNewsPostViewModel>(<any>null);
     }
 
     /**
@@ -1077,7 +1131,7 @@ export class NewsService {
      * @param count (optional) 
      * @return Success
      */
-    newsGet(index?: number | null | undefined, count?: number | null | undefined): Observable<ApiResultOfPagedResultDataOfIPagedListOfNewsPostViewModel> {
+    newsGet(index?: number | null | undefined, count?: number | null | undefined): Observable<ApiResultOfPagedResultDataOfIEnumerableOfNewsPostViewModel> {
         let url_ = this.baseUrl + "/api/v1/news?";
         if (index !== undefined)
             url_ += "index=" + encodeURIComponent("" + index) + "&"; 
@@ -1100,14 +1154,14 @@ export class NewsService {
                 try {
                     return this.processNewsGet(<any>response_);
                 } catch (e) {
-                    return <Observable<ApiResultOfPagedResultDataOfIPagedListOfNewsPostViewModel>><any>_observableThrow(e);
+                    return <Observable<ApiResultOfPagedResultDataOfIEnumerableOfNewsPostViewModel>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<ApiResultOfPagedResultDataOfIPagedListOfNewsPostViewModel>><any>_observableThrow(response_);
+                return <Observable<ApiResultOfPagedResultDataOfIEnumerableOfNewsPostViewModel>><any>_observableThrow(response_);
         }));
     }
 
-    protected processNewsGet(response: HttpResponseBase): Observable<ApiResultOfPagedResultDataOfIPagedListOfNewsPostViewModel> {
+    protected processNewsGet(response: HttpResponseBase): Observable<ApiResultOfPagedResultDataOfIEnumerableOfNewsPostViewModel> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
@@ -1118,7 +1172,7 @@ export class NewsService {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = resultData200 ? ApiResultOfPagedResultDataOfIPagedListOfNewsPostViewModel.fromJS(resultData200) : new ApiResultOfPagedResultDataOfIPagedListOfNewsPostViewModel();
+            result200 = resultData200 ? ApiResultOfPagedResultDataOfIEnumerableOfNewsPostViewModel.fromJS(resultData200) : new ApiResultOfPagedResultDataOfIEnumerableOfNewsPostViewModel();
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -1126,7 +1180,7 @@ export class NewsService {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<ApiResultOfPagedResultDataOfIPagedListOfNewsPostViewModel>(<any>null);
+        return _observableOf<ApiResultOfPagedResultDataOfIEnumerableOfNewsPostViewModel>(<any>null);
     }
 
     /**
@@ -1387,11 +1441,11 @@ export class RolesService {
     /**
      * @return Success
      */
-    rolesGetByuserid(userId: string): Observable<ApiResultOfStringOf> {
-        let url_ = this.baseUrl + "/api/v1/roles/{userid}";
-        if (userId === undefined || userId === null)
-            throw new Error("The parameter 'userId' must be defined.");
-        url_ = url_.replace("{userId}", encodeURIComponent("" + userId)); 
+    rolesGetByid(id: string): Observable<ApiResultOfStringOf> {
+        let url_ = this.baseUrl + "/api/v1/roles/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -1403,11 +1457,11 @@ export class RolesService {
         };
 
         return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processRolesGetByuserid(response_);
+            return this.processRolesGetByid(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processRolesGetByuserid(<any>response_);
+                    return this.processRolesGetByid(<any>response_);
                 } catch (e) {
                     return <Observable<ApiResultOfStringOf>><any>_observableThrow(e);
                 }
@@ -1416,7 +1470,7 @@ export class RolesService {
         }));
     }
 
-    protected processRolesGetByuserid(response: HttpResponseBase): Observable<ApiResultOfStringOf> {
+    protected processRolesGetByid(response: HttpResponseBase): Observable<ApiResultOfStringOf> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
@@ -1443,6 +1497,69 @@ export class RolesService {
             }));
         }
         return _observableOf<ApiResultOfStringOf>(<any>null);
+    }
+
+    /**
+     * @param rolesViewModel (optional) 
+     * @return Success
+     */
+    roles(rolesViewModel?: UpdateRolesViewModel | null | undefined): Observable<ApiResultOfUpdateRolesViewModel> {
+        let url_ = this.baseUrl + "/api/v1/roles";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(rolesViewModel);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("patch", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processRoles(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processRoles(<any>response_);
+                } catch (e) {
+                    return <Observable<ApiResultOfUpdateRolesViewModel>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ApiResultOfUpdateRolesViewModel>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processRoles(response: HttpResponseBase): Observable<ApiResultOfUpdateRolesViewModel> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? ApiResultOfUpdateRolesViewModel.fromJS(resultData200) : new ApiResultOfUpdateRolesViewModel();
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result400 = resultData400 ? ApiResultOfUpdateRolesViewModel.fromJS(resultData400) : new ApiResultOfUpdateRolesViewModel();
+            return throwException("A server error occurred.", status, _responseText, _headers, result400);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ApiResultOfUpdateRolesViewModel>(<any>null);
     }
 }
 
@@ -1935,12 +2052,12 @@ export interface IApiResultOfRegisterViewModel {
     errors?: string[] | null;
 }
 
-export class ApiResultOfPagedResultDataOfIPagedListOfApplicationUser implements IApiResultOfPagedResultDataOfIPagedListOfApplicationUser {
-    data?: PagedResultDataOfIPagedListOfApplicationUser | null;
+export class ApiResultOfPagedResultDataOfIEnumerableOfApplicationUser implements IApiResultOfPagedResultDataOfIEnumerableOfApplicationUser {
+    data?: PagedResultDataOfIEnumerableOfApplicationUser | null;
     success?: boolean | null;
     errors?: string[] | null;
 
-    constructor(data?: IApiResultOfPagedResultDataOfIPagedListOfApplicationUser) {
+    constructor(data?: IApiResultOfPagedResultDataOfIEnumerableOfApplicationUser) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -1951,7 +2068,7 @@ export class ApiResultOfPagedResultDataOfIPagedListOfApplicationUser implements 
 
     init(data?: any) {
         if (data) {
-            this.data = data["data"] ? PagedResultDataOfIPagedListOfApplicationUser.fromJS(data["data"]) : <any>null;
+            this.data = data["data"] ? PagedResultDataOfIEnumerableOfApplicationUser.fromJS(data["data"]) : <any>null;
             this.success = data["success"] !== undefined ? data["success"] : <any>null;
             if (data["errors"] && data["errors"].constructor === Array) {
                 this.errors = [] as any;
@@ -1961,9 +2078,9 @@ export class ApiResultOfPagedResultDataOfIPagedListOfApplicationUser implements 
         }
     }
 
-    static fromJS(data: any): ApiResultOfPagedResultDataOfIPagedListOfApplicationUser {
+    static fromJS(data: any): ApiResultOfPagedResultDataOfIEnumerableOfApplicationUser {
         data = typeof data === 'object' ? data : {};
-        let result = new ApiResultOfPagedResultDataOfIPagedListOfApplicationUser();
+        let result = new ApiResultOfPagedResultDataOfIEnumerableOfApplicationUser();
         result.init(data);
         return result;
     }
@@ -1981,20 +2098,20 @@ export class ApiResultOfPagedResultDataOfIPagedListOfApplicationUser implements 
     }
 }
 
-export interface IApiResultOfPagedResultDataOfIPagedListOfApplicationUser {
-    data?: PagedResultDataOfIPagedListOfApplicationUser | null;
+export interface IApiResultOfPagedResultDataOfIEnumerableOfApplicationUser {
+    data?: PagedResultDataOfIEnumerableOfApplicationUser | null;
     success?: boolean | null;
     errors?: string[] | null;
 }
 
-export class PagedResultDataOfIPagedListOfApplicationUser implements IPagedResultDataOfIPagedListOfApplicationUser {
+export class PagedResultDataOfIEnumerableOfApplicationUser implements IPagedResultDataOfIEnumerableOfApplicationUser {
     content?: ApplicationUser[] | null;
     recordCount?: number | null;
     currentIndex?: number | null;
     currentCountPerPage?: number | null;
     pageCount?: number | null;
 
-    constructor(data?: IPagedResultDataOfIPagedListOfApplicationUser) {
+    constructor(data?: IPagedResultDataOfIEnumerableOfApplicationUser) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -2017,9 +2134,9 @@ export class PagedResultDataOfIPagedListOfApplicationUser implements IPagedResul
         }
     }
 
-    static fromJS(data: any): PagedResultDataOfIPagedListOfApplicationUser {
+    static fromJS(data: any): PagedResultDataOfIEnumerableOfApplicationUser {
         data = typeof data === 'object' ? data : {};
-        let result = new PagedResultDataOfIPagedListOfApplicationUser();
+        let result = new PagedResultDataOfIEnumerableOfApplicationUser();
         result.init(data);
         return result;
     }
@@ -2039,7 +2156,7 @@ export class PagedResultDataOfIPagedListOfApplicationUser implements IPagedResul
     }
 }
 
-export interface IPagedResultDataOfIPagedListOfApplicationUser {
+export interface IPagedResultDataOfIEnumerableOfApplicationUser {
     content?: ApplicationUser[] | null;
     recordCount?: number | null;
     currentIndex?: number | null;
@@ -2731,12 +2848,12 @@ export interface IApiResultOfGuid {
     errors?: string[] | null;
 }
 
-export class ApiResultOfPagedResultDataOfIPagedListOfNewsPostViewModel implements IApiResultOfPagedResultDataOfIPagedListOfNewsPostViewModel {
-    data?: PagedResultDataOfIPagedListOfNewsPostViewModel | null;
+export class ApiResultOfPagedResultDataOfIEnumerableOfNewsPostViewModel implements IApiResultOfPagedResultDataOfIEnumerableOfNewsPostViewModel {
+    data?: PagedResultDataOfIEnumerableOfNewsPostViewModel | null;
     success?: boolean | null;
     errors?: string[] | null;
 
-    constructor(data?: IApiResultOfPagedResultDataOfIPagedListOfNewsPostViewModel) {
+    constructor(data?: IApiResultOfPagedResultDataOfIEnumerableOfNewsPostViewModel) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -2747,7 +2864,7 @@ export class ApiResultOfPagedResultDataOfIPagedListOfNewsPostViewModel implement
 
     init(data?: any) {
         if (data) {
-            this.data = data["data"] ? PagedResultDataOfIPagedListOfNewsPostViewModel.fromJS(data["data"]) : <any>null;
+            this.data = data["data"] ? PagedResultDataOfIEnumerableOfNewsPostViewModel.fromJS(data["data"]) : <any>null;
             this.success = data["success"] !== undefined ? data["success"] : <any>null;
             if (data["errors"] && data["errors"].constructor === Array) {
                 this.errors = [] as any;
@@ -2757,9 +2874,9 @@ export class ApiResultOfPagedResultDataOfIPagedListOfNewsPostViewModel implement
         }
     }
 
-    static fromJS(data: any): ApiResultOfPagedResultDataOfIPagedListOfNewsPostViewModel {
+    static fromJS(data: any): ApiResultOfPagedResultDataOfIEnumerableOfNewsPostViewModel {
         data = typeof data === 'object' ? data : {};
-        let result = new ApiResultOfPagedResultDataOfIPagedListOfNewsPostViewModel();
+        let result = new ApiResultOfPagedResultDataOfIEnumerableOfNewsPostViewModel();
         result.init(data);
         return result;
     }
@@ -2777,20 +2894,20 @@ export class ApiResultOfPagedResultDataOfIPagedListOfNewsPostViewModel implement
     }
 }
 
-export interface IApiResultOfPagedResultDataOfIPagedListOfNewsPostViewModel {
-    data?: PagedResultDataOfIPagedListOfNewsPostViewModel | null;
+export interface IApiResultOfPagedResultDataOfIEnumerableOfNewsPostViewModel {
+    data?: PagedResultDataOfIEnumerableOfNewsPostViewModel | null;
     success?: boolean | null;
     errors?: string[] | null;
 }
 
-export class PagedResultDataOfIPagedListOfNewsPostViewModel implements IPagedResultDataOfIPagedListOfNewsPostViewModel {
+export class PagedResultDataOfIEnumerableOfNewsPostViewModel implements IPagedResultDataOfIEnumerableOfNewsPostViewModel {
     content?: NewsPostViewModel[] | null;
     recordCount?: number | null;
     currentIndex?: number | null;
     currentCountPerPage?: number | null;
     pageCount?: number | null;
 
-    constructor(data?: IPagedResultDataOfIPagedListOfNewsPostViewModel) {
+    constructor(data?: IPagedResultDataOfIEnumerableOfNewsPostViewModel) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -2813,9 +2930,9 @@ export class PagedResultDataOfIPagedListOfNewsPostViewModel implements IPagedRes
         }
     }
 
-    static fromJS(data: any): PagedResultDataOfIPagedListOfNewsPostViewModel {
+    static fromJS(data: any): PagedResultDataOfIEnumerableOfNewsPostViewModel {
         data = typeof data === 'object' ? data : {};
-        let result = new PagedResultDataOfIPagedListOfNewsPostViewModel();
+        let result = new PagedResultDataOfIEnumerableOfNewsPostViewModel();
         result.init(data);
         return result;
     }
@@ -2835,7 +2952,7 @@ export class PagedResultDataOfIPagedListOfNewsPostViewModel implements IPagedRes
     }
 }
 
-export interface IPagedResultDataOfIPagedListOfNewsPostViewModel {
+export interface IPagedResultDataOfIEnumerableOfNewsPostViewModel {
     content?: NewsPostViewModel[] | null;
     recordCount?: number | null;
     currentIndex?: number | null;
@@ -3023,6 +3140,106 @@ export class ApiResultOfStringOf implements IApiResultOfStringOf {
 
 export interface IApiResultOfStringOf {
     data?: string[] | null;
+    success?: boolean | null;
+    errors?: string[] | null;
+}
+
+export class UpdateRolesViewModel implements IUpdateRolesViewModel {
+    userId?: string | null;
+    roles?: string[] | null;
+
+    constructor(data?: IUpdateRolesViewModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.userId = data["userId"] !== undefined ? data["userId"] : <any>null;
+            if (data["roles"] && data["roles"].constructor === Array) {
+                this.roles = [] as any;
+                for (let item of data["roles"])
+                    this.roles!.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): UpdateRolesViewModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new UpdateRolesViewModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["userId"] = this.userId !== undefined ? this.userId : <any>null;
+        if (this.roles && this.roles.constructor === Array) {
+            data["roles"] = [];
+            for (let item of this.roles)
+                data["roles"].push(item);
+        }
+        return data; 
+    }
+}
+
+export interface IUpdateRolesViewModel {
+    userId?: string | null;
+    roles?: string[] | null;
+}
+
+export class ApiResultOfUpdateRolesViewModel implements IApiResultOfUpdateRolesViewModel {
+    data?: UpdateRolesViewModel | null;
+    success?: boolean | null;
+    errors?: string[] | null;
+
+    constructor(data?: IApiResultOfUpdateRolesViewModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.data = data["data"] ? UpdateRolesViewModel.fromJS(data["data"]) : <any>null;
+            this.success = data["success"] !== undefined ? data["success"] : <any>null;
+            if (data["errors"] && data["errors"].constructor === Array) {
+                this.errors = [] as any;
+                for (let item of data["errors"])
+                    this.errors!.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): ApiResultOfUpdateRolesViewModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new ApiResultOfUpdateRolesViewModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["data"] = this.data ? this.data.toJSON() : <any>null;
+        data["success"] = this.success !== undefined ? this.success : <any>null;
+        if (this.errors && this.errors.constructor === Array) {
+            data["errors"] = [];
+            for (let item of this.errors)
+                data["errors"].push(item);
+        }
+        return data; 
+    }
+}
+
+export interface IApiResultOfUpdateRolesViewModel {
+    data?: UpdateRolesViewModel | null;
     success?: boolean | null;
     errors?: string[] | null;
 }

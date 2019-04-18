@@ -1,0 +1,30 @@
+<mat-card class="mat-elevation-z2">
+    <mat-card-header>
+        <ngx-avatar mat-card-avatar name="{{account.email}}" size="48"></ngx-avatar>
+        <mat-card-title>{{account.email}}</mat-card-title>
+        <mat-card-subtitle>{{account.id}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+        <table>
+            <td class="roles-label">
+                <h3>Roles: </h3>
+            </td>
+            <td>
+                <mat-chip-list>
+                    <mat-chip *ngFor="let role of roles">
+                        {{role}}
+                    </mat-chip>
+                </mat-chip-list>
+            </td>
+        </table>
+
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-actions>
+        <button mat-raised-button color="primary">Change Roles</button>
+        <button mat-raised-button color="primary">Resend Verification Mail</button>
+        <button mat-raised-button color="primary">Login as User</button>
+        <button mat-raised-button color="warn">Banhammer</button>
+    </mat-card-actions>
+</mat-card>

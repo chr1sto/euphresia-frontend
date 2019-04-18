@@ -21,7 +21,8 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr class="row" mat-row *matRowDef="let row; columns: displayedColumns;" (click)="open(row)"></tr>
     </table>
-    <mat-paginator [length]="accountsPageCount"
+    <mat-paginator 
+        [length]="accountsRecordCount"
         [pageSize]="25"
         [pageSizeOptions]="[25]"
         (page)="changePage($event)">
