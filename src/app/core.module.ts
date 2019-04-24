@@ -9,6 +9,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import { AvatarModule } from "ngx-avatar";
 import { CustomFileUploadService } from './shared/services/custom-file-upload.service';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { RegisterGuardService } from './shared/guards/register-guard';
 
 export class AppConsts
 {
@@ -50,6 +51,7 @@ export class CoreModule
                 AccountService,
                 AuthenticationService,
                 AdminGuardService,
+                RegisterGuardService,
                 ServiceStatusService,
                 GameEventService,
                 CustomFileUploadService,

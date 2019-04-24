@@ -5,16 +5,22 @@ import { UserPanelComponent } from './components/user-panel/user-panel.component
 import { CommonModule } from '@angular/common';  
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { LandingComponent } from './pages/landing/landing.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { RecaptchaModule } from 'ng-recaptcha';
 
 @NgModule({
     declarations: [
         PublicComponent,
-        UserPanelComponent
+        UserPanelComponent,
+        LandingComponent,
+        RegisterComponent
     ],
     imports: [
         PublicRoutingModule,
         CommonModule,
-        FormsModule
+        FormsModule,
+        RecaptchaModule
     ],
     bootstrap: [],
     providers: []
