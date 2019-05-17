@@ -58,7 +58,7 @@
     </mat-card-header>
     <mat-card-content>
         <div class="editor">
-            <div [froalaEditor] [(froalaModel)]="data.content">Hello, Froala!</div>
+            <angular-editor [(ngModel)]="data.content"></angular-editor>
         </div>
     </mat-card-content>
     <mat-card-actions>

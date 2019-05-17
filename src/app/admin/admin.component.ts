@@ -8,7 +8,7 @@ import { AuthenticationService } from '../shared/services/auth.service';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent {
-    constructor(private router: Router, private auth: AuthenticationService)
+    constructor(public router: Router, public auth: AuthenticationService)
     {
         
     }

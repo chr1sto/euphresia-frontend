@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
 import { NgModule } from '@angular/core';
-import { MatButtonModule, MatCheckboxModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatDialogModule, MatSelectModule } from '@angular/material';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AvatarModule } from 'ngx-avatar';
@@ -17,7 +17,6 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { ServiceStatusItemComponent } from './components/service-status-item/service-status-item.component';
 import { MatTableModule } from '@angular/material/table';
 import { FileUploadComponent } from './pages/file-upload/file-upload.component';
-import { FroalaViewModule, FroalaEditorModule } from 'angular-froala-wysiwyg';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { NewsDetailComponent } from './pages/news-detail/news-detail.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -29,7 +28,8 @@ import { AccountDetailComponent } from './pages/account-detail/account-detail.co
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDividerModule } from '@angular/material/divider';
 import { GameAccountListComponent } from './components/game-account-list/game-account-list.component';
-
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { ChangeRolesComponent } from './components/change-roles/change-roles.component';
 
 
 @NgModule({
@@ -45,7 +45,8 @@ import { GameAccountListComponent } from './components/game-account-list/game-ac
     NewsDetailComponent,
     AccountInfoItemComponent,
     AccountDetailComponent,
-    GameAccountListComponent
+    GameAccountListComponent,
+    ChangeRolesComponent
   ],
   imports: [
     CommonModule,
@@ -65,9 +66,13 @@ import { GameAccountListComponent } from './components/game-account-list/game-ac
     MatRadioModule,
     MatChipsModule,
     MatDividerModule,
-    FroalaEditorModule.forRoot(),
-    FroalaViewModule.forRoot(),
-    FormsModule
+    MatDialogModule,
+    FormsModule,
+    MatSelectModule,
+    AngularEditorModule
+  ],
+  entryComponents: [
+    ChangeRolesComponent
   ],
   bootstrap: [
     AdminComponent
