@@ -1,0 +1,62 @@
+.this{
+    background-image: url("../../assets/web/background/bg.jpg");
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-color: #57412c;
+    height: 100vmax;
+}
+
+.content-wrap
+{
+    margin: auto;
+    width: 1262px;
+}
+
+header{
+    margin-bottom: 100px;
+}
+
+.cols
+{
+    display: flex;
+    margin-left: 94px;
+}
+
+.left
+{
+    width: 245px;
+    margin-top: 30px;
+}
+
+.right
+{
+    margin-top: 30px;
+    width: 245px;
+}
+
+.mid
+{
+    width: 584px;
+    margin-left: -20px;
+    z-index: 2;
+}
+
+.left quick-links
+{
+    z-index: 1;
+}
+
+.left media-container
+{
+    display: block;
+    margin-top: -60px;
+    margin-left: 18px;
+    z-index: 3;
+    //margin-left: -20px;
+}
+
+.left discord-container
+{
+    display: block;
+    z-index: 1;
+}

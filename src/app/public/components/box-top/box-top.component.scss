@@ -1,0 +1,32 @@
+.this
+{
+    width: 604px;
+    height: 310px;
+    position: relative;
+}
+
+.this::after
+{
+    background-image: url('../../../../assets/web/slider/frame.png');
+    content: '';
+    width: 604px;
+    height: 310px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.this::before
+{
+    content: '';
+    background-color: white;
+    height: 250px;
+    width: 564px;
+    position: absolute;
+    left: 20px;
+    right: 0;
+    top: 45px;
+    bottom: 0;
+}

@@ -1,5 +1,5 @@
+<!--
 <div class="user-panel-container">
-    <!--USER INFORMATION PANEL-->
     <div class="logged-in" *ngIf="loggedIn">
         <p class="email">
             <span><b>Email: </b></span> <span>{{this.user.email}}</span>
@@ -16,7 +16,6 @@
         <a *ngIf="hasAdminAccess" [routerLink]="['/admin']">Admin Panel</a>
     </div>
     
-    <!--LOGIN PANEL-->
     <div class="logged-out" *ngIf="!loggedIn">
         <input [(ngModel)]="email" class="input" type="email" placeholder="Email">
         <input [(ngModel)]="password" class="input" type="passsword" placeholder="Password">
@@ -28,4 +27,8 @@
             Register
         </button>
     </div>
+</div>
+-->
+<div class="this">
+    
 </div>
