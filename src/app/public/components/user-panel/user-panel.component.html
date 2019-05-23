@@ -1,34 +1,40 @@
-<!--
-<div class="user-panel-container">
-    <div class="logged-in" *ngIf="loggedIn">
-        <p class="email">
-            <span><b>Email: </b></span> <span>{{this.user.email}}</span>
-        </p>
-        <p>
-            <span><b>User: </b></span> <span>{{this.user.userName}}</span>
-        </p>
-        <p>
-            <button class="button" (click)="this.logout()">
-                Logout
-            </button>
-        </p>
 
-        <a *ngIf="hasAdminAccess" [routerLink]="['/admin']">Admin Panel</a>
-    </div>
-    
-    <div class="logged-out" *ngIf="!loggedIn">
-        <input [(ngModel)]="email" class="input" type="email" placeholder="Email">
-        <input [(ngModel)]="password" class="input" type="passsword" placeholder="Password">
-        <input [(ngModel)]="rememberMe" type="checkbox">remember me
-        <button class="button" (click)="this.login()">
-            Login
-        </button>
-        <button class="button">
-            Register
-        </button>
-    </div>
-</div>
--->
+
 <div class="this">
+    <div class="user-panel-container">
+        <div class="logged-in" *ngIf="loggedIn">
+            <p class="email">
+                <span><b>Email: </b></span> <span>{{this.user.email}}</span>
+            </p>
+            <p>
+                <span><b>User: </b></span> <span>{{this.user.userName}}</span>
+            </p>
+            <p>
+                <button class="button" (click)="this.logout()">
+                    Logout
+                </button>
+            </p>
     
+            <a *ngIf="hasAdminAccess" [routerLink]="['/admin']">Admin Panel</a>
+        </div>
+        
+        <div class="logged-out" *ngIf="!loggedIn">
+            <p>
+                <input [(ngModel)]="email" class="input" type="email" placeholder="Email">
+            </p>
+            <p>
+                <input [(ngModel)]="password" class="input" type="passsword" placeholder="Password">
+            </p>   
+            <p>
+                <button class="button" (click)="this.login()">
+                    Login
+                </button>
+            </p>
+            <p>
+                <button class="button">
+                    Register
+                </button>
+            </p>
+        </div>
+    </div>
 </div>

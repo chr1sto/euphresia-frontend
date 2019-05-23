@@ -17,13 +17,21 @@ import { VoteBoxComponent } from './components/vote-box/vote-box.component';
 import { NewsBoxComponent } from './components/news-box/news-box.component';
 import { ServerInfoComponent } from './components/server-info/server-info.component';
 import { RankingSmallComponent } from './components/ranking-small/ranking-small.component';
+import { HomeComponent } from './pages/home/home.component';
+import { WikiComponent } from './pages/wiki/wiki.component';
+import { RankingComponent } from './pages/ranking/ranking.component';
+import { ShopComponent } from './pages/shop/shop.component';
+import { TeamComponent } from './pages/team/team.component';
 
 @NgModule({
     declarations: [
+        /* Layouts */
         PublicComponent,
-        UserPanelComponent,
         LandingComponent,
         RegisterComponent,
+
+        /* Components */
+        UserPanelComponent,
         HeaderComponent,
         TopBoxComponent,
         QuickLinksComponent,
@@ -32,7 +40,14 @@ import { RankingSmallComponent } from './components/ranking-small/ranking-small.
         VoteBoxComponent,
         NewsBoxComponent,
         ServerInfoComponent,
-        RankingSmallComponent
+        RankingSmallComponent,
+
+        /* Pages */
+        HomeComponent,
+        WikiComponent,
+        RankingComponent,
+        ShopComponent,
+        TeamComponent
     ],
     imports: [
         PublicRoutingModule,

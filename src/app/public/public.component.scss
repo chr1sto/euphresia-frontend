@@ -20,43 +20,93 @@ header{
 {
     display: flex;
     margin-left: 94px;
-}
 
-.left
-{
-    width: 245px;
-    margin-top: 30px;
-}
+    .left
+    {
+        z-index: 4;
+        width: 245px;
+        margin-top: 30px;
 
-.right
-{
-    margin-top: 30px;
-    width: 245px;
-}
+        quick-links
+        {
+            z-index: 1;
+        }
 
-.mid
-{
-    width: 584px;
-    margin-left: -20px;
-    z-index: 2;
-}
+        media-container
+        {
+            display: block;
+            margin-top: -60px;
+            margin-left: 18px;
+            z-index: 3;
+            //margin-left: -20px;
+        }
 
-.left quick-links
-{
-    z-index: 1;
-}
+        discord-container
+        {
+            display: block;
+            z-index: 1;
+        }
+    }
 
-.left media-container
-{
-    display: block;
-    margin-top: -60px;
-    margin-left: 18px;
-    z-index: 3;
-    //margin-left: -20px;
-}
+    .right
+    {
 
-.left discord-container
-{
-    display: block;
-    z-index: 1;
+        margin-top: 30px;
+        width: 245px;
+        z-index: 4;
+
+        user-panel
+        {
+            display: block;
+            z-index: 2;
+        }
+
+        server-info
+        {
+            display: block;
+            margin-top: -135px;
+            margin-left: 18px;
+            margin-bottom: 18px;
+            z-index: 3;
+        }
+
+        ranking-small
+        {
+            display: block;
+            margin-left: 22px;
+            z-index: 3;
+        }
+
+        vote-box
+        {
+            display: block;
+            margin-top: -25px;
+            margin-left: 13px;
+        }
+    }
+
+    .mid
+    {
+        width: 584px;
+        margin-left: -20px;
+        z-index: 5;
+
+        .content
+        {
+            margin-left: 27px;
+            margin-top: -40px;
+            width: 550px;
+            height: 967px;
+            background-image: url('../../assets/web/boxes/box_content.png');
+
+            .content-inner
+            {
+                outline: 1px red dotted;
+                padding-top: 50px;
+                padding-left: 20px;
+                padding-right: 20px;
+                height: 845px;
+            }
+        }
+    }
 }

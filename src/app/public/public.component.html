@@ -4,12 +4,16 @@
         <div class="cols">
             <div class="left">
                 <quick-links></quick-links>
-                <media-container></media-container>
+                <!--<media-container></media-container>-->
                 <discord-container></discord-container>
             </div>
             <div class="mid">
                 <box-top></box-top>
-                <news-box></news-box>
+                <div class="content">
+                    <div class="content-inner">
+                        <router-outlet></router-outlet>
+                    </div>
+                </div>
             </div>
             <div class="right">
                 <user-panel></user-panel>
@@ -18,7 +22,5 @@
                 <vote-box></vote-box>
             </div>
         </div>
-
-        <router-outlet></router-outlet>
     </div>
 </div>

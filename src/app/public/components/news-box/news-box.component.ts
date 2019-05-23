@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./news-box.component.scss']
   })
 export class NewsBoxComponent implements OnInit {
+    online : boolean = false;
+
     ngOnInit(): void {
 
     }

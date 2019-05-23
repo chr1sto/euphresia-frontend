@@ -42,6 +42,7 @@ export class GeneralAccountsComponent implements OnInit{
 
   refreshAccountList()
   {
+    console.log(this.accountsCurrentPageIndex);
     this.accountService.account(this.accountsCurrentPageIndex,25,this.searchText)
     .pipe(
       map(
@@ -66,6 +67,7 @@ export class GeneralAccountsComponent implements OnInit{
 
   changePage(event : any)
   {
+    this.accountsCurrentPageIndex = event.pageIndex;
     this.refreshAccountList();
   }
 }

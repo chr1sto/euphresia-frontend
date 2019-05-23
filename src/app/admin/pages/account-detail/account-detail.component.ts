@@ -60,6 +60,6 @@ export class AccountDetailComponent implements OnInit{
                     this.gameAccounts = result.data;
                 }
             )
-        )
+        ).subscribe();
     }
 }
