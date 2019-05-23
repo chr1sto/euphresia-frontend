@@ -5,6 +5,12 @@
     height: 232px;
 }
 
+ul *
+{
+    outline: none;
+    border: 0;
+}
+
 li
 {
     list-style-type: none;
