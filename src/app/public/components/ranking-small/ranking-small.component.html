@@ -1,2 +1,15 @@
 <div class="this">
+    <table>
+        <tr *ngFor="let item of ranking; let i = index">
+            <td>
+                {{i+1}}
+            </td>
+            <td>
+                {{item.name}}
+            </td>
+            <td>
+                {{item.gearScore}}
+            </td>
+        </tr>
+    </table>
 </div>

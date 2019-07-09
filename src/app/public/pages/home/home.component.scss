@@ -1,0 +1,29 @@
+h1
+{
+    text-align: center;
+    font-family: 'Roboto Slab', serif;
+    background-color: #460000;
+    color: transparent;
+    text-shadow: 0px -1px 0px rgba(80, 40, 0, 0.8);
+    -webkit-background-clip: text;
+       -moz-background-clip: text;
+            background-clip: text;
+}
+
+.container
+{
+    margin-top: 10px;
+}
+
+seperator
+{
+    margin-bottom: 15px;
+    display: block;
+}
+
+news-item
+{
+    display: block;
+    margin-left: 20px;
+    margin-right: 20px;
+}

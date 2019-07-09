@@ -1,0 +1,49 @@
+<h1>Characters</h1>
+
+<div class="container">
+    <table mat-table [dataSource]="characters" class="mat-elevation-z8">
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="account">
+            <th mat-header-cell *matHeaderCellDef> Account </th>
+            <td mat-cell *matCellDef="let element" class="account"> {{element.account}} </td>
+        </ng-container>
+        <ng-container matColumnDef="gearScore">
+            <th mat-header-cell *matHeaderCellDef> GearScore </th>
+            <td mat-cell *matCellDef="let element"> {{element.gearScore}} </td>
+        </ng-container>
+        <ng-container matColumnDef="level">
+            <th mat-header-cell *matHeaderCellDef> Level </th>
+            <td mat-cell *matCellDef="let element"> {{element.level}} </td>
+        </ng-container>
+        <ng-container matColumnDef="perin">
+            <th mat-header-cell *matHeaderCellDef> Perin </th>
+            <td mat-cell *matCellDef="let element"> {{element.perin}} </td>
+        </ng-container>
+        <ng-container matColumnDef="penya">
+            <th mat-header-cell *matHeaderCellDef> Penya </th>
+            <td mat-cell *matCellDef="let element"> {{element.penya}} </td>
+        </ng-container>
+        <ng-container matColumnDef="redChips">
+            <th mat-header-cell *matHeaderCellDef> Red Chips </th>
+            <td mat-cell *matCellDef="let element"> {{element.redChips}} </td>
+        </ng-container>
+        <ng-container matColumnDef="donateCoins">
+            <th mat-header-cell *matHeaderCellDef> Donate Coins </th>
+            <td mat-cell *matCellDef="let element"> {{element.donateCoins}} </td>
+        </ng-container>
+        <ng-container matColumnDef="euphresiaCoins">
+            <th mat-header-cell *matHeaderCellDef> Euphresia Coins </th>
+            <td mat-cell *matCellDef="let element"> {{element.euphresiaCoins}} </td>
+        </ng-container>
+        <ng-container matColumnDef="votePoints">
+            <th mat-header-cell *matHeaderCellDef> Vote Points </th>
+            <td mat-cell *matCellDef="let element"> {{element.votePoints}} </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr class="row" mat-row *matRowDef="let row; columns: displayedColumns;" (click)="open(row)"></tr>
+    </table>
+</div>

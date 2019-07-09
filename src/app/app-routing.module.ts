@@ -1,22 +1,28 @@
+import { HomeComponent } from './home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AdminGuardService } from './shared/guards/admin-guard';
+import { LoginComponent } from './components/login/login.component';
+import { AuthGuardService } from './guards/auth-guard';
+import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    loadChildren: './public/public.module#PublicModule'
-  },
-  {
-    path: 'admin',
-    loadChildren: './admin/admin.module#AdminModule',
-    canLoad: [AdminGuardService],
-    canActivate: [AdminGuardService]
-  },
+    {
+        path: '',
+        component: HomeComponent,
+        canActivate: [AuthGuardService]
+    },
+    {
+        path: 'login',
+        component: LoginComponent
+    },
+    {
+        path: 'register',
+        component: RegisterComponent
+    }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes, {useHash: true})],
+    exports: [RouterModule]
 })
 export class AppRoutingModule { }
