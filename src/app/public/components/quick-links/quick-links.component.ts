@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
     selector: 'quick-links',
@@ -9,12 +8,5 @@ import { Router } from '@angular/router';
 export class QuickLinksComponent implements OnInit {
     ngOnInit(): void {
 
-    }
-
-    constructor(private router : Router){}
-
-    route(r : string)
-    {
-      this.router.navigate([r]);
     }
 }

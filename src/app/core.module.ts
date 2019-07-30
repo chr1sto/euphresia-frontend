@@ -1,5 +1,5 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { API_BASE_URL, AccountService, ServiceStatusService, GameEventService, NewsService, RolesService, GameAccountService, GameCharacterService, GenericService, RankingService } from './shared/services/generated.services';
+import { API_BASE_URL, AccountService, ServiceStatusService, GameEventService, NewsService, RolesService, GameAccountService } from './shared/services/generated.services';
 import { JwtInterceptor } from './shared/helpers/jwt.interceptor';
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -13,7 +13,7 @@ import { RegisterGuardService } from './shared/guards/register-guard';
 
 export class AppConsts
 {
-  static baseUrl = "https://localhost:44345"
+  static baseUrl = "https://api.euphresia-flyff.com"
 }
 
 export function getBaseUrl() : string {
@@ -57,10 +57,7 @@ export class CoreModule
                 CustomFileUploadService,
                 NewsService,
                 RolesService,
-                GameAccountService,
-                GameCharacterService,
-                GenericService,
-                RankingService
+                GameAccountService
             ]
         }
     }
