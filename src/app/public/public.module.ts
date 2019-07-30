@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { LandingComponent } from './pages/landing/landing.component';
-import { RegisterComponent } from './pages/register/register.component';
+import { RegisterComponent } from './pages/landing/register/register.component';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { HeaderComponent } from './components/header/header.component';
 import { TopBoxComponent } from './components/box-top/box-top.component';
@@ -22,6 +22,13 @@ import { WikiComponent } from './pages/wiki/wiki.component';
 import { RankingComponent } from './pages/ranking/ranking.component';
 import { ShopComponent } from './pages/shop/shop.component';
 import { TeamComponent } from './pages/team/team.component';
+import {SlideshowModule} from 'ng-simple-slideshow';
+import { SeperatorComponent } from './components/seperator/seperator.component';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { LandingHomeComponent } from './pages/landing/landing-home/landing-home.component';
+import { NewsItemComponent } from './components/news-item/news-item.component';
+import { NewsDetailComponent } from './pages/news-detail/news-detail.component';
+import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 
 @NgModule({
     declarations: [
@@ -41,19 +48,28 @@ import { TeamComponent } from './pages/team/team.component';
         NewsBoxComponent,
         ServerInfoComponent,
         RankingSmallComponent,
+        SeperatorComponent,
+        NewsItemComponent,
 
         /* Pages */
         HomeComponent,
         WikiComponent,
         RankingComponent,
         ShopComponent,
-        TeamComponent
+        TeamComponent,
+        ForgotPasswordComponent,
+        LandingHomeComponent,
+        NewsDetailComponent,
+
+        /* Pipes */
+        SafeHtmlPipe
     ],
     imports: [
         PublicRoutingModule,
         CommonModule,
         FormsModule,
-        RecaptchaModule
+        RecaptchaModule,
+        SlideshowModule
     ],
     bootstrap: [],
     providers: []

@@ -1,0 +1,30 @@
+h1
+{
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 20px;
+}
+
+.floating-add
+{
+    position: fixed;
+    z-index: 3;
+    bottom: 20px;
+    right: 20px;
+}
+
+.floating-add-icon
+{
+    font-size: 72px !important;
+    color: #1a237e;
+}
+
+.floating-add-icon:hover
+{
+    cursor: pointer;
+    color: #0976db;
+}
+
+table
+{
+    width: 100%;
+}

@@ -1,0 +1,56 @@
+h1
+{
+    text-align: center;
+    font-family: 'Roboto Slab', serif;
+    background-color: #460000;
+    color: transparent;
+    text-shadow: 0px -1px 0px rgba(80, 40, 0, 0.8);
+    -webkit-background-clip: text;
+       -moz-background-clip: text;
+            background-clip: text;
+}
+
+.banner
+{
+    width: 540px;
+    position: relative;
+
+    img
+    {
+        width: 528px;
+        max-height: 200px;
+        margin-left: 6px;
+        margin-top: 12px;
+        margin-bottom: -12px;
+    }
+
+    margin-bottom: 20px;
+}
+
+.banner::before
+{
+    content: '';
+    display: block;
+    background-image: url("../../../../assets/web/separator.png");
+    width: 540px;
+    height: 22px;
+    position: absolute;
+}
+
+.banner::after
+{
+    content: '';
+    display: block;
+    background-image: url("../../../../assets/web/separator.png");
+    width: 540px;
+    height: 22px;
+    position: absolute;
+}
+
+.content
+{
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 30px;
+    overflow-y: auto;
+}

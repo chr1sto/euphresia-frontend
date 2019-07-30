@@ -1,0 +1,58 @@
+.this
+{
+    display: block;
+    position: relative;
+    height: 150px;
+
+    .thumbnail
+    {
+        float: left;
+        width: 150px;
+        height: 150px;
+
+        img
+        {
+            max-width: 100%;
+            max-height: 100%;
+            border: #3e2918 2px solid;
+        }
+    }
+
+    .text
+    {
+        float: right;
+        width: 325px;
+        height: 150px;
+
+        font-family: 'Roboto Slab', serif;
+
+        h3
+        {
+            color: #460000;
+        }
+
+        .content
+        {
+            font-size: 14px;
+        }
+
+        .foot
+        {
+            display: block;
+            margin-top: 5px;
+            font-size: 12px;
+
+            .read-more
+            {
+                text-align: right;
+                float: right;
+            }
+
+            .date
+            {
+                float: left;
+                color: #362517;
+            }
+        }
+    }
+}
