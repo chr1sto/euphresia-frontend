@@ -15,7 +15,7 @@ export class RegisterGuardService implements CanActivate
     canActivate() : boolean
     {
         if(!this._auth.isLoggedIn) return true;
-        this._router.navigate(['web']);
+        this._router.navigate(['']);
         return false;
     }
     

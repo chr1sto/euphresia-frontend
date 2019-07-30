@@ -30,10 +30,6 @@ import { MatDividerModule } from '@angular/material/divider';
 import { GameAccountListComponent } from './components/game-account-list/game-account-list.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { ChangeRolesComponent } from './components/change-roles/change-roles.component';
-import { GameCharactersComponent } from './pages/game-characters/game-characters.component';
-import { GameCharacterListComponent } from './components/game-character-list/game-character-list.component';
-import { GeneralSliderComponent } from './pages/general-slider/general-slider.component';
-import { CreateImageObjectComponent } from './components/create-image-object/create-image-object.component';
 
 
 @NgModule({
@@ -50,11 +46,7 @@ import { CreateImageObjectComponent } from './components/create-image-object/cre
     AccountInfoItemComponent,
     AccountDetailComponent,
     GameAccountListComponent,
-    ChangeRolesComponent,
-    GameCharactersComponent,
-    GameCharacterListComponent,
-    GeneralSliderComponent,
-    CreateImageObjectComponent
+    ChangeRolesComponent
   ],
   imports: [
     CommonModule,
@@ -80,9 +72,7 @@ import { CreateImageObjectComponent } from './components/create-image-object/cre
     AngularEditorModule
   ],
   entryComponents: [
-    ChangeRolesComponent,
-    GameCharacterListComponent,
-    CreateImageObjectComponent
+    ChangeRolesComponent
   ],
   bootstrap: [
     AdminComponent

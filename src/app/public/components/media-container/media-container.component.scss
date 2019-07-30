@@ -3,27 +3,4 @@
     background-image: url('../../../../assets/web/boxes/box_topitem.png');
     width: 202px;
     height: 202px;
-
-    .iframe-container
-    {
-        width: 160px;
-        height: 160px;
-        padding-left: 36px;
-        padding-top: 36px;
-
-        iframe
-        {
-            -ms-transform: scale(0.75);
-            -moz-transform: scale(0.75);
-            -o-transform: scale(0.75);
-            -webkit-transform: scale(0.75);
-            transform: scale(0.75);
-        
-            -ms-transform-origin: 0 0;
-            -moz-transform-origin: 0 0;
-            -o-transform-origin: 0 0;
-            -webkit-transform-origin: 0 0;
-            transform-origin: 0 0;
-        }
-    }
 }

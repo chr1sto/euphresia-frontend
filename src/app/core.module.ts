@@ -1,5 +1,5 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { API_BASE_URL, AccountService, ServiceStatusService, GameEventService, NewsService, RolesService, GameAccountService, GameCharacterService, GenericService, RankingService } from './shared/services/generated.services';
+import { API_BASE_URL, AccountService, ServiceStatusService, GameEventService, NewsService, RolesService, GameAccountService } from './shared/services/generated.services';
 import { JwtInterceptor } from './shared/helpers/jwt.interceptor';
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -8,11 +8,12 @@ import { AdminGuardService } from './shared/guards/admin-guard';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import { AvatarModule } from "ngx-avatar";
 import { CustomFileUploadService } from './shared/services/custom-file-upload.service';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { RegisterGuardService } from './shared/guards/register-guard';
 
 export class AppConsts
 {
-  static baseUrl = "https://api.euphresia-flyff.com";
+  static baseUrl = "https://api.euphresia-flyff.com"
 }
 
 export function getBaseUrl() : string {
@@ -56,10 +57,7 @@ export class CoreModule
                 CustomFileUploadService,
                 NewsService,
                 RolesService,
-                GameAccountService,
-                GameCharacterService,
-                GenericService,
-                RankingService
+                GameAccountService
             ]
         }
     }

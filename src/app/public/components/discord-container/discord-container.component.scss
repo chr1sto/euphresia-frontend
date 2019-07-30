@@ -1,45 +1,6 @@
 .this
 {
+    background-image: url('../../../../assets/web/boxes/box_discord.png');
     width: 235px;
-    height: 540px;
-    position: relative;
-
-    .border
-    {
-        background-image: url('../../../../assets/web/boxes/box_discord.png');
-        width: 235px;
-        height: 540px;
-        position: absolute;
-        left: 0px;
-        top: 0px;
-        pointer-events: none;
-    }
-
-    .iframe-container
-    {
-        position: absolute;
-        width: 180px;
-        height: 300px;
-        left: 20px;
-        top: 200px;
-        background-color: #212121;
-    }
-
-    iframe
-    {
-        width: 240px;
-        height: 380px;
-        border: 0;
-        -ms-transform: scale(0.75);
-        -moz-transform: scale(0.75);
-        -o-transform: scale(0.75);
-        -webkit-transform: scale(0.75);
-        transform: scale(0.75);
-    
-        -ms-transform-origin: 0 0;
-        -moz-transform-origin: 0 0;
-        -o-transform-origin: 0 0;
-        -webkit-transform-origin: 0 0;
-        transform-origin: 0 0;
-    }
+    height: 386px;
 }
