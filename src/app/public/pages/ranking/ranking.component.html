@@ -3,16 +3,27 @@
 <div class="content">
     <table>
         <tr>
-            <th>Name</th>
-            <th>Class</th>
-            <th>GearScore</th>
-            <th>Level</th>
+            <th align="left">Name</th>
+            <th align="left">Class</th>
+            <th align="left">GearScore</th>
+            <th align="left" colspan="2">Level</th>
         </tr>
-        <tr>
-            <td>Test</td>
-            <td>Billposter</td>
-            <td>1000</td>
-            <td>129</td>
+        <tr *ngFor="let item of data">
+            <td>{{item.name}}</td>
+            <td><img title="{{helper.GetJobNameFromId(item.class)}}" class="job" src="{{helper.GetJobIconFromId(item.class)}}"></td>
+            <td>{{item.gearScore}}</td>           
+            <td width="24px">{{item.level}}</td>      
+            <td class="master-col"><img class="master" src="{{helper.GetLevelIconFromJobAndLevel(item.class,item.level)}}"></td>    
         </tr>
     </table>
+</div>
+<seperator></seperator>
+<div class="pagination">
+    <div class="left">
+        <div class="img-back" (click)="previous()" ></div>
+    </div>
+    <div class="page">{{currentPage+1}} / {{pageCount}}</div>
+    <div class="right">
+        <div (click)="next()" class="img-next"></div>
+    </div>
 </div>

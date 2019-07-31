@@ -9,3 +9,98 @@ h1
        -moz-background-clip: text;
             background-clip: text;
 }
+
+
+.content
+{
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 20px;
+    height: 600px;
+}
+table
+{
+    width: 100%;
+
+    td img.job
+    {
+        width: 32px;
+        height: 32px;
+    }
+
+    td img.master
+    {
+        margin-top: 4px;
+        width: 16px;
+        height: 16px;
+    }
+
+    td.master-col
+    {
+        width:18px;
+    }
+}
+
+.pagination::after
+{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.pagination
+{
+    margin-top: 20px;
+    width: 100%;
+    div
+    {
+        float: left;
+        text-align: center;
+    }
+
+    .page
+    {
+        width: 20%;
+        margin-top: 15px;
+    }
+
+    .left
+    {
+        width: 40%;
+    }
+
+    .right
+    {
+        width: 40%;
+    }
+
+    .img-next
+    {
+        margin-left: 20px;
+        width: 175px;
+        height: 56px;
+        background-image: url('../../../../assets/web/buttons/next.png');
+        background-size: cover;
+        cursor: pointer;
+    }
+
+    .img-next:hover
+    {
+        background-image: url('../../../../assets/web/buttons/next_hover.png');
+    }
+
+    .img-back
+    {
+        margin-left: 20px;
+        width: 175px;
+        height: 56px;
+        background-image: url('../../../../assets/web/buttons/back.png');
+        background-size: cover;
+        cursor: pointer;
+    }
+
+    .img-back:hover
+    {
+        background-image: url('../../../../assets/web/buttons/back_hover.png');
+    }
+}

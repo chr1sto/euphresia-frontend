@@ -9,6 +9,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import { AvatarModule } from "ngx-avatar";
 import { CustomFileUploadService } from './shared/services/custom-file-upload.service';
 import { RegisterGuardService } from './shared/guards/register-guard';
+import { RankingHelperService } from './shared/services/ranking-helper.service';
 
 export class AppConsts
 {
@@ -56,7 +57,8 @@ export class CoreModule
                 CustomFileUploadService,
                 NewsService,
                 RolesService,
-                GameAccountService
+                GameAccountService,
+                RankingHelperService
             ]
         }
     }
