@@ -32,11 +32,14 @@ export class AuthenticationService
                 {
                     if(token)
                     {
-                        console.log(token)
-                        localStorage.setItem('token',token.data);
-                        console.log(token.data);
-                        this.userInfo = this.getUserInfo();
-                        this.isLoggedIn = true;
+                        if(token.data.length > 16)
+                        {
+                            console.log(token)
+                            localStorage.setItem('token',token.data);
+                            console.log(token.data);
+                            this.userInfo = this.getUserInfo();
+                            this.isLoggedIn = true;
+                        }
                     }
                 }
             )
@@ -56,6 +59,7 @@ export class AuthenticationService
             userInfo.userName = decoded.unique_name;
             userInfo.roles = decoded.role;
             return userInfo;
+
         }
         return null;
     }
@@ -70,8 +74,11 @@ export class AuthenticationService
         const token = localStorage.getItem('token');
         if(token)
         {
-            const jwt = new JwtHelperService();
-            return !jwt.isTokenExpired(token);
+            if(token.length > 16)
+            {
+                const jwt = new JwtHelperService();
+                return !jwt.isTokenExpired(token);
+            }
         }
         this.logout();
         return false;

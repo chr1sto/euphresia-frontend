@@ -3,12 +3,12 @@
     width: 604px;
     height: 310px;
     position: relative;
+    display: block;
 }
 
-.this::after
+.border
 {
     background-image: url('../../../../assets/web/slider/frame.png');
-    content: '';
     width: 604px;
     height: 310px;
     position: absolute;
@@ -18,9 +18,8 @@
     bottom: 0;
 }
 
-.this::before
+.inner
 {
-    content: '';
     background-color: white;
     height: 250px;
     width: 564px;
@@ -29,4 +28,40 @@
     right: 0;
     top: 45px;
     bottom: 0;
+    display: block;
+    slideshow
+    {
+        display: block;
+        width: 564px;
+    }
+}
+
+.slider-idx
+{
+    float: right;
+    list-style: none;
+    margin-right: 40px;
+    margin-top: 50px;
+    display: block;
+    z-index: 6;
+    position: relative;
+
+    li
+    {
+        float: right;
+        width: 40px;
+        height: 38px;
+        background-image: url('../../../../assets/web/slider/dot.png');
+    }
+
+    li:hover
+    {
+        background-image: url('../../../../assets/web/slider/dot_cur.png');
+        cursor: pointer;
+    }
+
+    li.is-active
+    {
+        background-image: url('../../../../assets/web/slider/dot_cur.png');
+    }
 }

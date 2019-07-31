@@ -15,7 +15,7 @@ export class ServiceStatusItemComponent {
     getStateClass() : string
     {
         var time = new Date().getTime() - this.serviceStatus.timeStamp.getTime();
-        if(time > 240000) this.serviceStatus.state=0;
+        //if(time > 240000) this.serviceStatus.state=0;
         switch(this.serviceStatus.state)
         {
             case 0: return 'is-offline';

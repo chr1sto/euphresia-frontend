@@ -39,6 +39,8 @@ export class RegisterComponent {
       this.accountService.register(model).subscribe(
         result => 
           {
+            if(!result.errors)
+            {
               this.hasErrors = false;
               this.errorMessages = null;
               this.success = true;
@@ -46,13 +48,14 @@ export class RegisterComponent {
               {
                 this.router.navigate(['web'])
               }
-              ,1000)
-          },
-          error => 
-          {
-            this.hasErrors = true;
-            this.errorMessages = error.errors;
-            this.success = false;
+              ,3000)
+            }
+            else
+            {
+              this.hasErrors = true;
+              this.errorMessages = result.errors;
+              this.success = false;
+            }
           }
       );
 

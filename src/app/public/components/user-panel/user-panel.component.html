@@ -3,38 +3,36 @@
 <div class="this">
     <div class="user-panel-container">
         <div class="logged-in" *ngIf="loggedIn">
-            <p class="email">
-                <span><b>Email: </b></span> <span>{{this.user.email}}</span>
-            </p>
-            <p>
-                <span><b>User: </b></span> <span>{{this.user.userName}}</span>
-            </p>
-            <p>
-                <button class="button" (click)="this.logout()">
-                    Logout
-                </button>
-            </p>
-    
-            <a *ngIf="hasAdminAccess" [routerLink]="['/admin']">Admin Panel</a>
+            <p class="label">Logged in as:</p>
+            <p>{{this.user.email}}</p>
+            <div class="logged-in-inner">
+                <ul class="user-options">
+                    <li [routerLink]="['/manage-account']">Manage Account</li>
+                    <li *ngIf="hasAdminAccess" [routerLink]="['/admin']">Admin Panel</li>
+                </ul>
+                <div class="logout-button" (click)="this.logout()"></div>
+            </div>
         </div>
         
         <div class="logged-out" *ngIf="!loggedIn">
-            <p>
-                <input [(ngModel)]="email" class="input" type="email" placeholder="Email">
-            </p>
-            <p>
-                <input [(ngModel)]="password" class="input" type="passsword" placeholder="Password">
-            </p>   
-            <p>
-                <button class="button" (click)="this.login()">
-                    Login
-                </button>
-            </p>
-            <p>
-                <button class="button">
-                    Register
-                </button>
-            </p>
+            <p class="label">Email</p>
+            <div class="input-wrapper">
+                <input [(ngModel)]="email" class="input" type="email" placeholder="">
+            </div>
+
+            <p class="label">Password</p>
+            <div class="input-wrapper">
+                <input [(ngModel)]="password" class="input" type="password" placeholder="">
+            </div>
+            
+            <div>
+                <div class="login-button" (click)="this.login()"></div>
+    
+                <div class="login-options">
+                    <p>Register</p>
+                    <p [routerLink]="['forgot-password']">Forgot Password?</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -11,3 +11,124 @@
     padding-top:60px;
     padding-left: 20px;
 }
+
+p.label
+{
+    font-family: 'Roboto Slab', serif;
+    background-color: #460000;
+    color: transparent;
+    text-shadow: 0px -1px 0px rgba(134, 67, 0, 0.8);
+    -webkit-background-clip: text;
+       -moz-background-clip: text;
+            background-clip: text;
+}
+
+.input-wrapper
+{
+    width: 187px;
+    height: 33px;
+    background: url('../../../../assets/web/login_input.png');
+
+    input
+    {
+        margin-left: 10px;
+        width: 187px;
+        height: 33px;
+        background: transparent;
+        border: none;
+    }
+
+    input:focus
+    {
+        border: none;
+        outline: none;
+    }
+
+    @-webkit-keyframes autofill {
+        to {
+            color: white;
+            background: transparent;
+        }
+    }
+    
+    input:-webkit-autofill {
+        -webkit-animation-name: autofill;
+        -webkit-animation-fill-mode: both;
+    }
+}
+
+.login-button
+{
+    margin-top: 10px;
+    margin-right: 30px;
+    float: right;
+    width: 84px;
+    height: 54px;
+    background-image: url("../../../../assets/web/buttons/login.png");
+}
+
+.login-button:hover
+{
+    cursor: pointer;
+    background-image: url("../../../../assets/web/buttons/login_hov.png");
+}
+
+.logout-button
+{
+    margin-top: 10px;
+    margin-right: 30px;
+    float: right;
+    width: 104px;
+    height: 54px;
+    background-image: url("../../../../assets/web/buttons/logout.png");
+}
+
+
+.logout-button:hover
+{
+    cursor: pointer;
+    background-image: url("../../../../assets/web/buttons/logout_hov.png");
+}
+
+.user-options
+{
+    margin-top: 20px;
+    height: 50px;
+
+    li
+    {
+        list-style-type: none;
+        font-family: 'Roboto Slab', serif;
+        font-size: 14px;
+        background-color: #460000;
+        color: transparent;
+        text-shadow: 0px -1px 0px rgba(134, 67, 0, 0.8);
+        -webkit-background-clip: text;
+           -moz-background-clip: text;
+                background-clip: text;
+    }
+
+    li:hover
+    {
+        cursor: pointer;
+        background-color: #533b3b;
+        text-shadow: 0px -1px 0px rgba(133, 114, 95, 0.8);
+    }
+}
+
+.login-options
+{
+    margin-top: 20px;
+    float:left;
+    p
+    {
+        font-family: 'Roboto Slab', serif;
+        font-size: 13px;
+    }
+
+    p:hover
+    {
+        color: white;
+        cursor: pointer;
+    }
+}

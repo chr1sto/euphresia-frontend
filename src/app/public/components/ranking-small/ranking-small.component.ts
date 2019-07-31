@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { RankingService, CharacterViewModel } from 'src/app/shared/services/generated.services';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'ranking-small',
@@ -7,6 +9,32 @@ import { Component, OnInit } from '@angular/core';
   })
 export class RankingSmallComponent implements OnInit {
     ngOnInit(): void {
+      this.updateRanking();
+    }
 
+    ranking : CharacterViewModel[] = [];
+
+    constructor(private rankingService : RankingService)
+    {
+
+    }
+
+    updateRanking()
+    {
+      this.rankingService.ranking(0,10,"gearscore").pipe(
+        map(
+          result => {
+            if(result.success)
+            {
+              this.ranking = result.data.content;
+              console.log(this.ranking);
+            }
+            else
+            {
+              console.log("Could not retrieve player Ranking!");
+            }
+          }
+        )
+      ).subscribe();
     }
 }

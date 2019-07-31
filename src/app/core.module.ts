@@ -8,7 +8,6 @@ import { AdminGuardService } from './shared/guards/admin-guard';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import { AvatarModule } from "ngx-avatar";
 import { CustomFileUploadService } from './shared/services/custom-file-upload.service';
-import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { RegisterGuardService } from './shared/guards/register-guard';
 
 export class AppConsts

@@ -12,6 +12,8 @@ import { FileUploadComponent } from './pages/file-upload/file-upload.component';
 import { NewsDetailComponent } from './pages/news-detail/news-detail.component';
 import { AccountInfoItemComponent } from './components/account-info-item/account-info-item.component';
 import { AccountDetailComponent } from './pages/account-detail/account-detail.component';
+import { GameCharactersComponent } from './pages/game-characters/game-characters.component';
+import { GeneralSliderComponent } from './pages/general-slider/general-slider.component';
 
 const routes : Routes =
 [
@@ -32,6 +34,10 @@ const routes : Routes =
             {
                 path:'news',
                 component: NewsManagmentComponent
+            },
+            {
+                path:'slider',
+                component: GeneralSliderComponent
             },
             {
                 path: 'accounts',
@@ -60,6 +66,10 @@ const routes : Routes =
             {
                 path: 'account-detail/:id',
                 component: AccountDetailComponent
+            },
+            {
+                path: 'game-characters',
+                component: GameCharactersComponent
             }
         ]
     }

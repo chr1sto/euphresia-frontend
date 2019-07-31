@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./server-info.component.scss']
   })
 export class ServerInfoComponent implements OnInit {
+    online : boolean = false;
     ngOnInit(): void {
 
     }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RankingService } from 'src/app/shared/services/generated.services';
 
 @Component({
     selector: 'ranking',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./ranking.component.scss']
   })
 export class RankingComponent {
-    constructor()
+    constructor(private rankingService : RankingService)
     {
     }
 }
