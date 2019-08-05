@@ -37,11 +37,12 @@ export class PublicComponent {
     if(url.includes('privacy-policy')) return 'Privacy-Policy';
     if(url.includes('vote')) return 'Vote';
     if(url.includes('guide')) return 'Guide';
+    if(url.includes('imprint')) return 'Imprint';
     return 'News & Announcments';
   }
 
   getShowSeperator(url : string) : boolean
   {
-    return !url.includes('ranking');
+    return !url.includes('ranking') && !url.includes('news');
   }
 }

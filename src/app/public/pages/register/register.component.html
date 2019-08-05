@@ -1,1 +1,37 @@
-Register
+<div class="container">
+    <form [formGroup]="form" (ngSubmit)="submit(form.value)">
+        <p class="label">Email</p>
+        <div class="input-wrapper">
+            <input formControlName="email" class="input" type="email" placeholder="">
+        </div>
+
+        <p class="label">Password</p>
+        <div class="input-wrapper">
+            <input formControlName="password" class="input" type="password" placeholder="">
+        </div>
+
+        <p class="label">Confirm Password</p>
+        <div class="input-wrapper">
+            <input formControlName="confirmedPassword" class="input" type="password" placeholder="">
+        </div>
+
+        <div class="tos-container">
+            <label class="tos-agreement">
+                <input type="checkbox" formControlname="tos">
+                I agree to the Terms of Service.
+            </label>
+        </div>  
+
+        <div *ngIf="hasErrors" class="errors">
+            <p *ngFor="let item of errorMessages" class="error">{{item}}</p>
+        </div>
+        
+        <div class="register-button-wrapper">
+            <button class="register-button" type="submit">Register</button>
+        </div>
+
+        <div *ngIf="success" class="success">
+            <p>Successfully created an account. Redirecting...</p>
+        </div>
+    </form>
+</div>

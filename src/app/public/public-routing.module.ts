@@ -19,6 +19,7 @@ import { TosComponent } from './pages/tos/tos.component';
 import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
 import { GuideComponent } from './pages/guide/guide.component';
 import { VoteComponent } from './pages/vote/vote.component';
+import { ImprintComponent } from './pages/imprint/imprint.component';
 
 const routes: Routes = [
     {
@@ -101,6 +102,10 @@ const routes: Routes = [
             {
                 path: 'vote',
                 component: VoteComponent
+            },
+            {
+                path: 'imprint',
+                component: ImprintComponent
             }
         ]
     }

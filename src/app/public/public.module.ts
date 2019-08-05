@@ -38,6 +38,7 @@ import { GuideComponent } from './pages/guide/guide.component';
 import { VoteComponent } from './pages/vote/vote.component';
 import { PageCaptionService } from './services/page-caption.service';
 import { ToastService } from './services/toast.service';
+import { ImprintComponent } from './pages/imprint/imprint.component';
 
 @NgModule({
     declarations: [
@@ -73,6 +74,7 @@ import { ToastService } from './services/toast.service';
         RegisterComponent,
         GuideComponent,
         VoteComponent,
+        ImprintComponent,
 
         PlayerRankingComponent,
         GuildRankingComponent,

@@ -1,0 +1,148 @@
+.container
+{
+    width: 75%;
+    margin: auto;
+    margin-top: 30px;
+}
+
+.input-wrapper
+{
+    input 
+    {
+        box-shadow: inset 0 1px 2px #56412c, 0 -1px 1px #48382b, 0px -2px 0 #2f241a;
+        background-color: rgba(92, 70, 49, 1);
+        border: 1px solid transparent;
+        border-top: none;
+        border-radius: 2px;
+        height: 25px;
+        font-family: 'Roboto Slab', serif;
+        color: rgba(183, 155, 127, 1);
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    
+    input:focus
+    {
+        border: none;
+        outline: none;
+    }    
+}
+
+p.label
+{
+    font-family: 'Roboto Slab', serif;
+    background-color: #460000;
+    color: transparent;
+    text-shadow: 0px -1px 0px rgba(80, 40, 0, 0.8);
+    -webkit-background-clip: text;
+       -moz-background-clip: text;
+            background-clip: text;
+            
+    margin-bottom: 5px;
+}
+
+.tos-container
+{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    word-wrap: break-word;
+}
+
+#tos-notice
+{
+    width: 60%;
+    font-size: 1.2vw;
+    font-family: 'Roboto Slab', serif;
+    background-color: #565656;
+    color: transparent;
+    text-shadow: 0px -1px 0px rgba(183, 155, 127,0.8);
+    -webkit-background-clip: text;
+       -moz-background-clip: text;
+            background-clip: text;
+}
+
+.tos-agreement
+{
+    margin-top: 10px;;
+    font-size: 16px;
+    font-family: 'Roboto Slab', serif;
+    background-color: #565656;
+    color: transparent;
+    text-shadow: 0px -1px 0px rgba(255, 255, 255, 1);
+    -webkit-background-clip: text;
+       -moz-background-clip: text;
+            background-clip: text;
+}
+
+.register-button-wrapper
+{
+    display: flex;
+    justify-content: center;
+
+    button
+    {
+        margin-top: 15px;
+        background-color: rgba(61, 44, 29, 0.9);
+        width: 150px;
+        height: 40px;
+        border: 1px solid transparent;
+        border-radius: 4px;   
+        font-size: 16;
+        font-family: 'Roboto Slab', serif;
+        color: rgb(245, 245, 245)
+    }
+    button:focus 
+    { 
+        outline: none; 
+    }
+    
+    button:hover
+    {
+        cursor: pointer;
+        background-color: rgba(88, 66, 43, 0.9) !important;
+    }
+}
+
+.errors
+{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    text-align: center;
+}
+
+.error
+{
+    margin-top: 5px;
+    font-size: 12px;
+    font-family: 'Roboto Slab', serif;
+    background-color: #962828;
+    color: transparent;
+    text-shadow: 0px -1px 0px rgba(177, 38, 4, 0.8);
+    -webkit-background-clip: text;
+       -moz-background-clip: text;
+            background-clip: text;
+}
+
+.success
+{
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.success p
+{
+    font-size: 12px;
+    font-family: 'Roboto Slab', serif;
+    background-color: #035800;
+    color: transparent;
+    text-shadow: 0px -1px 0px rgba(0, 88, 8, 0.8);
+    -webkit-background-clip: text;
+       -moz-background-clip: text;
+            background-clip: text;
+}

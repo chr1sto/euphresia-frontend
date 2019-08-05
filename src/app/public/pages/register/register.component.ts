@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AccountService, RegisterViewModel } from 'src/app/shared/services/generated.services';
 import { Router } from '@angular/router';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
     selector: 'register',
@@ -8,10 +9,17 @@ import { Router } from '@angular/router';
     styleUrls: ['./register.component.scss']
   })
 export class RegisterComponent {
-    constructor(private accountService : AccountService, private router : Router)
+    constructor(private accountService : AccountService, private router : Router, private formBuilder : FormBuilder)
     {
-
+      this.form = this.formBuilder.group({
+        email: '',
+        password: '',
+        confirmedPassword: '',
+        tos: false
+      })
     }
+
+    form = null;
 
     password : string;
     confirmedPassword : string;
@@ -28,12 +36,20 @@ export class RegisterComponent {
       console.log(event);
     }
 
-    submit()
+    submit(data)
     {
       var model = new RegisterViewModel();
-      model.confirmPassword = this.confirmedPassword;
-      model.password = this.password;
-      model.email = this.email;
+      model.confirmPassword = data.confirmedPassword;
+      model.password = data.password;
+      model.email = data.email;
+
+      if(!data.tos)
+      {
+        this.hasErrors = true;
+        this.errorMessages = ["You have to read and accept our Terms of Service in order to create an Account!"];
+        this.success = false;
+        return;
+      }
 
       this.accountService.register(model).subscribe(
         result => 
