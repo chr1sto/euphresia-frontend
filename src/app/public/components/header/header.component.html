@@ -1,12 +1,22 @@
-<div class="this">
-    <ul class="left">
-        <li id="home" [routerLink]="['home']"></li>
-        <li id="wiki" [routerLink]="['wiki']"></li>
-        <li id="ranking" [routerLink]="['ranking']"></li>
-    </ul>
-    <ul class="right">
-        <li id="features"></li>
-        <li id="shop" [routerLink]="['shop']"></li>
-        <li id="team" [routerLink]="['team']"></li>
-    </ul>
-</div>
+<ul class="left">
+    <li id="home">
+        <a [routerLink]="['/home']"></a>
+    </li>
+    <li id="wiki">
+        <a href="https://wiki.euphresia-flyff.com/"></a>
+    </li>
+    <li id="ranking">
+        <a [routerLink]="['/ranking']"></a>
+    </li>
+</ul>
+<ul class="right">
+    <li id="features">
+        <a href="https://preview.euphresia-flyff.com/"></a>
+    </li>
+    <li id="shop">
+        <a [routerLink]="['/shop']"></a>
+    </li>
+    <li id="team">
+        <a [routerLink]="['/team']"></a>
+    </li>
+</ul>

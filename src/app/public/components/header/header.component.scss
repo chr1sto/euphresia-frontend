@@ -1,4 +1,4 @@
-.this
+:host
 {
     background-image: url('../../../../assets/web/header/navigation/nav-bg.png');
     width: 1262px;
@@ -14,16 +14,23 @@ ul *
 li
 {
     list-style-type: none;
-    height: 67px;
-    background-position: 0px 0px;
-    background-repeat: no-repeat;
     float: left;
-}
+    height: 67px;
 
-li:hover
-{
-    background-position: 0px -67px;
-    cursor: pointer;
+    a 
+    {
+        height: 67px;
+        width: 100%;
+        background-position: 0px 0px;
+        background-repeat: no-repeat;
+        display: block;        
+    }
+
+    a:hover
+    {
+        background-position: 0px -67px;
+        cursor: pointer;
+    }
 }
 
 .left
@@ -40,19 +47,28 @@ li:hover
     #home
     {
         width: 75px;
-        background-image: url('../../../../assets/web/header/navigation/home.png');
+        a
+        {
+            background-image: url('../../../../assets/web/header/navigation/home.png');
+        }
     }
 
     #wiki
     {
         width: 87px;
-        background-image: url('../../../../assets/web/header/navigation/wiki.png');
+        a
+        {
+            background-image: url('../../../../assets/web/header/navigation/wiki.png');
+        }
     }
 
     #ranking
     {
         width: 111px;
-        background-image: url('../../../../assets/web/header/navigation/ranking.png');
+        a
+        {
+            background-image: url('../../../../assets/web/header/navigation/ranking.png');
+        }
     }
 }
 
@@ -70,18 +86,27 @@ li:hover
     #features
     {
         width: 119px;
-        background-image: url('../../../../assets/web/header/navigation/features.png');
+        a 
+        {
+            background-image: url('../../../../assets/web/header/navigation/features.png');            
+        }
     }
 
     #shop
     {
         width: 77px;
-        background-image: url('../../../../assets/web/header/navigation/shop.png');
+        a 
+        {
+            background-image: url('../../../../assets/web/header/navigation/shop.png');
+        }
     }
 
     #team
     {
         width: 88px;
-        background-image: url('../../../../assets/web/header/navigation/team.png');
+        a 
+        {
+            background-image: url('../../../../assets/web/header/navigation/team.png');
+        }
     }
 }

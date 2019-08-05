@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AccountService, RegisterViewModel } from 'src/app/shared/services/generated.services';
-import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 @Component({
@@ -46,7 +45,7 @@ export class RegisterComponent {
               this.success = true;
               setTimeout(() =>
               {
-                this.router.navigate(['web'])
+                this.router.navigate([''])
               }
               ,3000)
             }

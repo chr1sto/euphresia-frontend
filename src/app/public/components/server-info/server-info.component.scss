@@ -2,6 +2,7 @@
 {
     width: 220px;
     height: 98px;
+    position: relative;
 }
 
 .this.offline
@@ -12,4 +13,22 @@
 .this.online
 {
     background-image: url('../../../../assets/web/ifonline.png');
+}
+
+.time
+{
+    width: 220px;
+    height: 28px;
+    position: absolute;
+    top: 60px;
+
+    .clock
+    {
+        margin-left: 20px;
+        margin-right: 20px;
+        text-align: center;
+        font-size: 22px;
+        color: white;
+        font-family: 'Roboto Slab', serif;
+    }
 }

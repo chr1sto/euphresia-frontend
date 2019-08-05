@@ -1,38 +1,38 @@
 
 
-<div class="this">
-    <div class="user-panel-container">
-        <div class="logged-in" *ngIf="loggedIn">
-            <p class="label">Logged in as:</p>
-            <p>{{this.user.email}}</p>
-            <div class="logged-in-inner">
-                <ul class="user-options">
-                    <li [routerLink]="['/manage-account']">Manage Account</li>
-                    <li *ngIf="hasAdminAccess" [routerLink]="['/admin']">Admin Panel</li>
-                </ul>
-                <div class="logout-button" (click)="this.logout()"></div>
-            </div>
+<div class="user-panel-container">
+    <div class="logged-in" *ngIf="loggedIn">
+        <p class="label">Logged in as:</p>
+        <p>{{this.user.email}}</p>
+        <div class="logged-in-inner">
+            <ul class="user-options">
+                <li [routerLink]="['/manage-account']">Manage Account</li>
+                <li *ngIf="hasAdminAccess" [routerLink]="['/admin']">Admin Panel</li>
+            </ul>
+            <div class="logout-button" (click)="this.logout()"></div>
         </div>
-        
-        <div class="logged-out" *ngIf="!loggedIn">
+    </div>
+    
+    <div class="logged-out" *ngIf="!loggedIn">
+        <form [formGroup]="form" (ngSubmit)="login(form.value)">
             <p class="label">Email</p>
             <div class="input-wrapper">
-                <input [(ngModel)]="email" class="input" type="email" placeholder="">
+                <input formControlName="email" class="input" type="email" placeholder="">
             </div>
 
             <p class="label">Password</p>
             <div class="input-wrapper">
-                <input [(ngModel)]="password" class="input" type="password" placeholder="">
+                <input formControlName="password" class="input" type="password" placeholder="">
             </div>
-            
-            <div>
-                <div class="login-button" (click)="this.login()"></div>
+
+            <div class="button-wrapper">
+                <button class="login-button" type="submit"></button>
     
                 <div class="login-options">
-                    <p>Register</p>
-                    <p [routerLink]="['forgot-password']">Forgot Password?</p>
+                    <p><a [routerLink]="['/register']">Register</a></p>
+                    <p><a [routerLink]="['/forgot-password']">Forgot Password?</a></p>
                 </div>
             </div>
-        </div>
+        </form>              
     </div>
 </div>

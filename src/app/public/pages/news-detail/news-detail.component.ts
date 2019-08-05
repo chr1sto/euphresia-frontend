@@ -3,6 +3,7 @@ import { NewsService, NewsPostViewModel } from 'src/app/shared/services/generate
 import { map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
+import { PageCaptionService } from '../../services/page-caption.service';
 
 @Component({
     selector: 'news-detail',
@@ -16,7 +17,7 @@ export class NewsDetailComponent implements OnInit {
 
     }
 
-    constructor(private newsService : NewsService, private route: ActivatedRoute)
+    constructor(private newsService : NewsService, private route: ActivatedRoute, private pageCaption : PageCaptionService)
     {
         this.route.paramMap.subscribe(
             result => {
@@ -37,6 +38,7 @@ export class NewsDetailComponent implements OnInit {
                 result => {
                     if(result.success)
                     {
+                        this.pageCaption.caption = result.data.caption;
                         this.newsPost = result.data;
                         console.log(this.newsPost);
                     }

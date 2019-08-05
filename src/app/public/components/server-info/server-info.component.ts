@@ -7,7 +7,12 @@ import { Component, OnInit } from '@angular/core';
   })
 export class ServerInfoComponent implements OnInit {
     online : boolean = false;
-    ngOnInit(): void {
 
+    time = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Berlin'}));
+
+    ngOnInit(): void {
+      setInterval(() => {
+        this.time = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Berlin'}));
+      },1000)
     }
 }

@@ -9,6 +9,8 @@ import { map } from 'rxjs/operators';
 export class AuthenticationService
 {
     userInfo : UserInfo;
+    hasErrors : boolean;
+    errorMessages : string[];
 
     constructor(private _http: HttpClient, private _accountService: AccountService) {
         if(this.isAuthenticated())
@@ -28,18 +30,21 @@ export class AuthenticationService
         loginDto.rememberMe = rememberMe;
         return this._accountService.login(loginDto).pipe(
             map(
-                token => 
+                result => 
                 {
-                    if(token)
+                    if(result.success)
                     {
-                        if(token.data.length > 16)
-                        {
-                            console.log(token)
-                            localStorage.setItem('token',token.data);
-                            console.log(token.data);
-                            this.userInfo = this.getUserInfo();
-                            this.isLoggedIn = true;
-                        }
+                        localStorage.setItem('token',result.data);
+                        this.userInfo = this.getUserInfo();
+                        this.isLoggedIn = true;
+                        this.hasErrors = false;
+                        this.errorMessages = null;                        
+                    }
+                    else
+                    {
+                        this.hasErrors = true;
+                        this.errorMessages = result.errors;
+                        this.isLoggedIn = false;
                     }
                 }
             )

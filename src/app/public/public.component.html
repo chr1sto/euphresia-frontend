@@ -1,5 +1,12 @@
 <div class="this">
     <div class="content-wrap">
+        <div *ngIf="toastService.enabled" class="notifications-wrapper">
+            <div class="notifications" [style.margin-top]="toastService.marginTop">
+                <div class="notifications-inner">
+                    <p *ngFor="let message of toastService.errorMessages">{{message}}</p>
+                </div>                
+            </div>
+        </div>
         <header></header>
         <div class="cols">
             <div class="left">
@@ -11,6 +18,8 @@
                 <box-top></box-top>
                 <div class="content">
                     <div class="content-inner">
+                        <h1 class="page-head">{{pageCaption.caption}}</h1>
+                        <seperator *ngIf="pageCaption.showSeperator"></seperator>
                         <router-outlet></router-outlet>
                     </div>
                 </div>

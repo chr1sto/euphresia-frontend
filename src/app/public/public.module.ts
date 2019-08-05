@@ -4,8 +4,7 @@ import { PublicRoutingModule } from './public-routing.module';
 import { UserPanelComponent } from './components/user-panel/user-panel.component';
 import { CommonModule } from '@angular/common';  
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { LandingComponent } from './pages/landing/landing.component';
+import { FormsModule, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { HeaderComponent } from './components/header/header.component';
 import { TopBoxComponent } from './components/box-top/box-top.component';
@@ -24,18 +23,26 @@ import { TeamComponent } from './pages/team/team.component';
 import {SlideshowModule} from 'ng-simple-slideshow';
 import { SeperatorComponent } from './components/seperator/seperator.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
-import { LandingHomeComponent } from './pages/landing/landing-home/landing-home.component';
 import { NewsItemComponent } from './components/news-item/news-item.component';
 import { NewsDetailComponent } from './pages/news-detail/news-detail.component';
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
-import { RegisterComponent } from './pages/landing/register/register.component';
 import { VerifyMailComponent } from './pages/verify-mail/verify-mail.component';
+import { PlayerRankingComponent } from './pages/ranking/player-ranking/player-ranking.component';
+import { GuildRankingComponent } from './pages/ranking/guild-ranking/guild-ranking.component';
+import { DungeonRankingComponent } from './pages/ranking/dungeon-ranking/dungeon-ranking.component';
+import { DownloadComponent } from './pages/download/download.component';
+import { TosComponent } from './pages/tos/tos.component';
+import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { GuideComponent } from './pages/guide/guide.component';
+import { VoteComponent } from './pages/vote/vote.component';
+import { PageCaptionService } from './services/page-caption.service';
+import { ToastService } from './services/toast.service';
 
 @NgModule({
     declarations: [
         /* Layouts */
         PublicComponent,
-        LandingComponent,
 
         /* Components */
         UserPanelComponent,
@@ -50,7 +57,6 @@ import { VerifyMailComponent } from './pages/verify-mail/verify-mail.component';
         RankingSmallComponent,
         SeperatorComponent,
         NewsItemComponent,
-        RegisterComponent,
         VerifyMailComponent,
 
         /* Pages */
@@ -60,8 +66,17 @@ import { VerifyMailComponent } from './pages/verify-mail/verify-mail.component';
         ShopComponent,
         TeamComponent,
         ForgotPasswordComponent,
-        LandingHomeComponent,
         NewsDetailComponent,
+        DownloadComponent,
+        TosComponent,
+        PrivacyPolicyComponent,
+        RegisterComponent,
+        GuideComponent,
+        VoteComponent,
+
+        PlayerRankingComponent,
+        GuildRankingComponent,
+        DungeonRankingComponent,
 
         /* Pipes */
         SafeHtmlPipe
@@ -71,9 +86,10 @@ import { VerifyMailComponent } from './pages/verify-mail/verify-mail.component';
         CommonModule,
         FormsModule,
         RecaptchaModule,
-        SlideshowModule
+        SlideshowModule,
+        ReactiveFormsModule
     ],
     bootstrap: [],
-    providers: []
+    providers: [PageCaptionService,FormBuilder,ToastService]
   })
 export class PublicModule { }

@@ -8,7 +8,6 @@ export class RankingHelperService
 
     public GetJobIconFromId(id : number) : string 
     {
-        console.log(id);
         switch(+id)
         {
             case 0: return "../assets/web/icons/JobVagrant.png";

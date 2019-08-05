@@ -1,8 +1,14 @@
-<div class="this">
-    <ul>
-        <li id="step"></li>
-        <li id="register" (click)="route('register')"></li>
-        <li id="download"></li>
-        <li id="vote"></li>
-    </ul>
-</div>
+<ul>
+    <li id="step">
+        <a [routerLink]="['/guide']"></a>
+    </li>
+    <li id="register">
+        <a [routerLink]="['/register']"></a>
+    </li>
+    <li id="download">
+        <a [routerLink]="['/download']"></a>
+    </li>
+    <li id="vote">
+        <a [routerLink]="['/vote']"></a>
+    </li>
+</ul>

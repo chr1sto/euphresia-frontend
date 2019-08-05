@@ -1,0 +1,36 @@
+<div class="content">
+    <div class="content-inner">
+        <div class="filter"></div>
+        <table>
+            <tr class="head">
+                <th>#</th>
+                <th align="left">Name</th>
+                <th align="left">Class</th>
+                <th align="left">Gearscore</th>
+                <th align="left" colspan="2">Level</th>
+            </tr>
+            <tr class="entry" *ngFor="let item of data; let i = index">
+                <td width="30px" style="text-align: center">{{currentPageVisible*recordsPerPage+i+1}}</td>
+                <td width="180px">{{item.name}}</td>
+                <td width="60px"><img title="{{helper.GetJobNameFromId(item.class)}}" class="job" src="{{helper.GetJobIconFromId(item.class)}}"></td>
+                <td width="169px">{{item.gearScore}}</td>           
+                <td width="24px">{{item.level}}</td>      
+                <td class="master-col"><img class="master" src="{{helper.GetLevelIconFromJobAndLevel(item.class,item.level)}}"></td>    
+            </tr>
+        </table>
+    </div>
+    <div *ngIf="loading" class="loading">
+        <img class="ground" src="../../../../assets/logo_black.png">
+        <img class="overlay" src="../../../../assets/logo.png">
+    </div>
+</div>
+<seperator class="on-top"></seperator>
+<div class="pagination">
+    <div class="left">
+        <div class="img-back" (click)="previous()" ></div>
+    </div>
+    <div class="page">{{currentPageVisible+1}} / {{pageCount}}</div>
+    <div class="right">
+        <div (click)="next()" class="img-next"></div>
+    </div>
+</div>

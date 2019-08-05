@@ -17,7 +17,7 @@ export class VerifyMailComponent implements OnInit{
                     this.success = true;
                     setTimeout(() =>
                     {
-                        this.router.navigate(['web'])
+                        this.router.navigate([''])
                     }
                     ,1000)
                 }
@@ -28,7 +28,7 @@ export class VerifyMailComponent implements OnInit{
 
                     setTimeout(() =>
                     {
-                        this.router.navigate(['web'])
+                        this.router.navigate([''])
                     }
                     ,3000)
                 }

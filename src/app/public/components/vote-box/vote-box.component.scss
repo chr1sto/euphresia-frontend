@@ -1,6 +1,13 @@
-.this
+:host
 {
     width: 232px;
     height: 175px;
-    background-image: url('../../../../assets/web/buttons/linkimg_vote.png')
+}
+
+a
+{
+    display: block;
+    height: 100%;
+    width: 100%;
+    background-image: url('../../../../assets/web/buttons/linkimg_vote.png');
 }

@@ -1,29 +1,24 @@
-<h1>Ranking</h1>
-<seperator></seperator>
-<div class="content">
-    <table>
-        <tr>
-            <th align="left">Name</th>
-            <th align="left">Class</th>
-            <th align="left">GearScore</th>
-            <th align="left" colspan="2">Level</th>
-        </tr>
-        <tr *ngFor="let item of data">
-            <td>{{item.name}}</td>
-            <td><img title="{{helper.GetJobNameFromId(item.class)}}" class="job" src="{{helper.GetJobIconFromId(item.class)}}"></td>
-            <td>{{item.gearScore}}</td>           
-            <td width="24px">{{item.level}}</td>      
-            <td class="master-col"><img class="master" src="{{helper.GetLevelIconFromJobAndLevel(item.class,item.level)}}"></td>    
-        </tr>
-    </table>
+<div class="select-ranking">
+    <div class="inner-select-ranking">
+        <ul>
+            <li id="ranking-1" class="active" (mouseleave)="leave(1)" (mouseenter)="enter(1)" (click)="click(1)">
+                <div class="heading">
+                    <h2>Player Ranking</h2>
+                </div>
+            </li>
+            <li id="ranking-2" class="" (mouseleave)="leave(2)" (mouseenter)="enter(2)" (click)="click(2)">
+                <div class="heading">
+                    <h2>Guild Ranking</h2>
+                </div>
+            </li>
+            <li id="ranking-3" class="" (mouseleave)="leave(3)" (mouseenter)="enter(3)" (click)="click(3)">
+                <div class="heading">
+                    <h2>Dungeon Time Ranking</h2>
+                </div>
+            </li>
+        </ul>
+    </div>
 </div>
-<seperator></seperator>
-<div class="pagination">
-    <div class="left">
-        <div class="img-back" (click)="previous()" ></div>
-    </div>
-    <div class="page">{{currentPage+1}} / {{pageCount}}</div>
-    <div class="right">
-        <div (click)="next()" class="img-next"></div>
-    </div>
+<div class="routing">
+    <router-outlet></router-outlet>
 </div>

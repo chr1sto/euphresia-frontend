@@ -81,7 +81,7 @@ export class ForgotPasswordComponent {
                         this.hasErrors = false;
                         setTimeout(() =>
                         {
-                            this.router.navigate(['web'])
+                            this.router.navigate([''])
                         }
                         ,1000)
                     }

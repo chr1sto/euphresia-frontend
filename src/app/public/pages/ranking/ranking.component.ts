@@ -2,53 +2,65 @@ import { Component, OnInit } from '@angular/core';
 import { RankingService, CharacterViewModel } from 'src/app/shared/services/generated.services';
 import { map } from 'rxjs/operators';
 import { RankingHelperService } from 'src/app/shared/services/ranking-helper.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'ranking',
     templateUrl: './ranking.component.html',
     styleUrls: ['./ranking.component.scss']
   })
-export class RankingComponent implements OnInit {
+export class RankingComponent implements OnInit{
   ngOnInit(): void {
-    this.updateData();
+    this.leave(1);
   }
 
-  data : CharacterViewModel[];
-  currentPage : number = 0;
-  recordsPerPage : number = 15;
-  pageCount : number = 0;
-  totalRecCount : number = 0;
-
-  constructor(private rankingService : RankingService, private helper : RankingHelperService)
+  constructor(private router: Router)
   {
-
+    if(this.router.url.includes('player')) this.activePageIndex = 0;
+    if(this.router.url.includes('guild')) this.activePageIndex = 1;
+    if(this.router.url.includes('dungeon')) this.activePageIndex = 2;
   }
 
-  updateData()
+  activePageIndex : number = 0;
+
+  enter(i)
   {
-    this.rankingService.ranking(this.currentPage,this.recordsPerPage,"gearscore").pipe(
-      map(
-        result => {
-          if(result.success)
-          {
-            this.data = result.data.content;
-            this.pageCount = result.data.pageCount;
-            this.totalRecCount = result.data.recordCount;
-          }
-        }
-      )
-    ).subscribe();
+    if(i == 1)
+    {
+      document.getElementById('ranking-2').classList.remove('active');
+      document.getElementById('ranking-3').classList.remove('active');
+      document.getElementById('ranking-1').classList.add('active');
+      return;
+    }
+
+    if(i == 2)
+    {
+      document.getElementById('ranking-1').classList.remove('active');
+      document.getElementById('ranking-3').classList.remove('active');
+      document.getElementById('ranking-2').classList.add('active');
+      return;
+    }
+
+    if(i == 3)
+    {
+      document.getElementById('ranking-1').classList.remove('active');
+      document.getElementById('ranking-2').classList.remove('active');
+      document.getElementById('ranking-3').classList.add('active');
+      return;
+    }
   }
 
-  previous()
+  leave(i)
   {
-    this.currentPage--;
-    this.updateData();
+    document.getElementById('ranking-'+i).classList.remove('active');
+    document.getElementById('ranking-'+(this.activePageIndex+1)).classList.add('active');
   }
 
-  next()
+  click(i)
   {
-    this.currentPage++;
-    this.updateData();
+    this.activePageIndex = i - 1;
+    if(i == 1) this.router.navigate(['ranking/player']);
+    if(i == 2) this.router.navigate(['ranking/guild']);
+    if(i == 3) this.router.navigate(['ranking/dungeon']);
   }
 }

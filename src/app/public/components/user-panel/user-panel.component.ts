@@ -2,6 +2,8 @@ import { AuthenticationService } from 'src/app/shared/services/auth.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { UserInfo } from 'src/app/shared/models/user-info';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
     selector: 'user-panel',
@@ -20,40 +22,36 @@ export class UserPanelComponent implements OnInit {
     }
 
     loggedIn: boolean = false;
-    error: boolean = false;
-    email: string;
-    password: string;
-    rememberMe: boolean = false;
     hasAdminAccess: boolean = false;
 
     user: UserInfo;
+    form : FormGroup;
 
-    constructor(private auth: AuthenticationService, private router: Router)
+    constructor(private auth: AuthenticationService, private router: Router, private formBuilder : FormBuilder, private toastService: ToastService)
     {
-
+        this.form = this.formBuilder.group({
+            email: '',
+            password: ''
+        })
     }
 
-    login()
+    login(data)
     {
-        if(this.email && this.password)
+        if(data.email && data.password)
         {
-        this.auth.login(this.email,this.password,this.rememberMe).subscribe(
-            data => {
-            this.error = false;
-            this.loggedIn = true;
-            this.user = this.auth.userInfo;
-            this.email = null;
-            this.password = null;
-            this.hasAdminAccess =  this.auth.isAdmin();
-            },
-            err => {
-            console.log(err);
-            this.loggedIn = false;
-            this.error = true;
-            this.user = null;
-            this.hasAdminAccess = false;
+        this.auth.login(data.email,data.password,true).subscribe(() => {
+            if(this.auth.hasErrors)
+            {
+                this.toastService.errorMessages = this.auth.errorMessages;
+                this.toastService.enable();
             }
-        );
+            else
+            {
+                this.loggedIn = true;
+                this.form.reset();
+                this.user = this.auth.userInfo;
+            }
+        });
         }
     }
 
@@ -63,7 +61,5 @@ export class UserPanelComponent implements OnInit {
         this.loggedIn = false;
         this.hasAdminAccess = false;
         this.user = null;
-        this.email = null;
-        this.password = null;
     }
 }

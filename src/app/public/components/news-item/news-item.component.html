@@ -1,15 +1,13 @@
-<div class="this">
-    <div class="thumbnail">
-        <img src="{{this.newsPost.imageUrlSmallTile}}">
+<div class="thumbnail">
+    <img src="{{this.newsPost.imageUrlSmallTile}}">
+</div>
+<div class="text">
+    <h3>{{newsPost.caption}}</h3>
+    <div class="content block-with-text">
+        {{content}} ...
     </div>
-    <div class="text">
-        <h3>{{newsPost.caption}}</h3>
-        <div class="content block-with-text">
-            {{content}} ...
-        </div>
-        <div class="foot">
-            <div class="date">{{newsPost.createdOn | date: 'dd.MM.yyyy'}}</div>
-            <div class="read-more"><a [routerLink]="['/web/news',newsPost.id]">Read more...</a></div>
-        </div>
+    <div class="foot">
+        <div class="date">{{newsPost.createdOn | date: 'dd.MM.yyyy'}}</div>
+        <div class="read-more"><a [routerLink]="['/web/news',newsPost.id]">Read more...</a></div>
     </div>
 </div>
