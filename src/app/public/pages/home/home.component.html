@@ -1,5 +1,17 @@
-<div *ngFor="let item of news">
-    <news-item [(newsPost)]="item"></news-item>
-    <seperator></seperator>
+<div class="news-wrapper">
+    <div *ngFor="let item of news">
+        <news-item [(newsPost)]="item"></news-item>
+        <seperator></seperator>
+    </div>
+</div>
+
+<div class="pagination">
+    <div class="left">
+        <div class="img-back" (click)="previous()" ></div>
+    </div>
+    <div class="page">{{currentPageVisible+1}} / {{pageCount}}</div>
+    <div class="right">
+        <div (click)="next()" class="img-next"></div>
+    </div>
 </div>
 

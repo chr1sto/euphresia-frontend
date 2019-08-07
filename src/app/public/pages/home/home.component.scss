@@ -15,3 +15,67 @@ news-item
     margin-left: 20px;
     margin-right: 20px;
 }
+
+.pagination
+{
+    width: 100%;
+    div
+    {
+        float: left;
+        text-align: center;
+    }
+
+    .page
+    {
+        font-family: 'Roboto Slab', serif;
+        color: white;
+        //text-shadow: 1px -1px 0px rgba(10, 6, 1, 0.37);
+        width: 20%;
+        margin-top: 15px;
+    }
+
+    .left
+    {
+        width: 40%;
+    }
+
+    .right
+    {
+        width: 40%;
+    }
+
+    .img-next
+    {
+        margin-left: 20px;
+        width: 175px;
+        height: 56px;
+        background-image: url('../../../../assets/web/buttons/next.png');
+        background-size: cover;
+        cursor: pointer;
+    }
+
+    .img-next:hover
+    {
+        background-image: url('../../../../assets/web/buttons/next_hover.png');
+    }
+
+    .img-back
+    {
+        margin-left: 20px;
+        width: 175px;
+        height: 56px;
+        background-image: url('../../../../assets/web/buttons/back.png');
+        background-size: cover;
+        cursor: pointer;
+    }
+
+    .img-back:hover
+    {
+        background-image: url('../../../../assets//web/buttons//back_hover.png');
+    }
+}
+
+.news-wrapper
+{
+    height: 710px;
+}

@@ -34,6 +34,8 @@ import { GameCharactersComponent } from './pages/game-characters/game-characters
 import { GameCharacterListComponent } from './components/game-character-list/game-character-list.component';
 import { GeneralSliderComponent } from './pages/general-slider/general-slider.component';
 import { CreateImageObjectComponent } from './components/create-image-object/create-image-object.component';
+import { GameDownloadsComponent } from './pages/game-downloads/game-downloads.component';
+import { DownloadDetailComponent } from './components/download-detail/download-detail.component';
 
 
 @NgModule({
@@ -54,7 +56,9 @@ import { CreateImageObjectComponent } from './components/create-image-object/cre
     GameCharactersComponent,
     GameCharacterListComponent,
     GeneralSliderComponent,
-    CreateImageObjectComponent
+    CreateImageObjectComponent,
+    GameDownloadsComponent,
+    DownloadDetailComponent
   ],
   imports: [
     CommonModule,
@@ -82,7 +86,8 @@ import { CreateImageObjectComponent } from './components/create-image-object/cre
   entryComponents: [
     ChangeRolesComponent,
     GameCharacterListComponent,
-    CreateImageObjectComponent
+    CreateImageObjectComponent,
+    DownloadDetailComponent
   ],
   bootstrap: [
     AdminComponent

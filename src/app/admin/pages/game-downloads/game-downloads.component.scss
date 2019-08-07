@@ -1,0 +1,41 @@
+table {
+    width: 100%;
+}
+
+.container > mat-form-field
+{
+    width: 80%;
+    margin-left: 5px;
+    margin-right: 15px;
+}
+
+h1
+{
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 20px;
+}
+
+tr.row:hover {
+    cursor: pointer;
+    background-color: lightgray;
+}
+
+.floating-add-icon
+{
+    font-size: 72px !important;
+    color: #1a237e;
+}
+
+.floating-add-icon:hover
+{
+    cursor: pointer;
+    color: #0976db;
+}
+
+.floating-add
+{
+    position: fixed;
+    z-index: 3;
+    bottom: 20px;
+    right: 20px;
+}

@@ -18,7 +18,7 @@
                 <box-top></box-top>
                 <div class="content">
                     <div class="content-inner">
-                        <h1 class="page-head">{{pageCaption.caption}}</h1>
+                        <h1 class="page-head" id="page-head">{{pageCaption.caption}}</h1>
                         <seperator *ngIf="pageCaption.showSeperator"></seperator>
                         <router-outlet></router-outlet>
                     </div>
@@ -32,4 +32,5 @@
             </div>
         </div>
     </div>
+    <footer></footer>
 </div>

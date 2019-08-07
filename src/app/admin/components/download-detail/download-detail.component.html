@@ -1,0 +1,8 @@
+<mat-form-field>
+    <input matInput [(ngModel)]="data.valueType" placeholder="Type">
+</mat-form-field>
+<mat-form-field>
+    <input matInput [(ngModel)]="data.value" placeholder="Value">
+</mat-form-field>
+<button mat-raised-button color="primary" (click)="submit()">Save</button>
+<button mat-raised-button color="warn" (click)="delete()">Delete</button>

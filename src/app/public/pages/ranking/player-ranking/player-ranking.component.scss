@@ -9,7 +9,21 @@
         height: 580px;
         .filter
         {
-            height: 35px;
+            height: 48px;
+            width: 378px;
+            margin-left: auto;
+            margin-right: auto;
+            .filter-icon
+            {
+                margin-top: 4px;
+                width: 42px;
+                cursor: pointer;
+            }
+
+            .filter-icon.is-active
+            {
+                border-bottom: 2px solid white;
+            }
         }
 
         table
@@ -46,7 +60,7 @@
 
             tr.head 
             {
-                height: 40px;
+                height: 30px;
             }
         }
     }

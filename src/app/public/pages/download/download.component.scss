@@ -1,0 +1,43 @@
+table
+{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse:separate;
+    border-spacing:0 20px;
+    font-family: 'Roboto Slab', serif !important;
+    color: white !important;
+
+    tr
+    {
+        border: 1px solid  #5a3917;
+    }
+
+    td
+    {
+        padding: 20px;
+        border-top: 2px solid  #5a3917;
+        border-bottom: 2px solid  #5a3917;
+
+        a
+        {
+            text-decoration: underline;
+            color: white !important;
+        }
+    }
+
+    td.link
+    {
+        background: #5a3917;
+        border-right: 2px solid  #5a3917;
+        border-left: 2px solid  #5a3917;
+        text-align: right;
+        width: 50px;
+    }
+
+    td.type
+    {
+        border-left: 2px solid  #5a3917;
+        background: rgba(37, 19, 1, 0.38);
+    }
+}

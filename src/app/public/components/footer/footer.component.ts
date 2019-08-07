@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
     selector: 'footer',
@@ -6,8 +7,15 @@ import { Component } from '@angular/core';
     styleUrls: ['./footer.component.scss']
   })
 export class FooterComponent {
-    constructor()
+    constructor(private viewPortScroller: ViewportScroller)
     {
 
+    }
+
+    scrollToTop() 
+    { 
+      window.setTimeout(() => {
+        document.getElementById("page-head").scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+      },100)
     }
 }

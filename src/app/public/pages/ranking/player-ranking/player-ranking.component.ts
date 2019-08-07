@@ -20,6 +20,7 @@ export class PlayerRankingComponent implements OnInit
       recordsPerPage : number = 15;
       pageCount : number = 0;
       totalRecCount : number = 0;
+      filter : string = "";
     
       constructor(private rankingService : RankingService, private helper : RankingHelperService)
       {
@@ -29,7 +30,7 @@ export class PlayerRankingComponent implements OnInit
       updateData()
       {
         this.loading = true;
-        this.rankingService.ranking(this.currentPage,this.recordsPerPage,"gearscore").pipe(
+        this.rankingService.ranking(this.currentPage,this.recordsPerPage,"gearscore",this.filter).pipe(
           map(
             result => {
               if(result.success)
@@ -71,4 +72,10 @@ export class PlayerRankingComponent implements OnInit
         }
       }
     
+      setFilter(job : string)
+      {
+        this.filter = job;
+        this.currentPage = 0;
+        this.updateData();
+      }
 }

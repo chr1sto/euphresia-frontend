@@ -1,1 +1,10 @@
-Download
+<table>
+    <tr>
+        <th></th>
+        <th></th>
+    </tr>
+    <tr class="download-item" *ngFor="let item of data">
+        <td class="type">{{item.valueType}}</td>
+        <td class="link"><a href="{{item.value}}" target="_blank">Download</a></td>
+    </tr>
+</table>

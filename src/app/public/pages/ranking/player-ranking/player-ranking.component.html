@@ -1,6 +1,16 @@
 <div class="content">
     <div class="content-inner">
-        <div class="filter"></div>
+        <div class="filter">
+            <img title="Filter: All Classes" class="filter-icon" [class.is-active]="filter==''" src="../../../../../assets/web/icons/JobVagrant.png" (click)="setFilter('')">
+            <img title="Filter: Crackshooter" class="filter-icon" [class.is-active]="filter=='CRACKSHOOTER'" src="../../../../../assets/web/icons/JobCrackshooterHero.png" (click)="setFilter('CRACKSHOOTER')">
+            <img title="Filter: Harlequin" class="filter-icon" [class.is-active]="filter=='HARLEQUIN'" src="../../../../../assets/web/icons/JobWindlurkerHero.png" (click)="setFilter('HARLEQUIN')">
+            <img title="Filter: Slayer" class="filter-icon" [class.is-active]="filter=='SLAYER'" src="../../../../../assets/web/icons/JobStormbladeHero.png" (click)="setFilter('SLAYER')">
+            <img title="Filter: Templar" class="filter-icon" [class.is-active]="filter=='TEMPLAR'" src="../../../../../assets/web/icons/JobLordtemplerHero.png" (click)="setFilter('TEMPLAR')">
+            <img title="Filter: Seraph" class="filter-icon" [class.is-active]="filter=='SERAPH'" src="../../../../../assets/web/icons/JobFloristHero.png" (click)="setFilter('SERAPH')">
+            <img title="Filter: Force Master" class="filter-icon" [class.is-active]="filter=='FORCEMASTER'" src="../../../../../assets/web/icons/JobForcemasterHero.png" (click)="setFilter('FORCEMASTER')">
+            <img title="Filter: Mentalist" class="filter-icon" [class.is-active]="filter=='MENTALIST'" src="../../../../../assets/web/icons/JobMentalistHero.png" (click)="setFilter('MENTALIST')">
+            <img title="Filter: Arcanist" class="filter-icon" [class.is-active]="filter=='ARCANIST'" src="../../../../../assets/web/icons/JobElementorlordHero.png" (click)="setFilter('ARCANIST')">
+        </div>
         <table>
             <tr class="head">
                 <th>#</th>
@@ -15,11 +25,11 @@
                 <td width="60px"><img title="{{helper.GetJobNameFromId(item.class)}}" class="job" src="{{helper.GetJobIconFromId(item.class)}}"></td>
                 <td width="169px">{{item.gearScore}}</td>           
                 <td width="24px">{{item.level}}</td>      
-                <td class="master-col"><img class="master" src="{{helper.GetLevelIconFromJobAndLevel(item.class,item.level)}}"></td>    
+                <td class="master-col"><img *ngIf="item.class > 14" class="master" src="{{helper.GetLevelIconFromJobAndLevel(item.class,item.level)}}"></td>    
             </tr>
         </table>
     </div>
-    <div *ngIf="loading" class="loading">
+    <div *ngIf="loadings" class="loading">
         <img class="ground" src="../../../../assets/logo_black.png">
         <img class="overlay" src="../../../../assets/logo.png">
     </div>
