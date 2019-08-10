@@ -13,7 +13,7 @@ import { RankingHelperService } from './shared/services/ranking-helper.service';
 
 export class AppConsts
 {
-  static baseUrl = "https://localhost:44345"
+  static baseUrl = "https://api.euphresia-flyff.com"
 }
 
 export function getBaseUrl() : string {

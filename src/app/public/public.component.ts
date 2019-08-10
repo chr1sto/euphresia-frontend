@@ -10,7 +10,7 @@ import { ToastService } from './services/toast.service';
   })
 export class PublicComponent {
 
-  constructor(private router : Router, private pageCaption :  PageCaptionService, private toastService : ToastService)
+  constructor(private router : Router, public pageCaption :  PageCaptionService, public toastService : ToastService)
   {
     this.getPageName(router.url);
     router.events.subscribe((val) => {
