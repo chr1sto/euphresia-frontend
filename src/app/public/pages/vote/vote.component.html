@@ -1,1 +1,24 @@
-<h1>Coming Soon!</h1>
+<div *ngIf="loaded" class="wrapper">
+    <div class="gtop-100" [class.disabled]="signalRService.state.state=='ALREADY_VOTED'" (click)="openVoteLink()">
+
+    </div>
+    <div class="message already-voted" *ngIf="signalRService.state.state == 'ALREADY_VOTED'">
+        <p>You have already voted in the past 24h.</p>
+        <p>You can vote again in {{signalRService.state.timeSpan.substring(0,8)}}.</p>
+    </div>
+    <div class="message vote-failed" *ngIf="signalRService.state.state == 'VOTE_FAILED'">
+        <p>Your vote has failed.</p>
+        <p>Please try again.</p>
+    </div>
+    <div class="message vote-succesfull" *ngIf="signalRService.state.state == 'VOTE_SUCCESFULL'">
+        <p>Thank you for voting for Euphresia-FlyFF. Your Votepoints have been succesfully added to your Account.</p>
+        <p>Click <a href="#">here</a> to see your transaction History</p>
+    </div>
+    <div class="message waiting" *ngIf ="signalRService.state.state ==  'WAITING_FOR_VOTE'">
+        <div class="lds"><div></div><div></div><div></div></div>
+        <p>Waiting for your Vote to be completed....</p>
+    </div>
+    <div class="message can-vote" *ngIf="signalRService.state.state == 'CAN_VOTE'">
+        <p>Vote by clicking the Image above.</p>
+    </div>
+</div>
