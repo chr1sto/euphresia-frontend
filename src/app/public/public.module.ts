@@ -40,6 +40,7 @@ import { PageCaptionService } from './services/page-caption.service';
 import { ToastService } from './services/toast.service';
 import { ImprintComponent } from './pages/imprint/imprint.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { AccountComponent } from './pages/account/account.component';
 
 @NgModule({
     declarations: [
@@ -77,6 +78,7 @@ import { FooterComponent } from './components/footer/footer.component';
         VoteComponent,
         ImprintComponent,
         FooterComponent,
+        AccountComponent,
 
         PlayerRankingComponent,
         GuildRankingComponent,

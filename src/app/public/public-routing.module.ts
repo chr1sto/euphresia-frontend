@@ -20,6 +20,8 @@ import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.co
 import { GuideComponent } from './pages/guide/guide.component';
 import { VoteComponent } from './pages/vote/vote.component';
 import { ImprintComponent } from './pages/imprint/imprint.component';
+import { AccountComponent } from './pages/account/account.component';
+import { LoginGuardService } from '../shared/guards/login-guard';
 
 const routes: Routes = [
     {
@@ -101,11 +103,17 @@ const routes: Routes = [
             },
             {
                 path: 'vote',
-                component: VoteComponent
+                component: VoteComponent,
+                canActivate: [LoginGuardService]
             },
             {
                 path: 'imprint',
                 component: ImprintComponent
+            },
+            {
+                path: 'account',
+                component: AccountComponent,
+                canActivate: [LoginGuardService]
             }
         ]
     }

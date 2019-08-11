@@ -6,8 +6,8 @@
         <p>{{this.user.email}}</p>
         <div class="logged-in-inner">
             <ul class="user-options">
-                <li [routerLink]="['/manage-account']">Manage Account</li>
-                <li *ngIf="hasAdminAccess" [routerLink]="['/admin']">Admin Panel</li>
+                <li><a [routerLink]="['/account']">Manage Account</a></li>
+                <li *ngIf="hasAdminAccess"><a [routerLink]="['/admin']">Admin Panel</a></li>
             </ul>
             <div class="logout-button" (click)="this.logout()"></div>
         </div>

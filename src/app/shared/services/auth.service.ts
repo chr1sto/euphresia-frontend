@@ -4,6 +4,7 @@ import { AccountService, LoginViewModel, RegisterViewModel } from './generated.s
 import { HttpClient } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthenticationService
@@ -12,7 +13,7 @@ export class AuthenticationService
     hasErrors : boolean;
     errorMessages : string[];
 
-    constructor(private _http: HttpClient, private _accountService: AccountService) {
+    constructor(private _http: HttpClient, private _accountService: AccountService, private _router: Router) {
         if(this.isAuthenticated())
         {
             this.isLoggedIn = true;
@@ -99,5 +100,6 @@ export class AuthenticationService
         localStorage.removeItem('token');
         this.isLoggedIn = false;
         this.userInfo = null;
+        this._router.navigate(['/']);
     }
 }

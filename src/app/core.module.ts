@@ -11,6 +11,7 @@ import { CustomFileUploadService } from './shared/services/custom-file-upload.se
 import { RegisterGuardService } from './shared/guards/register-guard';
 import { RankingHelperService } from './shared/services/ranking-helper.service';
 import { SignalRService, SOCK_BASE_URL } from './shared/services/signal-r.service';
+import { LoginGuardService } from './shared/guards/login-guard';
 
 export class AppConsts
 {
@@ -59,6 +60,7 @@ export class CoreModule
                 AuthenticationService,
                 AdminGuardService,
                 RegisterGuardService,
+                LoginGuardService,
                 ServiceStatusService,
                 GameEventService,
                 CustomFileUploadService,
