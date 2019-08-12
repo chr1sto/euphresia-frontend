@@ -22,6 +22,7 @@ import { VoteComponent } from './pages/vote/vote.component';
 import { ImprintComponent } from './pages/imprint/imprint.component';
 import { AccountComponent } from './pages/account/account.component';
 import { LoginGuardService } from '../shared/guards/login-guard';
+import { UnauthorizedComponent } from './pages/unauthorized/unauthorized.component';
 
 const routes: Routes = [
     {
@@ -114,6 +115,10 @@ const routes: Routes = [
                 path: 'account',
                 component: AccountComponent,
                 canActivate: [LoginGuardService]
+            },
+            {
+                path: 'unauthorized',
+                component: UnauthorizedComponent
             }
         ]
     }

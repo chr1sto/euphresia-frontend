@@ -39,6 +39,7 @@ export class PublicComponent {
     if(url.includes('guide')) return 'Guide';
     if(url.includes('imprint')) return 'Imprint';
     if(url.includes('account')) return 'Account';
+    if(url.includes('unauthorized')) return 'Unauthorized';
     return 'News & Announcments';
   }
 

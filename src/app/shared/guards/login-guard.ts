@@ -15,7 +15,7 @@ export class LoginGuardService implements CanActivate
     canActivate() : boolean
     {
         if(this._auth.isLoggedIn) return true;
-        this._router.navigate(['/']);
+        this._router.navigate(['/unauthorized']);
         return false;
     }
     

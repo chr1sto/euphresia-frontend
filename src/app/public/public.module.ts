@@ -41,6 +41,7 @@ import { ToastService } from './services/toast.service';
 import { ImprintComponent } from './pages/imprint/imprint.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AccountComponent } from './pages/account/account.component';
+import { UnauthorizedComponent } from './pages/unauthorized/unauthorized.component';
 
 @NgModule({
     declarations: [
@@ -79,6 +80,9 @@ import { AccountComponent } from './pages/account/account.component';
         ImprintComponent,
         FooterComponent,
         AccountComponent,
+
+        /* Error Pages */
+        UnauthorizedComponent,
 
         PlayerRankingComponent,
         GuildRankingComponent,
