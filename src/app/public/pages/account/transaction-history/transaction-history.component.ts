@@ -16,7 +16,7 @@ export class TransactionHistoryComponent implements OnInit {
   data : TransactionViewModel[];
   currentPageVisible : number = 0;
   currentPage : number = 0;
-  recordsPerPage : number = 20;
+  recordsPerPage : number = 18;
   pageCount : number = 0;
   totalRecCount : number = 0;
 
