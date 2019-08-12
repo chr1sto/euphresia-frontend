@@ -42,6 +42,9 @@ import { ImprintComponent } from './pages/imprint/imprint.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AccountComponent } from './pages/account/account.component';
 import { UnauthorizedComponent } from './pages/unauthorized/unauthorized.component';
+import { TransactionHistoryComponent } from './pages/account/transaction-history/transaction-history.component';
+import { AccountSettingsComponent } from './pages/account/account-settings/account-settings.component';
+import { IngameAccountsComponent } from './pages/account/ingame-accounts/ingame-accounts.component';
 
 @NgModule({
     declarations: [
@@ -62,11 +65,15 @@ import { UnauthorizedComponent } from './pages/unauthorized/unauthorized.compone
         SeperatorComponent,
         NewsItemComponent,
         VerifyMailComponent,
+        FooterComponent,
 
         /* Pages */
         HomeComponent,
         WikiComponent,
         RankingComponent,
+            PlayerRankingComponent,
+            GuildRankingComponent,
+            DungeonRankingComponent,
         ShopComponent,
         TeamComponent,
         ForgotPasswordComponent,
@@ -78,15 +85,13 @@ import { UnauthorizedComponent } from './pages/unauthorized/unauthorized.compone
         GuideComponent,
         VoteComponent,
         ImprintComponent,
-        FooterComponent,
         AccountComponent,
+            TransactionHistoryComponent,
+            AccountSettingsComponent,
+            IngameAccountsComponent,
 
         /* Error Pages */
         UnauthorizedComponent,
-
-        PlayerRankingComponent,
-        GuildRankingComponent,
-        DungeonRankingComponent,
 
         /* Pipes */
         SafeHtmlPipe

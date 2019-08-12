@@ -1,0 +1,31 @@
+<div class="account-info">
+    <div class="account-info-item">
+        <p>Email:</p>
+        <p>{{this.authService.userInfo.email}}</p>
+    </div>
+    <div class="account-info-item">
+        <p>Username:</p>
+        <p>{{this.authService.userInfo.email}}</p>
+    </div>
+</div>
+<div class="account actions">
+
+</div>
+
+<seperator></seperator>
+
+<ul class="tabs clearfix">
+    <li>
+        <a [routerLink]="['/account/transaction-history']">Transaction History</a>
+    </li>
+    <li>
+        <a [routerLink]="['/account/ingame-accounts']">Game Accounts</a>
+    </li>
+    <li>
+        <a [routerLink]="['/account/settings']">Settings</a>
+    </li>
+</ul>
+<seperator></seperator>
+<div class="page-container">
+    <router-outlet></router-outlet>
+</div>

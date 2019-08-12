@@ -23,6 +23,9 @@ import { ImprintComponent } from './pages/imprint/imprint.component';
 import { AccountComponent } from './pages/account/account.component';
 import { LoginGuardService } from '../shared/guards/login-guard';
 import { UnauthorizedComponent } from './pages/unauthorized/unauthorized.component';
+import { TransactionHistoryComponent } from './pages/account/transaction-history/transaction-history.component';
+import { IngameAccountsComponent } from './pages/account/ingame-accounts/ingame-accounts.component';
+import { AccountSettingsComponent } from './pages/account/account-settings/account-settings.component';
 
 const routes: Routes = [
     {
@@ -114,7 +117,26 @@ const routes: Routes = [
             {
                 path: 'account',
                 component: AccountComponent,
-                canActivate: [LoginGuardService]
+                canActivate: [LoginGuardService],
+                children:  
+                [
+                    {
+                        path: '',
+                        redirectTo: 'transaction-history'
+                    },
+                    {
+                        path: 'transaction-history',
+                        component: TransactionHistoryComponent
+                    },
+                    {
+                        path: 'ingame-accounts',
+                        component: IngameAccountsComponent
+                    },
+                    {
+                        path: 'settings',
+                        component: AccountSettingsComponent
+                    }
+                ]
             },
             {
                 path: 'unauthorized',

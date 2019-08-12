@@ -1,0 +1,39 @@
+<table>
+    <tr>
+        <th style="padding-left: 10px">
+            Currency
+        </th>
+        <th>
+            Amount
+        </th>
+        <th>
+            Date
+        </th>
+        <th>
+            Reason
+        </th>
+    </tr>
+    <tr *ngFor="let item of data">
+        <td style="padding-left: 10px">
+            {{item.currency}}
+        </td>
+        <td [class.negative]="item.amount < 0" [class.positive]="item.amount > 0">
+            {{item.amount}}
+        </td>
+        <td>
+            {{item.date | date: 'dd.MM.yyyy'}}
+        </td>
+        <td>
+            {{item.reason}}
+        </td>
+    </tr>
+</table>
+<div class="pagination">
+    <div class="left">
+        <div class="img-back" (click)="previous()" ></div>
+    </div>
+    <div class="page">{{currentPageVisible+1}} / {{pageCount}}</div>
+    <div class="right">
+        <div (click)="next()" class="img-next"></div>
+    </div>
+</div>
