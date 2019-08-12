@@ -2615,6 +2615,183 @@ export class StatisticsService {
 @Injectable({
     providedIn: 'root'
 })
+export class TransactionsService {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl ? baseUrl : "/api";
+    }
+
+    /**
+     * @return Success
+     */
+    transactionsGet(): Observable<ApiResultOfIEnumerableOfTransactionViewModel> {
+        let url_ = this.baseUrl + "/v1/transactions";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processTransactionsGet(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processTransactionsGet(<any>response_);
+                } catch (e) {
+                    return <Observable<ApiResultOfIEnumerableOfTransactionViewModel>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ApiResultOfIEnumerableOfTransactionViewModel>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processTransactionsGet(response: HttpResponseBase): Observable<ApiResultOfIEnumerableOfTransactionViewModel> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? ApiResultOfIEnumerableOfTransactionViewModel.fromJS(resultData200) : new ApiResultOfIEnumerableOfTransactionViewModel();
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ApiResultOfIEnumerableOfTransactionViewModel>(<any>null);
+    }
+
+    /**
+     * @param viewModel (optional) 
+     * @return Success
+     */
+    transactionsPatch(viewModel?: TransactionViewModel | null | undefined): Observable<ApiResultOfTransactionViewModel> {
+        let url_ = this.baseUrl + "/v1/transactions";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(viewModel);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("patch", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processTransactionsPatch(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processTransactionsPatch(<any>response_);
+                } catch (e) {
+                    return <Observable<ApiResultOfTransactionViewModel>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ApiResultOfTransactionViewModel>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processTransactionsPatch(response: HttpResponseBase): Observable<ApiResultOfTransactionViewModel> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? ApiResultOfTransactionViewModel.fromJS(resultData200) : new ApiResultOfTransactionViewModel();
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ApiResultOfTransactionViewModel>(<any>null);
+    }
+
+    /**
+     * @param viewModel (optional) 
+     * @return Success
+     */
+    withdraw(viewModel?: WithdrawCurrencyViewModel | null | undefined): Observable<ApiResultOfWithdrawCurrencyViewModel> {
+        let url_ = this.baseUrl + "/v1/transactions/withdraw";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(viewModel);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processWithdraw(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processWithdraw(<any>response_);
+                } catch (e) {
+                    return <Observable<ApiResultOfWithdrawCurrencyViewModel>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ApiResultOfWithdrawCurrencyViewModel>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processWithdraw(response: HttpResponseBase): Observable<ApiResultOfWithdrawCurrencyViewModel> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? ApiResultOfWithdrawCurrencyViewModel.fromJS(resultData200) : new ApiResultOfWithdrawCurrencyViewModel();
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ApiResultOfWithdrawCurrencyViewModel>(<any>null);
+    }
+}
+
+@Injectable({
+    providedIn: 'root'
+})
 export class VoteService {
     private http: HttpClient;
     private baseUrl: string;
@@ -5408,6 +5585,278 @@ export interface IStatisticsEntryViewModel {
     value?: string | null;
 }
 
+export class ApiResultOfIEnumerableOfTransactionViewModel implements IApiResultOfIEnumerableOfTransactionViewModel {
+    data?: TransactionViewModel[] | null;
+    success?: boolean | null;
+    errors?: string[] | null;
+
+    constructor(data?: IApiResultOfIEnumerableOfTransactionViewModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            if (data["data"] && data["data"].constructor === Array) {
+                this.data = [] as any;
+                for (let item of data["data"])
+                    this.data!.push(TransactionViewModel.fromJS(item));
+            }
+            this.success = data["success"] !== undefined ? data["success"] : <any>null;
+            if (data["errors"] && data["errors"].constructor === Array) {
+                this.errors = [] as any;
+                for (let item of data["errors"])
+                    this.errors!.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): ApiResultOfIEnumerableOfTransactionViewModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new ApiResultOfIEnumerableOfTransactionViewModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (this.data && this.data.constructor === Array) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        data["success"] = this.success !== undefined ? this.success : <any>null;
+        if (this.errors && this.errors.constructor === Array) {
+            data["errors"] = [];
+            for (let item of this.errors)
+                data["errors"].push(item);
+        }
+        return data; 
+    }
+}
+
+export interface IApiResultOfIEnumerableOfTransactionViewModel {
+    data?: TransactionViewModel[] | null;
+    success?: boolean | null;
+    errors?: string[] | null;
+}
+
+export class TransactionViewModel implements ITransactionViewModel {
+    id?: string | null;
+    amount?: number | null;
+    date?: Date | null;
+    reason?: string | null;
+    currency?: string | null;
+    target?: string | null;
+    targetInfo?: string | null;
+    status?: string | null;
+
+    constructor(data?: ITransactionViewModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.id = data["id"] !== undefined ? data["id"] : <any>null;
+            this.amount = data["amount"] !== undefined ? data["amount"] : <any>null;
+            this.date = data["date"] ? new Date(data["date"].toString()) : <any>null;
+            this.reason = data["reason"] !== undefined ? data["reason"] : <any>null;
+            this.currency = data["currency"] !== undefined ? data["currency"] : <any>null;
+            this.target = data["target"] !== undefined ? data["target"] : <any>null;
+            this.targetInfo = data["targetInfo"] !== undefined ? data["targetInfo"] : <any>null;
+            this.status = data["status"] !== undefined ? data["status"] : <any>null;
+        }
+    }
+
+    static fromJS(data: any): TransactionViewModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new TransactionViewModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id !== undefined ? this.id : <any>null;
+        data["amount"] = this.amount !== undefined ? this.amount : <any>null;
+        data["date"] = this.date ? this.date.toISOString() : <any>null;
+        data["reason"] = this.reason !== undefined ? this.reason : <any>null;
+        data["currency"] = this.currency !== undefined ? this.currency : <any>null;
+        data["target"] = this.target !== undefined ? this.target : <any>null;
+        data["targetInfo"] = this.targetInfo !== undefined ? this.targetInfo : <any>null;
+        data["status"] = this.status !== undefined ? this.status : <any>null;
+        return data; 
+    }
+}
+
+export interface ITransactionViewModel {
+    id?: string | null;
+    amount?: number | null;
+    date?: Date | null;
+    reason?: string | null;
+    currency?: string | null;
+    target?: string | null;
+    targetInfo?: string | null;
+    status?: string | null;
+}
+
+export class ApiResultOfTransactionViewModel implements IApiResultOfTransactionViewModel {
+    data?: TransactionViewModel | null;
+    success?: boolean | null;
+    errors?: string[] | null;
+
+    constructor(data?: IApiResultOfTransactionViewModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.data = data["data"] ? TransactionViewModel.fromJS(data["data"]) : <any>null;
+            this.success = data["success"] !== undefined ? data["success"] : <any>null;
+            if (data["errors"] && data["errors"].constructor === Array) {
+                this.errors = [] as any;
+                for (let item of data["errors"])
+                    this.errors!.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): ApiResultOfTransactionViewModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new ApiResultOfTransactionViewModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["data"] = this.data ? this.data.toJSON() : <any>null;
+        data["success"] = this.success !== undefined ? this.success : <any>null;
+        if (this.errors && this.errors.constructor === Array) {
+            data["errors"] = [];
+            for (let item of this.errors)
+                data["errors"].push(item);
+        }
+        return data; 
+    }
+}
+
+export interface IApiResultOfTransactionViewModel {
+    data?: TransactionViewModel | null;
+    success?: boolean | null;
+    errors?: string[] | null;
+}
+
+export class WithdrawCurrencyViewModel implements IWithdrawCurrencyViewModel {
+    character!: string;
+    currency!: string;
+    amount?: number | null;
+
+    constructor(data?: IWithdrawCurrencyViewModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.character = data["character"] !== undefined ? data["character"] : <any>null;
+            this.currency = data["currency"] !== undefined ? data["currency"] : <any>null;
+            this.amount = data["amount"] !== undefined ? data["amount"] : <any>null;
+        }
+    }
+
+    static fromJS(data: any): WithdrawCurrencyViewModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new WithdrawCurrencyViewModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["character"] = this.character !== undefined ? this.character : <any>null;
+        data["currency"] = this.currency !== undefined ? this.currency : <any>null;
+        data["amount"] = this.amount !== undefined ? this.amount : <any>null;
+        return data; 
+    }
+}
+
+export interface IWithdrawCurrencyViewModel {
+    character: string;
+    currency: string;
+    amount?: number | null;
+}
+
+export class ApiResultOfWithdrawCurrencyViewModel implements IApiResultOfWithdrawCurrencyViewModel {
+    data?: WithdrawCurrencyViewModel | null;
+    success?: boolean | null;
+    errors?: string[] | null;
+
+    constructor(data?: IApiResultOfWithdrawCurrencyViewModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.data = data["data"] ? WithdrawCurrencyViewModel.fromJS(data["data"]) : <any>null;
+            this.success = data["success"] !== undefined ? data["success"] : <any>null;
+            if (data["errors"] && data["errors"].constructor === Array) {
+                this.errors = [] as any;
+                for (let item of data["errors"])
+                    this.errors!.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): ApiResultOfWithdrawCurrencyViewModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new ApiResultOfWithdrawCurrencyViewModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["data"] = this.data ? this.data.toJSON() : <any>null;
+        data["success"] = this.success !== undefined ? this.success : <any>null;
+        if (this.errors && this.errors.constructor === Array) {
+            data["errors"] = [];
+            for (let item of this.errors)
+                data["errors"].push(item);
+        }
+        return data; 
+    }
+}
+
+export interface IApiResultOfWithdrawCurrencyViewModel {
+    data?: WithdrawCurrencyViewModel | null;
+    success?: boolean | null;
+    errors?: string[] | null;
+}
+
 export class ApiResultOfPagedResultDataOfIEnumerableOfTransactionViewModel implements IApiResultOfPagedResultDataOfIEnumerableOfTransactionViewModel {
     data?: PagedResultDataOfIEnumerableOfTransactionViewModel | null;
     success?: boolean | null;
@@ -5518,58 +5967,6 @@ export interface IPagedResultDataOfIEnumerableOfTransactionViewModel {
     currentIndex?: number | null;
     currentCountPerPage?: number | null;
     pageCount?: number | null;
-}
-
-export class TransactionViewModel implements ITransactionViewModel {
-    id?: string | null;
-    amount?: number | null;
-    date?: Date | null;
-    reason?: string | null;
-    currency?: string | null;
-
-    constructor(data?: ITransactionViewModel) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(data?: any) {
-        if (data) {
-            this.id = data["id"] !== undefined ? data["id"] : <any>null;
-            this.amount = data["amount"] !== undefined ? data["amount"] : <any>null;
-            this.date = data["date"] ? new Date(data["date"].toString()) : <any>null;
-            this.reason = data["reason"] !== undefined ? data["reason"] : <any>null;
-            this.currency = data["currency"] !== undefined ? data["currency"] : <any>null;
-        }
-    }
-
-    static fromJS(data: any): TransactionViewModel {
-        data = typeof data === 'object' ? data : {};
-        let result = new TransactionViewModel();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id !== undefined ? this.id : <any>null;
-        data["amount"] = this.amount !== undefined ? this.amount : <any>null;
-        data["date"] = this.date ? this.date.toISOString() : <any>null;
-        data["reason"] = this.reason !== undefined ? this.reason : <any>null;
-        data["currency"] = this.currency !== undefined ? this.currency : <any>null;
-        return data; 
-    }
-}
-
-export interface ITransactionViewModel {
-    id?: string | null;
-    amount?: number | null;
-    date?: Date | null;
-    reason?: string | null;
-    currency?: string | null;
 }
 
 export class ApiResultOfInt32 implements IApiResultOfInt32 {
