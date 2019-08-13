@@ -1,0 +1,47 @@
+<table>
+    <tr>
+        <th>
+
+        </th>
+        <th>
+            Amount
+        </th>
+        <th>
+            Date
+        </th>
+        <th>
+            Reason
+        </th>
+        <th>
+        </th>
+    </tr>
+    <tr *ngFor="let item of data" [class.failed-entry]="item.status == 'FAILED'">
+        <td style="padding-left: 10px">
+            <img *ngIf="item.currency == 'VP'" class="currency" title="Vote-Points" src="../../../../../assets/web/icons/blue-essence.png">
+            <img *ngIf="item.currency == 'DP'" class="currency" title="Donate-Points" src="../../../../../assets/web/icons/yellow-essence.png">
+        </td>
+        <td [class.negative]="item.amount < 0" [class.positive]="item.amount > 0">
+            {{item.amount}}
+        </td>
+        <td>
+            {{item.date | date: 'dd.MM.yyyy'}}
+        </td>
+        <td>
+            {{item.reason}}
+        </td>
+        <td>
+            <img *ngIf="item.status == 'FINISHED'" title="Finished" class="status finished" src="../../../../../assets/web/icons/baseline_done_black_18dp.png">
+            <img *ngIf="item.status == 'PENDING'" title="Pending" class="status pending" src="../../../../../assets/web/icons/baseline_hourglass_empty_black_18dp.png">
+            <img *ngIf="item.status == 'FAILED'" title="Failed" class="status failed" src="../../../../../assets/web/icons/baseline_error_outline_black_18dp.png">
+        </td>
+    </tr>
+</table>
+<div class="pagination">
+    <div class="left">
+        <div class="img-back" (click)="previous()" ></div>
+    </div>
+    <div class="page">{{currentPageVisible+1}} / {{pageCount}}</div>
+    <div class="right">
+        <div (click)="next()" class="img-next"></div>
+    </div>
+</div>

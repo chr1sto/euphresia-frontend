@@ -1,7 +1,7 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { API_BASE_URL, AccountService, ServiceStatusService, GameEventService, NewsService, RolesService, GameAccountService, GenericService } from './shared/services/generated.services';
+import { API_BASE_URL, AccountService, ServiceStatusService, GameEventService, NewsService, RolesService, GameAccountService, GenericService, VoteService } from './shared/services/generated.services';
 import { JwtInterceptor } from './shared/helpers/jwt.interceptor';
-import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import { ModuleWithProviders, NgModule, Optional, SkipSelf, InjectionToken } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthenticationService } from './shared/services/auth.service';
 import { AdminGuardService } from './shared/guards/admin-guard';
@@ -10,14 +10,21 @@ import { AvatarModule } from "ngx-avatar";
 import { CustomFileUploadService } from './shared/services/custom-file-upload.service';
 import { RegisterGuardService } from './shared/guards/register-guard';
 import { RankingHelperService } from './shared/services/ranking-helper.service';
+import { SignalRService, SOCK_BASE_URL } from './shared/services/signal-r.service';
+import { LoginGuardService } from './shared/guards/login-guard';
 
 export class AppConsts
 {
-  static baseUrl = "https://api.euphresia-flyff.com"
+  static apiUrl = "https://localhost:44345/api"
+  static sockUrl = "https://localhost:44345/sock"
 }
 
 export function getBaseUrl() : string {
-  return AppConsts.baseUrl
+  return AppConsts.apiUrl;
+}
+
+export function getSockUrl() : string {
+    return AppConsts.sockUrl;
 }
 
 @NgModule(
@@ -47,11 +54,13 @@ export class CoreModule
             ngModule: CoreModule,
             providers: [
                 {provide: API_BASE_URL,useFactory: getBaseUrl},
+                {provide: SOCK_BASE_URL,useFactory: getSockUrl},
                 {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
                 AccountService,
                 AuthenticationService,
                 AdminGuardService,
                 RegisterGuardService,
+                LoginGuardService,
                 ServiceStatusService,
                 GameEventService,
                 CustomFileUploadService,
@@ -59,7 +68,9 @@ export class CoreModule
                 RolesService,
                 GameAccountService,
                 RankingHelperService,
-                GenericService
+                GenericService,
+                SignalRService,
+                VoteService
             ]
         }
     }

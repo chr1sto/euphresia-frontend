@@ -40,6 +40,11 @@ import { PageCaptionService } from './services/page-caption.service';
 import { ToastService } from './services/toast.service';
 import { ImprintComponent } from './pages/imprint/imprint.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { AccountComponent } from './pages/account/account.component';
+import { UnauthorizedComponent } from './pages/unauthorized/unauthorized.component';
+import { TransactionHistoryComponent } from './pages/account/transaction-history/transaction-history.component';
+import { AccountSettingsComponent } from './pages/account/account-settings/account-settings.component';
+import { IngameAccountsComponent } from './pages/account/ingame-accounts/ingame-accounts.component';
 
 @NgModule({
     declarations: [
@@ -60,11 +65,15 @@ import { FooterComponent } from './components/footer/footer.component';
         SeperatorComponent,
         NewsItemComponent,
         VerifyMailComponent,
+        FooterComponent,
 
         /* Pages */
         HomeComponent,
         WikiComponent,
         RankingComponent,
+            PlayerRankingComponent,
+            GuildRankingComponent,
+            DungeonRankingComponent,
         ShopComponent,
         TeamComponent,
         ForgotPasswordComponent,
@@ -76,11 +85,13 @@ import { FooterComponent } from './components/footer/footer.component';
         GuideComponent,
         VoteComponent,
         ImprintComponent,
-        FooterComponent,
+        AccountComponent,
+            TransactionHistoryComponent,
+            AccountSettingsComponent,
+            IngameAccountsComponent,
 
-        PlayerRankingComponent,
-        GuildRankingComponent,
-        DungeonRankingComponent,
+        /* Error Pages */
+        UnauthorizedComponent,
 
         /* Pipes */
         SafeHtmlPipe

@@ -1,0 +1,76 @@
+.account-info
+{
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+
+    .account-info-item
+    {
+        width: 100%;
+        display: inline-block;
+        height: auto;
+        background: rgba(37, 19, 1, 0.38);
+        padding: 5px;
+
+        p
+        {
+            font-family: 'Roboto Slab', serif;
+            background-color: #000000;
+            color: transparent;
+            text-shadow: 0px -1px 0px rgba(255, 255, 255, 0.9);
+            -webkit-background-clip: text;
+               -moz-background-clip: text;
+                    background-clip: text;
+        }
+
+        p:first-child
+        {
+            float: left;
+        }
+
+        p:nth-child(2)
+        {
+            float: right;
+            font-size: 14px;
+        }
+    }
+}
+
+ul.tabs
+{
+    list-style-type: none;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    li 
+    {
+        float: left;
+        margin-left: 10px;
+        margin-right: 10px;
+        a
+        {
+            display: block;
+            font-family: 'Roboto Slab', serif;
+            background-color: #000000;
+            color: transparent;
+            text-shadow: 0px -1px 0px rgba(255, 255, 255, 0.9);
+            -webkit-background-clip: text;
+               -moz-background-clip: text;
+                    background-clip: text;
+        }
+
+        a:hover
+        {
+            background-color: #000000;
+            text-shadow: 0px -1px 0px rgba(255, 199, 96, 0.9);
+        }
+    }
+}
+
+.page-container
+{
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    max-height: 630px;
+}

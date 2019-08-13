@@ -4,4 +4,6 @@ export class UserInfo
     email: string;
     userName: string;
     roles: string;
+    votePoints: number;
+    donatePoints: number;
 }

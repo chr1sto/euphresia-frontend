@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { UserInfo } from '../models/user-info';
-import { AccountService, LoginViewModel, RegisterViewModel } from './generated.services';
+import { AccountService, LoginViewModel, RegisterViewModel, VoteService } from './generated.services';
 import { HttpClient } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthenticationService
@@ -12,7 +13,7 @@ export class AuthenticationService
     hasErrors : boolean;
     errorMessages : string[];
 
-    constructor(private _http: HttpClient, private _accountService: AccountService) {
+    constructor(private _http: HttpClient, private _accountService: AccountService, private _router: Router, private voteService : VoteService) {
         if(this.isAuthenticated())
         {
             this.isLoggedIn = true;
@@ -63,6 +64,15 @@ export class AuthenticationService
             userInfo.email = decoded.email;
             userInfo.userName = decoded.unique_name;
             userInfo.roles = decoded.role;
+            this.voteService.balance().pipe(
+                map(result => {
+                  if(result.success)
+                  {
+                    userInfo.votePoints = result.data;
+                    userInfo.donatePoints = 0;
+                  }
+                })
+              ).subscribe();
             return userInfo;
 
         }
@@ -99,5 +109,19 @@ export class AuthenticationService
         localStorage.removeItem('token');
         this.isLoggedIn = false;
         this.userInfo = null;
+        this._router.navigate(['/']);
+    }
+
+    public updateCurrencies()
+    {
+        this.voteService.balance().pipe(
+            map(result => {
+              if(result.success)
+              {
+                this.userInfo.votePoints = result.data;
+                this.userInfo.donatePoints = 0;
+              }
+            })
+          ).subscribe();
     }
 }

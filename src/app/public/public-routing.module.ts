@@ -20,6 +20,12 @@ import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.co
 import { GuideComponent } from './pages/guide/guide.component';
 import { VoteComponent } from './pages/vote/vote.component';
 import { ImprintComponent } from './pages/imprint/imprint.component';
+import { AccountComponent } from './pages/account/account.component';
+import { LoginGuardService } from '../shared/guards/login-guard';
+import { UnauthorizedComponent } from './pages/unauthorized/unauthorized.component';
+import { TransactionHistoryComponent } from './pages/account/transaction-history/transaction-history.component';
+import { IngameAccountsComponent } from './pages/account/ingame-accounts/ingame-accounts.component';
+import { AccountSettingsComponent } from './pages/account/account-settings/account-settings.component';
 
 const routes: Routes = [
     {
@@ -59,7 +65,8 @@ const routes: Routes = [
             },
             {
                 path: 'shop',
-                component: ShopComponent
+                component: ShopComponent,
+                canActivate: [LoginGuardService]
             },
             {
                 path: 'team',
@@ -101,11 +108,40 @@ const routes: Routes = [
             },
             {
                 path: 'vote',
-                component: VoteComponent
+                component: VoteComponent,
+                canActivate: [LoginGuardService]
             },
             {
                 path: 'imprint',
                 component: ImprintComponent
+            },
+            {
+                path: 'account',
+                component: AccountComponent,
+                canActivate: [LoginGuardService],
+                children:  
+                [
+                    {
+                        path: '',
+                        redirectTo: 'transaction-history'
+                    },
+                    {
+                        path: 'transaction-history',
+                        component: TransactionHistoryComponent
+                    },
+                    {
+                        path: 'ingame-accounts',
+                        component: IngameAccountsComponent
+                    },
+                    {
+                        path: 'settings',
+                        component: AccountSettingsComponent
+                    }
+                ]
+            },
+            {
+                path: 'unauthorized',
+                component: UnauthorizedComponent
             }
         ]
     }
