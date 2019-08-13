@@ -3,13 +3,25 @@
 <div class="user-panel-container">
     <div class="logged-in" *ngIf="loggedIn">
         <p class="label">Logged in as:</p>
-        <p>{{this.user.email}}</p>
+        <p>{{this.auth.userInfo.email}}</p>
         <div class="logged-in-inner">
             <ul class="user-options">
                 <li><a [routerLink]="['/account']">Manage Account</a></li>
                 <li *ngIf="hasAdminAccess"><a [routerLink]="['/admin']">Admin Panel</a></li>
             </ul>
-            <div class="logout-button" (click)="this.logout()"></div>
+            <div class="lower-wrapper">
+                <div class="currencies">
+                    <div class="currency">
+                        <img src="../../../../assets/web/icons/blue-essence.png" title="Vote Points">
+                        <div class="points">{{this.auth.userInfo.votePoints}}</div>
+                    </div>
+                    <div class="currency">
+                        <img src="../../../../assets/web/icons/yellow-essence.png" title="Donate Points">
+                        <div class="points">{{this.auth.userInfo.donatePoints}}</div>
+                    </div>
+                </div>
+                <div class="logout-button" (click)="this.logout()"></div>
+            </div>
         </div>
     </div>
     

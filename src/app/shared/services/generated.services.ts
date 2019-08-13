@@ -1198,6 +1198,64 @@ export class GameCharacterService {
         }
         return _observableOf<void>(<any>null);
     }
+
+    /**
+     * @return Success
+     */
+    myCharacters(): Observable<ApiResultOfIEnumerableOfCharacterViewModel> {
+        let url_ = this.baseUrl + "/v1/game-character/my-characters";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processMyCharacters(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processMyCharacters(<any>response_);
+                } catch (e) {
+                    return <Observable<ApiResultOfIEnumerableOfCharacterViewModel>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ApiResultOfIEnumerableOfCharacterViewModel>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processMyCharacters(response: HttpResponseBase): Observable<ApiResultOfIEnumerableOfCharacterViewModel> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? ApiResultOfIEnumerableOfCharacterViewModel.fromJS(resultData200) : new ApiResultOfIEnumerableOfCharacterViewModel();
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result400 = resultData400 ? ApiResultOfIEnumerableOfCharacterViewModel.fromJS(resultData400) : new ApiResultOfIEnumerableOfCharacterViewModel();
+            return throwException("A server error occurred.", status, _responseText, _headers, result400);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ApiResultOfIEnumerableOfCharacterViewModel>(<any>null);
+    }
 }
 
 @Injectable({
@@ -4385,6 +4443,138 @@ export interface ICharacterAdminViewModel {
     isDeleted?: boolean | null;
 }
 
+export class ApiResultOfIEnumerableOfCharacterViewModel implements IApiResultOfIEnumerableOfCharacterViewModel {
+    data?: CharacterViewModel[] | null;
+    success?: boolean | null;
+    errors?: string[] | null;
+
+    constructor(data?: IApiResultOfIEnumerableOfCharacterViewModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            if (data["data"] && data["data"].constructor === Array) {
+                this.data = [] as any;
+                for (let item of data["data"])
+                    this.data!.push(CharacterViewModel.fromJS(item));
+            }
+            this.success = data["success"] !== undefined ? data["success"] : <any>null;
+            if (data["errors"] && data["errors"].constructor === Array) {
+                this.errors = [] as any;
+                for (let item of data["errors"])
+                    this.errors!.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): ApiResultOfIEnumerableOfCharacterViewModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new ApiResultOfIEnumerableOfCharacterViewModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (this.data && this.data.constructor === Array) {
+            data["data"] = [];
+            for (let item of this.data)
+                data["data"].push(item.toJSON());
+        }
+        data["success"] = this.success !== undefined ? this.success : <any>null;
+        if (this.errors && this.errors.constructor === Array) {
+            data["errors"] = [];
+            for (let item of this.errors)
+                data["errors"].push(item);
+        }
+        return data; 
+    }
+}
+
+export interface IApiResultOfIEnumerableOfCharacterViewModel {
+    data?: CharacterViewModel[] | null;
+    success?: boolean | null;
+    errors?: string[] | null;
+}
+
+export class CharacterViewModel implements ICharacterViewModel {
+    name?: string | null;
+    class?: string | null;
+    gearScore?: number | null;
+    level?: number | null;
+    playTime?: number | null;
+    strength?: number | null;
+    dexterity?: number | null;
+    stamina?: number | null;
+    intelligence?: number | null;
+    bossKills?: number | null;
+
+    constructor(data?: ICharacterViewModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.name = data["name"] !== undefined ? data["name"] : <any>null;
+            this.class = data["class"] !== undefined ? data["class"] : <any>null;
+            this.gearScore = data["gearScore"] !== undefined ? data["gearScore"] : <any>null;
+            this.level = data["level"] !== undefined ? data["level"] : <any>null;
+            this.playTime = data["playTime"] !== undefined ? data["playTime"] : <any>null;
+            this.strength = data["strength"] !== undefined ? data["strength"] : <any>null;
+            this.dexterity = data["dexterity"] !== undefined ? data["dexterity"] : <any>null;
+            this.stamina = data["stamina"] !== undefined ? data["stamina"] : <any>null;
+            this.intelligence = data["intelligence"] !== undefined ? data["intelligence"] : <any>null;
+            this.bossKills = data["bossKills"] !== undefined ? data["bossKills"] : <any>null;
+        }
+    }
+
+    static fromJS(data: any): CharacterViewModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new CharacterViewModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name !== undefined ? this.name : <any>null;
+        data["class"] = this.class !== undefined ? this.class : <any>null;
+        data["gearScore"] = this.gearScore !== undefined ? this.gearScore : <any>null;
+        data["level"] = this.level !== undefined ? this.level : <any>null;
+        data["playTime"] = this.playTime !== undefined ? this.playTime : <any>null;
+        data["strength"] = this.strength !== undefined ? this.strength : <any>null;
+        data["dexterity"] = this.dexterity !== undefined ? this.dexterity : <any>null;
+        data["stamina"] = this.stamina !== undefined ? this.stamina : <any>null;
+        data["intelligence"] = this.intelligence !== undefined ? this.intelligence : <any>null;
+        data["bossKills"] = this.bossKills !== undefined ? this.bossKills : <any>null;
+        return data; 
+    }
+}
+
+export interface ICharacterViewModel {
+    name?: string | null;
+    class?: string | null;
+    gearScore?: number | null;
+    level?: number | null;
+    playTime?: number | null;
+    strength?: number | null;
+    dexterity?: number | null;
+    stamina?: number | null;
+    intelligence?: number | null;
+    bossKills?: number | null;
+}
+
 export class ApiResultOfIListOfStoredEvent implements IApiResultOfIListOfStoredEvent {
     data?: StoredEvent[] | null;
     success?: boolean | null;
@@ -5071,78 +5261,6 @@ export interface IPagedResultDataOfIEnumerableOfCharacterViewModel {
     currentIndex?: number | null;
     currentCountPerPage?: number | null;
     pageCount?: number | null;
-}
-
-export class CharacterViewModel implements ICharacterViewModel {
-    name?: string | null;
-    class?: string | null;
-    gearScore?: number | null;
-    level?: number | null;
-    playTime?: number | null;
-    strength?: number | null;
-    dexterity?: number | null;
-    stamina?: number | null;
-    intelligence?: number | null;
-    bossKills?: number | null;
-
-    constructor(data?: ICharacterViewModel) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(data?: any) {
-        if (data) {
-            this.name = data["name"] !== undefined ? data["name"] : <any>null;
-            this.class = data["class"] !== undefined ? data["class"] : <any>null;
-            this.gearScore = data["gearScore"] !== undefined ? data["gearScore"] : <any>null;
-            this.level = data["level"] !== undefined ? data["level"] : <any>null;
-            this.playTime = data["playTime"] !== undefined ? data["playTime"] : <any>null;
-            this.strength = data["strength"] !== undefined ? data["strength"] : <any>null;
-            this.dexterity = data["dexterity"] !== undefined ? data["dexterity"] : <any>null;
-            this.stamina = data["stamina"] !== undefined ? data["stamina"] : <any>null;
-            this.intelligence = data["intelligence"] !== undefined ? data["intelligence"] : <any>null;
-            this.bossKills = data["bossKills"] !== undefined ? data["bossKills"] : <any>null;
-        }
-    }
-
-    static fromJS(data: any): CharacterViewModel {
-        data = typeof data === 'object' ? data : {};
-        let result = new CharacterViewModel();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["name"] = this.name !== undefined ? this.name : <any>null;
-        data["class"] = this.class !== undefined ? this.class : <any>null;
-        data["gearScore"] = this.gearScore !== undefined ? this.gearScore : <any>null;
-        data["level"] = this.level !== undefined ? this.level : <any>null;
-        data["playTime"] = this.playTime !== undefined ? this.playTime : <any>null;
-        data["strength"] = this.strength !== undefined ? this.strength : <any>null;
-        data["dexterity"] = this.dexterity !== undefined ? this.dexterity : <any>null;
-        data["stamina"] = this.stamina !== undefined ? this.stamina : <any>null;
-        data["intelligence"] = this.intelligence !== undefined ? this.intelligence : <any>null;
-        data["bossKills"] = this.bossKills !== undefined ? this.bossKills : <any>null;
-        return data; 
-    }
-}
-
-export interface ICharacterViewModel {
-    name?: string | null;
-    class?: string | null;
-    gearScore?: number | null;
-    level?: number | null;
-    playTime?: number | null;
-    strength?: number | null;
-    dexterity?: number | null;
-    stamina?: number | null;
-    intelligence?: number | null;
-    bossKills?: number | null;
 }
 
 export class ApiResultOfStringOf implements IApiResultOfStringOf {

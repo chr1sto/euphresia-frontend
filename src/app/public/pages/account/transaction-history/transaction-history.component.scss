@@ -7,9 +7,35 @@ table
     border-collapse:separate;
     border-spacing:0 5px;
 
+    .failed-entry
+    {
+        color: rgb(112, 112, 112) !important;
+
+        td.negative
+        {
+            color: rgb(112, 112, 112) !important;
+        }
+    
+        td.positive
+        {
+            color: rgb(112, 112, 112) !important;
+        }
+    }
+
     td
     {
         background: rgba(37, 19, 1, 0.38);
+
+        img.status
+        {
+            width: 16px;
+        }
+
+        img.currency
+        {
+            margin-top: 2px;
+            width: 12px;
+        }
     }
 
     td.negative

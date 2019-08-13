@@ -1,1 +1,36 @@
-<h1>Coming Soon!</h1>
+<div class="container">
+    <p>As of now, you can only transfer your Votepoints to one of your Characters here.</p>
+    <p>All Votepoints that you gained during Beta and used on one of your Characters will be fully restored.</p>
+    <p>The Vote-Shop itself can be found ingame.</p>
+</div>
+<seperator></seperator>
+<div class="container">
+    <div class="form">
+        <div class="form-item">
+            <div class="label">
+                Select a Character: 
+            </div>
+            <select [(ngModel)]="selectedChar">
+                <option *ngFor="let c of characters" [ngValue]="c.name">{{c.name}}</option>
+            </select>
+        </div>
+        <div class="form-item" *ngIf="selectedChar">
+            <div class="label">
+                Amount of Votepoints:
+            </div>
+            <input type="number" [(ngModel)]="amount" min="0">
+        </div>
+        <div class="button-wrap">
+            <button type="submit" *ngIf="selectedChar && amount > 0" (click)="submit()">Submit</button>
+        </div>
+
+        <div *ngIf="hasErrors" class="errors">
+            <p *ngFor="let item of errorMessages" class="error">{{item}}</p>
+        </div>
+
+        <div *ngIf="success" class="success">
+            <p>Your withdraw request has been issued. It may take up to 1 Minute until the Votepoints will show up in your inventory!</p>
+            <p>You can check the transaction status under "Manage-Account" -> "Transaction-History"</p>
+        </div>
+    </div>
+</div>

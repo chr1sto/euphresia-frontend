@@ -65,7 +65,8 @@ const routes: Routes = [
             },
             {
                 path: 'shop',
-                component: ShopComponent
+                component: ShopComponent,
+                canActivate: [LoginGuardService]
             },
             {
                 path: 'team',

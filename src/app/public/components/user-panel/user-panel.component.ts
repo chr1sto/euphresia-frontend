@@ -15,7 +15,6 @@ export class UserPanelComponent implements OnInit {
         this.loggedIn = this.auth.isLoggedIn;
         if(this.loggedIn)
         {
-            this.user = this.auth.userInfo;
             this.hasAdminAccess =  this.auth.isAdmin();
         }
         console.log(this.loggedIn);
@@ -49,7 +48,8 @@ export class UserPanelComponent implements OnInit {
             {
                 this.loggedIn = true;
                 this.form.reset();
-                this.user = this.auth.userInfo;
+                this.auth.userInfo;
+                this.hasAdminAccess =  this.auth.isAdmin();
             }
         });
         }
