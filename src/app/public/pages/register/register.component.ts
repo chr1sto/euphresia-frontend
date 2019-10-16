@@ -26,6 +26,7 @@ export class RegisterComponent {
     email: string;
     secretQuestion: string;
     secretAnswer: string;
+    tos : boolean = false;
 
     errorMessages : Array<string>;
     hasErrors : boolean = false;
@@ -42,6 +43,8 @@ export class RegisterComponent {
       model.confirmPassword = data.confirmedPassword;
       model.password = data.password;
       model.email = data.email;
+
+      console.log(data.tos);
 
       if(!data.tos)
       {

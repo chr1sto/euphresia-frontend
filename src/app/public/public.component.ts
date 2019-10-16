@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd, UrlHandlingStrategy } from '@angular/router';
 import { PageCaptionService } from './services/page-caption.service';
 import { ToastService } from './services/toast.service';
@@ -10,20 +10,24 @@ import { ToastService } from './services/toast.service';
   })
 export class PublicComponent {
 
-  constructor(private router : Router, public pageCaption :  PageCaptionService, public toastService : ToastService)
+  constructor(private router : Router, public pageCaption :  PageCaptionService, public toastService : ToastService, private ngZone: NgZone)
   {
     this.getPageName(router.url);
     router.events.subscribe((val) => {
       if(val instanceof NavigationEnd)
       {
-        pageCaption.caption = this.getPageName(val.url);
-        pageCaption.showSeperator = this.getShowSeperator(val.url);
+          this.caption = this.getPageName(val.url);
+          pageCaption.showSeperator = this.getShowSeperator(val.url);
+          console.log(this.caption);
       }
     })
   }
 
+  caption : string;
+
   getPageName(url : string) : string
   {
+    console.log(url);
     if(url.includes('home'))  return 'News & Announcments';
     if(url.includes('ranking')) return 'Ranking';
     if(url.includes('shop')) return 'Shop';
