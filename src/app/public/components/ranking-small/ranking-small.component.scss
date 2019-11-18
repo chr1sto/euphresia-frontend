@@ -9,7 +9,57 @@
 table
 {
     font-family: 'Roboto Slab', serif;
-    color: white;
+    color: #fbd7b2;
+    text-shadow: 0.1em 0.1em 0.2em black;
     padding-top: 70px;
     padding-left: 35px;
+    text-align: center;
+    width: calc(100% - 30px);
+
+
+
+    tr
+    {
+        width: 100%;
+        td
+        {
+            &.index
+            {
+                font-size: 24px;
+                color: #883333;
+                text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.8);
+            }
+    
+            &.gs
+            {
+                font-size: 12px;
+            }
+
+            &.last
+            {
+                padding-bottom: 4px;
+                border-bottom: 2px rgba(251,215,178,0.8) dotted !important;
+            }
+        }
+
+    }
+}
+
+.more
+{
+    text-align: center;
+    width: 100%;
+    display: inline-block;
+    margin-top: 1px;
+    color: #883333;
+    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.8);
+    font-size: 32px;
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover
+    {
+        color: #d8bfbf;
+        text-shadow: 0px -1px 0px rgba(155, 155, 155, 0.8);
+    }
 }

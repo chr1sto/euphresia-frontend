@@ -61,5 +61,8 @@ export class UserPanelComponent implements OnInit {
         this.loggedIn = false;
         this.hasAdminAccess = false;
         this.user = null;
+
+        this.toastService.errorMessages = ["Successfully logged out!"];
+        this.toastService.enable();
     }
 }

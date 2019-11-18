@@ -1,0 +1,29 @@
+.container
+{
+    overflow-y: scroll;
+    height: 780px;
+    margin-left: 12px;
+    margin-right: 12px;
+
+    .block
+    {
+        background-color: rgba(0,0,0,0.2);
+        padding: 8px;
+        width: calc(100% - 24px);
+    }
+
+    h1
+    {
+        color: #460000;
+        text-shadow: 0px -1px 0px rgba(80, 40, 0, 0.8);
+        font-size: 20px;
+        margin-top: 20px;
+    }
+
+    p
+    {
+        margin-bottom: 6px !important;
+        color: #fbd7b2;
+        text-shadow: 0.1em 0.1em 0.2em black;
+    }
+}

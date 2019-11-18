@@ -1,13 +1,14 @@
 <table>
-    <tr *ngFor="let item of ranking; let i = index">
-        <td>
-            {{i+1}}
-        </td>
-        <td>
-            {{item.name}}
-        </td>
-        <td>
-            {{item.gearScore}}
-        </td>
-    </tr>
+    <ng-container *ngFor="let item of ranking; let i = index">
+        <tr>
+            <td rowspan="2" class="index last">{{i+1}}</td>
+            <td class="name">{{item.name}}</td>
+        </tr>
+        <tr class="">
+            <td class="gs last">{{item.gearScore}}</td>
+        </tr>
+    </ng-container>
 </table>
+<a class="more" routerLink="/ranking">
+    More
+</a>

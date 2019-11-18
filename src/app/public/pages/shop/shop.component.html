@@ -24,7 +24,7 @@
             <button type="submit" *ngIf="selectedChar && amount > 0" (click)="submit()">Submit</button>
         </div>
 
-        <div *ngIf="hasErrors" class="errors">
+        <div *ngIf="hasErros" class="errors">
             <p *ngFor="let item of errorMessages" class="error">{{item}}</p>
         </div>
 

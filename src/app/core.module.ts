@@ -15,8 +15,8 @@ import { LoginGuardService } from './shared/guards/login-guard';
 
 export class AppConsts
 {
-  static apiUrl = "https://api.euphresia-flyff.com/api"
-  static sockUrl = "https://api.euphresia-flyff.com/sock"
+  static apiUrl = "https://localhost:44345/api"
+  static sockUrl = "https://localhost:44345/sock"
 }
 
 export function getBaseUrl() : string {

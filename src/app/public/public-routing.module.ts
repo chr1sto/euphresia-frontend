@@ -112,10 +112,6 @@ const routes: Routes = [
                 canActivate: [LoginGuardService]
             },
             {
-                path: 'imprint',
-                component: ImprintComponent
-            },
-            {
                 path: 'account',
                 component: AccountComponent,
                 canActivate: [LoginGuardService],

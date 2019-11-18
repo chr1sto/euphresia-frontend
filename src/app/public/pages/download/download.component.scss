@@ -6,7 +6,8 @@ table
     border-collapse:separate;
     border-spacing:0 20px;
     font-family: 'Roboto Slab', serif !important;
-    color: white !important;
+    color: #fbd7b2 !important;
+    text-shadow: 0.1em 0.1em 0.2em black;
 
     tr
     {
@@ -22,7 +23,8 @@ table
         a
         {
             text-decoration: underline;
-            color: white !important;
+            color: #fbd7b2 !important;
+            text-shadow: 0.1em 0.1em 0.2em black;
         }
     }
 

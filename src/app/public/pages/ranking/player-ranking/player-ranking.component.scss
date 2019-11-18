@@ -29,8 +29,8 @@
         table
         {
             font-family: 'Roboto Slab', serif;
-            color: white;
-            //text-shadow: 1px -1px 0px rgba(10, 6, 1, 0.37);
+            color: #fbd7b2;
+            text-shadow: 0.1em 0.1em 0.2em black;
             width: 100%;
             border-collapse:separate;
             border-spacing:0 5px;
@@ -136,7 +136,8 @@
     .page
     {
         font-family: 'Roboto Slab', serif;
-        color: white;
+        color: #fbd7b2;
+        text-shadow: 0.1em 0.1em 0.2em black;
         //text-shadow: 1px -1px 0px rgba(10, 6, 1, 0.37);
         width: 20%;
         margin-top: 15px;
