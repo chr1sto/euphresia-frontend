@@ -44,8 +44,6 @@ export class RegisterComponent {
       model.password = data.password;
       model.email = data.email;
 
-      console.log(data.tos);
-
       if(!data.tos)
       {
         this.hasErrors = true;
@@ -57,16 +55,17 @@ export class RegisterComponent {
       this.accountService.register(model).subscribe(
         result => 
           {
-            if(!result.errors)
+            console.log(result);
+            if(result.success)
             {
               this.hasErrors = false;
               this.errorMessages = null;
               this.success = true;
               setTimeout(() =>
               {
-                this.router.navigate([''])
+                this.router.navigate(['/home'])
               }
-              ,3000)
+              ,2000)
             }
             else
             {
