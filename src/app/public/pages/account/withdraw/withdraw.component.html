@@ -15,7 +15,16 @@
         </div>
         <div class="form-item" *ngIf="selectedChar">
             <div class="label">
-                Amount of Votepoints:
+                Currency:
+            </div>
+            <select [(ngModel)]="currency">
+                <option value="DP">Donate Points</option>
+                <option value="VP">Vote Points</option>
+            </select>
+        </div>
+        <div class="form-item" *ngIf="selectedChar">
+            <div class="label">
+                Amount:
             </div>
             <input type="number" [(ngModel)]="amount" min="0">
         </div>

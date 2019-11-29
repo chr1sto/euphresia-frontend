@@ -29,6 +29,7 @@ export class WithdrawComponent implements OnInit{
     hasErros : boolean = false;
     success : boolean = false;
     errorMessages : string[] = [];
+    currency : string = "VP";
 
     constructor(private characterService : GameCharacterService, private transactionService : TransactionsService, private auth : AuthenticationService)
     {
@@ -42,7 +43,7 @@ export class WithdrawComponent implements OnInit{
         let viewModel = new WithdrawCurrencyViewModel();
         viewModel.character = this.selectedChar;
         viewModel.amount = this.amount;
-        viewModel.currency = "VP";
+        viewModel.currency = this.currency;
         this.transactionService.withdraw(viewModel).pipe(
           map(
             result => {
