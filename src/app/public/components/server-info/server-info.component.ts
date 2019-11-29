@@ -9,6 +9,7 @@ import { map } from 'rxjs/operators';
   })
 export class ServerInfoComponent implements OnInit {
     online : boolean = false;
+    maintenance : boolean = false;
 
     time = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Berlin'}));
 
@@ -26,6 +27,7 @@ export class ServerInfoComponent implements OnInit {
             {
               this.serviceStatus = result.data[0];
               this.online = this.serviceStatus.state == 3;
+              this.maintenance = this.serviceStatus.state == 4;
               console.log(this.serviceStatus);
             }
           }

@@ -1,4 +1,4 @@
-<div class="this" [ngClass]="{'online': online, 'offline': !online}">
+<div class="this" [ngClass]="{'online': online && !maintenance, 'offline': !online && !maintenance, 'maintenance': maintenance}">
     <div class="time">
         <p class="clock">{{time | date: 'hh:mm:ss a'}}</p>
     </div>
