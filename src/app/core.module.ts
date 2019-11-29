@@ -16,8 +16,8 @@ import { DonationService } from './shared/services/donation.service';
 
 export class AppConsts
 {
-  static apiUrl = "https://localhost:44345/api"
-  static sockUrl = "https://localhost:44345/sock"
+  static apiUrl = "https://api.euphresia-flyff.com/api"
+  static sockUrl = "https://api.euphresia-flyff.com/sock"
 }
 
 export function getBaseUrl() : string {
