@@ -12,6 +12,7 @@ import { RegisterGuardService } from './shared/guards/register-guard';
 import { RankingHelperService } from './shared/services/ranking-helper.service';
 import { SignalRService, SOCK_BASE_URL } from './shared/services/signal-r.service';
 import { LoginGuardService } from './shared/guards/login-guard';
+import { DonationService } from './shared/services/donation.service';
 
 export class AppConsts
 {
@@ -70,7 +71,8 @@ export class CoreModule
                 RankingHelperService,
                 GenericService,
                 SignalRService,
-                VoteService
+                VoteService,
+                DonationService
             ]
         }
     }

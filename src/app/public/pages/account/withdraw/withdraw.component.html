@@ -1,0 +1,35 @@
+<div class="container">
+    <p>Please make sure that you are logged in with the chosen Character.</p>
+    <p>If the Character is not logged in the Transaction will fail and no amount will be withdrawn!</p>    
+</div>
+
+<div class="container">
+    <div class="form">
+        <div class="form-item">
+            <div class="label">
+                Select a Character: 
+            </div>
+            <select [(ngModel)]="selectedChar">
+                <option *ngFor="let c of characters" [ngValue]="c.name">{{c.name}}</option>
+            </select>
+        </div>
+        <div class="form-item" *ngIf="selectedChar">
+            <div class="label">
+                Amount of Votepoints:
+            </div>
+            <input type="number" [(ngModel)]="amount" min="0">
+        </div>
+        <div class="button-wrap">
+            <button type="submit" *ngIf="selectedChar && amount > 0" (click)="submit()">Submit</button>
+        </div>
+
+        <div *ngIf="hasErros" class="errors">
+            <p *ngFor="let item of errorMessages" class="error">{{item}}</p>
+        </div>
+
+        <div *ngIf="success" class="success">
+            <p>Your withdraw request has been issued. It may take up to 1 Minute until the Votepoints will show up in your inventory!</p>
+            <p>You can check the transaction status under "Manage-Account" -> "Transaction-History"</p>
+        </div>
+    </div>
+</div>

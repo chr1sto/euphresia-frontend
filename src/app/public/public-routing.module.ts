@@ -26,6 +26,7 @@ import { UnauthorizedComponent } from './pages/unauthorized/unauthorized.compone
 import { TransactionHistoryComponent } from './pages/account/transaction-history/transaction-history.component';
 import { IngameAccountsComponent } from './pages/account/ingame-accounts/ingame-accounts.component';
 import { AccountSettingsComponent } from './pages/account/account-settings/account-settings.component';
+import { WithdrawComponent } from './pages/account/withdraw/withdraw.component';
 
 const routes: Routes = [
     {
@@ -132,6 +133,10 @@ const routes: Routes = [
                     {
                         path: 'settings',
                         component: AccountSettingsComponent
+                    },
+                    {
+                        path: 'withdraw',
+                        component: WithdrawComponent
                     }
                 ]
             },

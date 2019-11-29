@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { DonationService } from './donation.service';
 
 @Injectable()
 export class AuthenticationService
@@ -13,7 +14,7 @@ export class AuthenticationService
     hasErrors : boolean;
     errorMessages : string[];
 
-    constructor(private _http: HttpClient, private _accountService: AccountService, private _router: Router, private voteService : VoteService) {
+    constructor(private _http: HttpClient, private _accountService: AccountService, private _router: Router, private voteService : VoteService, public donateService : DonationService) {
         if(this.isAuthenticated())
         {
             this.isLoggedIn = true;
@@ -73,6 +74,9 @@ export class AuthenticationService
                   }
                 })
               ).subscribe();
+            this.donateService.getBalance().subscribe(() => {
+                userInfo.donatePoints = this.donateService.balance;
+            })
             return userInfo;
 
         }
@@ -119,9 +123,12 @@ export class AuthenticationService
               if(result.success)
               {
                 this.userInfo.votePoints = result.data;
-                this.userInfo.donatePoints = 0;
               }
             })
           ).subscribe();
+
+        this.donateService.getBalance().subscribe(() => {
+            this.userInfo.donatePoints = this.donateService.balance;
+        })
     }
 }

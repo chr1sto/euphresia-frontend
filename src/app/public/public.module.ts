@@ -45,6 +45,9 @@ import { UnauthorizedComponent } from './pages/unauthorized/unauthorized.compone
 import { TransactionHistoryComponent } from './pages/account/transaction-history/transaction-history.component';
 import { AccountSettingsComponent } from './pages/account/account-settings/account-settings.component';
 import { IngameAccountsComponent } from './pages/account/ingame-accounts/ingame-accounts.component';
+import { WithdrawComponent } from './pages/account/withdraw/withdraw.component';
+import { NgxPayPalModule } from 'ngx-paypal';
+import { DonationService } from '../shared/services/donation.service';
 
 @NgModule({
     declarations: [
@@ -89,6 +92,7 @@ import { IngameAccountsComponent } from './pages/account/ingame-accounts/ingame-
             TransactionHistoryComponent,
             AccountSettingsComponent,
             IngameAccountsComponent,
+            WithdrawComponent,
 
         /* Error Pages */
         UnauthorizedComponent,
@@ -102,7 +106,8 @@ import { IngameAccountsComponent } from './pages/account/ingame-accounts/ingame-
         FormsModule,
         RecaptchaModule,
         SlideshowModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NgxPayPalModule
     ],
     bootstrap: [],
     providers: [PageCaptionService,FormBuilder,ToastService]

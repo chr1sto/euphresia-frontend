@@ -1,7 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { GameCharacterService, CharacterViewModel, TransactionsService, WithdrawCurrencyViewModel } from 'src/app/shared/services/generated.services';
-import { map } from 'rxjs/operators';
+import { IPayPalConfig, ICreateOrderRequest, ITransactionItem } from 'ngx-paypal';
+import { DonationService } from 'src/app/shared/services/donation.service';
 import { AuthenticationService } from 'src/app/shared/services/auth.service';
+
+export class Product
+{
+  public value : string;
+  public dp : string;
+  public free : string;
+}
 
 @Component({
     selector: 'shop',
@@ -9,62 +16,175 @@ import { AuthenticationService } from 'src/app/shared/services/auth.service';
     styleUrls: ['./shop.component.scss']
   })
 export class ShopComponent implements OnInit{
-    ngOnInit(): void {
-      this.characterService.myCharacters().pipe(
-        map(
-          result => {
-            if(result.success)
-            {
-              this.characters = result.data;
-            }
+  public payPalConfig ? : IPayPalConfig;
+  public showSuccess : boolean;
+  public showError : boolean;
+  public showCancel : boolean;
+  public items : ITransactionItem[];
+  public selectedProduct : Product;
+
+  public products : Array<Product> = [
+    {
+      value: "10.00",
+      dp: "1000",
+      free: "0"
+    },
+    {
+      value: "15.00",
+      dp: "1500",
+      free: "0"
+    },
+    {
+      value: "25.00",
+      dp: "2600",
+      free: "100"
+    },
+    {
+      value: "50.00",
+      dp: "5500",
+      free: "500"
+    },
+    {
+      value: "100.00",
+      dp: "11500",
+      free: "1500"
+    },
+    {
+      value: "200.00",
+      dp: "23500",
+      free: "3500"
+    }
+  ]
+
+  constructor(public donationService : DonationService, public authService : AuthenticationService)
+  {
+    
+  }
+
+  ngOnInit(): void {
+      this.selectProduct(this.products[0])
+  }
+
+  public selectProduct(product : Product)
+  {
+    this.selectedProduct = product;
+    this.getItems(product);
+    this.initConfig(product);
+  }
+
+  private initConfig(product : Product): void {
+
+      this.payPalConfig = {
+          currency: 'EUR',
+          clientId: 'AfVGPTPTMsaXHyUdSkdM8n9iViKFauE1E8XEfKPQAznDF04C-U-yGcRwlHgb3w0XRlNMBl9jN8EuaOH7',
+          createOrderOnClient: (data) => < ICreateOrderRequest > {
+              intent: 'CAPTURE',
+              purchase_units: [{
+                  amount: {
+                      currency_code: 'EUR',
+                      value: product.value,
+                      breakdown: {
+                          item_total: {
+                              currency_code: 'EUR',
+                              value: product.value
+                          }
+                      },
+                  },
+                  items: this.items
+
+              }],
+              application_context:
+              {
+                brand_name: "Euphresia-Flyff",
+                shipping_preference: "NO_SHIPPING"
+              }
+          },
+          advanced: {
+              commit: 'true'
+          },
+          style: {
+              label: 'paypal',
+              layout: 'vertical'
+          },
+          onApprove: (data, actions) => {
+
+            this.donationService.verifyPaypalOrder(data.orderID).subscribe(() => {
+              if(this.donationService.ppResult != '' && this.donationService.ppResult != '0')
+              {
+                console.log(this.donationService.ppResult);
+                this.showSuccess = true;
+              }
+            });
+
+          },
+          onClientAuthorization: (data) => {
+            this.authService.updateCurrencies();
+
+          },
+          onCancel: (data, actions) => {
+              console.log('OnCancel', data, actions);
+              this.showCancel = true;
+
+          },
+          onError: err => {
+              console.log('OnError', err);
+              this.showError = true;
+          },
+          onClick: (data, actions) => {
+              console.log('onClick', data, actions);
+              this.resetStatus();
           }
-        )
-      ).subscribe();
+      };
+      console.log(this.payPalConfig);
     }
 
-    characters : CharacterViewModel[] = [];
-    selectedChar : string = "";
-    amount : number = 0;
-
-    hasErros : boolean = false;
-    success : boolean = false;
-    errorMessages : string[] = [];
-
-    constructor(private characterService : GameCharacterService, private transactionService : TransactionsService, private auth : AuthenticationService)
+    public resetStatus() : void
     {
+
     }
 
-
-    submit()
+    private getItems(product : Product) : ITransactionItem[]
     {
-      if(this.selectedChar && this.amount > 0)
+      var result : ITransactionItem[];
+      if(product.free != '0')
       {
-        let viewModel = new WithdrawCurrencyViewModel();
-        viewModel.character = this.selectedChar;
-        viewModel.amount = this.amount;
-        viewModel.currency = "VP";
-        this.transactionService.withdraw(viewModel).pipe(
-          map(
-            result => {
-              if(result.success)
-              {
-                this.hasErros = false;
-                this.success = true;
-                this.errorMessages = [];
-                this.selectedChar = "";
-                this.amount = 0;
-                this.auth.updateCurrencies();
-              }
-              else
-              {
-                this.hasErros = true;
-                this.errorMessages = result.errors;
-                this.success = false;
-                console.log(this.errorMessages);
-              }
-            }
-          )
-        ).subscribe();
+        result = [
+          {
+            name: 'Donate Points',
+            unit_amount: {
+              value: '0.1',
+              currency_code: 'EUR'
+            },
+            quantity: '' + (parseInt(product.dp) - parseInt(product.free)),
+            category: 'DIGITAL_GOODS'
+          },
+          {
+            name: 'Bonus Donate Points',
+            unit_amount: {
+              value: '0',
+              currency_code: 'EUR'
+            },
+            quantity: product.free,
+            category: 'DIGITAL_GOODS'
+          }
+        ];
       }
+      else
+      {
+        result = [
+          {
+            name: 'Donate Points',
+            unit_amount: {
+              value: '0.1',
+              currency_code: 'EUR'
+            },
+            quantity: product.dp,
+            category: 'DIGITAL_GOODS'
+          }
+        ];
+      }
+      console.log(result);
+
+      return result;
     }
 }

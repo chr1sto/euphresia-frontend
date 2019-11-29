@@ -1,36 +1,34 @@
-<div class="container">
-    <p>As of now, you can only transfer your Votepoints to one of your Characters here.</p>
-    <p>All Votepoints that you gained during Beta and used on one of your Characters will be fully restored.</p>
-    <p>The Vote-Shop itself can be found ingame.</p>
+
+<div *ngIf="!this.showSuccess && !this.showError && !this.showCancel">
+    <div class="container">
+            <table>
+                <tbody>
+                    <tr *ngFor="let item of products" (click)="selectProduct(item)" [class.selected]="selectedProduct==item">
+                        <td>{{item.value}} €</td>
+                        <td>{{item.dp}} DP</td>
+                    </tr>            
+                </tbody>
+            </table>
+        </div>
+        <seperator></seperator>
+        <div class="container">
+            <p>When you purchase the virtual currency called Donate Points, you automatically confirm our Privacy Policy and Terms of Service. Furthermore, you waive the buyer protection provided by PayPal out of your free will. You agree that all sales of virtual goods and virtual currencies are final. No refunds will be made except at our sole and absolute discretion.</p>
+        </div>
+        <seperator></seperator>
+        <div class="container">
+            <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+    </div>
 </div>
-<seperator></seperator>
-<div class="container">
-    <div class="form">
-        <div class="form-item">
-            <div class="label">
-                Select a Character: 
-            </div>
-            <select [(ngModel)]="selectedChar">
-                <option *ngFor="let c of characters" [ngValue]="c.name">{{c.name}}</option>
-            </select>
-        </div>
-        <div class="form-item" *ngIf="selectedChar">
-            <div class="label">
-                Amount of Votepoints:
-            </div>
-            <input type="number" [(ngModel)]="amount" min="0">
-        </div>
-        <div class="button-wrap">
-            <button type="submit" *ngIf="selectedChar && amount > 0" (click)="submit()">Submit</button>
-        </div>
-
-        <div *ngIf="hasErros" class="errors">
-            <p *ngFor="let item of errorMessages" class="error">{{item}}</p>
-        </div>
-
-        <div *ngIf="success" class="success">
-            <p>Your withdraw request has been issued. It may take up to 1 Minute until the Votepoints will show up in your inventory!</p>
-            <p>You can check the transaction status under "Manage-Account" -> "Transaction-History"</p>
-        </div>
+<div *ngIf="this.showSuccess">
+    <div class="container">
+        <p>Thank you for your donation and your trust into Euphresia-FlyFF!</p>
+        <p>Your transaction has been completed.</p>
+        <p>Log into your PayPal account to view transaction details.</p>
+    </div>
+</div>
+<div *ngIf="this.showError">
+    <div class="container">
+        <p>Something went horribly wrong while performing your transaction.</p>
+        <p>Please contact the Euphresia-Staff immediately.</p>
     </div>
 </div>
