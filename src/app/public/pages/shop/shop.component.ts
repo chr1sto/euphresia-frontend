@@ -22,7 +22,6 @@ export class ShopComponent implements OnInit{
   public showCancel : boolean;
   public items : ITransactionItem[];
   public selectedProduct : Product;
-  public orderID : string;
 
   public products : Array<Product> = [
     {
@@ -109,18 +108,17 @@ export class ShopComponent implements OnInit{
           },
           onApprove: (data, actions) => {
 
-            this.orderID = data.orderID;
+            this.donationService.verifyPaypalOrder(data.orderID).subscribe(() => {
+              if(this.donationService.ppResult != '' && this.donationService.ppResult != '0')
+              {
+                console.log(this.donationService.ppResult);
+                this.showSuccess = true;
+              }
+            });
 
           },
           onClientAuthorization: (data) => {
-            this.donationService.verifyPaypalOrder(this.orderID).subscribe(() => {
-              if(this.donationService.ppResult != '' && this.donationService.ppResult != '0')
-              {
-                this.showSuccess = true;
-                this.authService.updateCurrencies();
-                this.orderID = null;
-              }
-            });
+            this.authService.updateCurrencies();
 
           },
           onCancel: (data, actions) => {
