@@ -99,7 +99,7 @@ export class AuthenticationService
                 return !jwt.isTokenExpired(token);
             }
         }
-        this.logout();
+        //this.logout();
         return false;
     }
 
