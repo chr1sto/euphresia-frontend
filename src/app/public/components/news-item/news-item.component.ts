@@ -12,7 +12,7 @@ export class NewsItemComponent implements OnInit {
     content : string;
 
     ngOnInit(): void {
-        this.content = (new DOMParser).parseFromString(this.newsPost.content, "text/html").documentElement.textContent.split(" ").slice(0,30).join(" ");
+        this.content = (new DOMParser).parseFromString(this.newsPost.content, "text/html").documentElement.textContent.split(" ").slice(0,20).join(" ");
     }
 
     
