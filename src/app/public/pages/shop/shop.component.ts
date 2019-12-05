@@ -73,10 +73,10 @@ export class ShopComponent implements OnInit{
   }
 
   private initConfig(product : Product): void {
-
+      var mail = this.authService.userInfo.Id;
       this.payPalConfig = {
           currency: 'EUR',
-          clientId: 'AbX3gxzBi8GtxByPp4u1N3P1wMhvafavEowWDQm2Zc0tSIOVuDrWp0Lj53mCpXf1vAcKvVZrY-GfZ-VG',
+          clientId: 'AfVGPTPTMsaXHyUdSkdM8n9iViKFauE1E8XEfKPQAznDF04C-U-yGcRwlHgb3w0XRlNMBl9jN8EuaOH7',
           createOrderOnClient: (data) => < ICreateOrderRequest > {
               intent: 'CAPTURE',
               purchase_units: [{
@@ -90,7 +90,8 @@ export class ShopComponent implements OnInit{
                           }
                       },
                   },
-                  items: this.items
+                  items: this.items,
+                  reference_id: mail
 
               }],
               application_context:
@@ -108,17 +109,20 @@ export class ShopComponent implements OnInit{
           },
           onApprove: (data, actions) => {
 
-            this.donationService.verifyPaypalOrder(data.orderID).subscribe(() => {
+          },
+          onClientAuthorization: (data) => {
+            this.donationService.verifyPaypalOrder(data.id).subscribe(() => {
               if(this.donationService.ppResult != '' && this.donationService.ppResult != '0')
               {
                 console.log(this.donationService.ppResult);
                 this.showSuccess = true;
+                this.authService.updateCurrencies();
+              }
+              else{
+                this.showError = true;
               }
             });
-
-          },
-          onClientAuthorization: (data) => {
-            this.authService.updateCurrencies();
+            console.log(data);
 
           },
           onCancel: (data, actions) => {
