@@ -68,7 +68,6 @@ export class ShopComponent implements OnInit{
   public selectProduct(product : Product)
   {
     this.selectedProduct = product;
-    this.getItems(product);
     this.initConfig(product);
   }
 
@@ -90,7 +89,17 @@ export class ShopComponent implements OnInit{
                           }
                       },
                   },
-                  items: this.items,
+                  items: [
+                    {
+                      name: product.dp + ' Donate Points',
+                      unit_amount: {
+                        value: product.value,
+                        currency_code: 'EUR'
+                      },
+                      quantity: '1',
+                      category: 'DIGITAL_GOODS'
+                    }
+                  ],
                   reference_id: mail
 
               }],
@@ -160,15 +169,6 @@ export class ShopComponent implements OnInit{
               currency_code: 'EUR'
             },
             quantity: '' + (parseInt(product.dp) - parseInt(product.free)),
-            category: 'DIGITAL_GOODS'
-          },
-          {
-            name: 'Bonus Donate Points',
-            unit_amount: {
-              value: '0',
-              currency_code: 'EUR'
-            },
-            quantity: product.free,
             category: 'DIGITAL_GOODS'
           }
         ];
