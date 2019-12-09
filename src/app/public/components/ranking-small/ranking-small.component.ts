@@ -21,7 +21,7 @@ export class RankingSmallComponent implements OnInit {
 
     updateRanking()
     {
-      this.rankingService.ranking(0,5,"gearscore").pipe(
+      this.rankingService.ranking(0,5,"gearscore",null).pipe(
         map(
           result => {
             if(result.success)

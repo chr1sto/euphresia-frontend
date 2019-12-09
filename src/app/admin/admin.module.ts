@@ -36,6 +36,7 @@ import { GeneralSliderComponent } from './pages/general-slider/general-slider.co
 import { CreateImageObjectComponent } from './components/create-image-object/create-image-object.component';
 import { GameDownloadsComponent } from './pages/game-downloads/game-downloads.component';
 import { DownloadDetailComponent } from './components/download-detail/download-detail.component';
+import { TransactionsComponent } from './pages/transactions/transactions.compontent';
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import { DownloadDetailComponent } from './components/download-detail/download-d
     GeneralSliderComponent,
     CreateImageObjectComponent,
     GameDownloadsComponent,
-    DownloadDetailComponent
+    DownloadDetailComponent,
+    TransactionsComponent
   ],
   imports: [
     CommonModule,
