@@ -16,6 +16,7 @@ import { GameCharactersComponent } from './pages/game-characters/game-characters
 import { GeneralSliderComponent } from './pages/general-slider/general-slider.component';
 import { GameDownloadsComponent } from './pages/game-downloads/game-downloads.component';
 import { TransactionsComponent } from './pages/transactions/transactions.compontent';
+import { TransactionDetailComponent } from './pages/transaction-detail/transaction-detail.component';
 
 const routes : Routes =
 [
@@ -80,6 +81,10 @@ const routes : Routes =
             {
                 path: 'transactions',
                 component: TransactionsComponent
+            },
+            {
+                path: 'transaction-detail/:id',
+                component: TransactionDetailComponent
             }
         ]
     }

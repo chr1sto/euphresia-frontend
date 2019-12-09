@@ -72,6 +72,16 @@
                         Upload
                     </span>
                 </mat-toolbar-row>
+                <mat-toolbar-row class="nav-item" routerLink="transactions" [class.is-active]="this.router.url==='/admin/transactions'">
+                    <span>
+                        <i class="material-icons">
+                            account_balance
+                        </i>
+                    </span>
+                    <span>
+                        Transactions
+                    </span>
+                </mat-toolbar-row>
                 <mat-toolbar-row class="nav-section">
                     <span>Game</span>
                 </mat-toolbar-row>

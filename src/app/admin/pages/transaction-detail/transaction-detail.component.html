@@ -1,0 +1,18 @@
+<mat-card class="mat-elevation-z2" *ngIf="transaction != null">
+    <mat-card-header>
+        <mat-card-title>{{transaction.id}}</mat-card-title>
+        <mat-card-subtitle>{{transaction.reason}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-divider>
+
+    </mat-divider>
+    <mat-card-content>
+        <h3>Transaction Model</h3>
+        <ngx-json-viewer [json]="transaction"></ngx-json-viewer>
+        <mat-divider></mat-divider>
+        <div class="pp-wrapper" *ngIf="ppOrder">
+            <h3>PayPal Order</h3>
+            <ngx-json-viewer [json]="ppOrder"></ngx-json-viewer>
+        </div>
+    </mat-card-content>
+</mat-card>

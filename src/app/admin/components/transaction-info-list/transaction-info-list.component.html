@@ -1,0 +1,93 @@
+<h1>Transactions</h1>
+<div class="container">
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+            Filter
+            </mat-panel-title>
+            <mat-panel-description>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        
+        <mat-form-field style="width: 100%;">
+            <input [(ngModel)]="searchText" (keyup)="search($event.target.value)" matInput placeholder="Search in Info">
+        </mat-form-field>
+        <mat-form-field style="margin-right: 20px; width: 25%;">
+            <mat-label>Currency</mat-label>
+            <mat-select [(ngModel)]="currency" (selectionChange)="refreshTransactionsList()">
+                <mat-option *ngFor="let c of currencies" [value]="c.value">
+                {{c.displayValue}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field style="margin-right: 20px; width: 25%;">
+            <mat-label>Status</mat-label>
+            <mat-select [(ngModel)]="status" (selectionChange)="refreshTransactionsList()">
+                <mat-option *ngFor="let c of statuses" [value]="c.value">
+                {{c.displayValue}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field style="margin-right: 20px; width: 20%;">
+            <input matInput placeholder="Min. Amount" value="minAmount" [(ngModel)]="minAmount" type="number" (change)="refreshTransactionsList()">
+        </mat-form-field>
+        <mat-form-field style="margin-right: 20px; width: 20%;">
+            <input matInput placeholder="Max. Amount" value="maxAmount" [(ngModel)]="maxAmount" type="number" (change)="refreshTransactionsList()">
+        </mat-form-field>
+        <mat-checkbox [(ngModel)]="filterDate" style="margin-right: 40px;" (change)="refreshTransactionsList()">Filter by Date</mat-checkbox>
+        <mat-form-field style="width: 40%; margin-right: 40px;" *ngIf="filterDate">
+            <input matInput [matDatepicker]="pickerFrom" placeholder="From" [value]="from" [(ngModel)]="from" (ngModelChange)="refreshTransactionsList()">
+            <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+            <mat-datepicker #pickerFrom></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field style="width: 40%; margin-right: 40px;" *ngIf="filterDate">
+            <input matInput [matDatepicker]="pickerUntil" placeholder="Until" [value]="until" [(ngModel)]="until" (ngModelChange)="refreshTransactionsList()">
+            <mat-datepicker-toggle matSuffix [for]="pickerUntil"></mat-datepicker-toggle>
+            <mat-datepicker #pickerUntil></mat-datepicker>
+        </mat-form-field>
+
+            
+    </mat-expansion-panel>
+</div>
+<div class="container">
+
+
+    <table mat-table [dataSource]="transactions" class="mat-elevation-z8">
+        <ng-container matColumnDef="userId">
+            <th mat-header-cell *matHeaderCellDef> UserId </th>
+            <td mat-cell *matCellDef="let element"> {{element.userId}} </td>
+        </ng-container>   
+        <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef> date </th>
+            <td mat-cell *matCellDef="let element"> {{element.date | date: 'short'}} </td>
+        </ng-container>    
+        <ng-container matColumnDef="amount">
+            <th mat-header-cell *matHeaderCellDef> Amount </th>
+            <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+        </ng-container>    
+        <ng-container matColumnDef="currency">
+            <th mat-header-cell *matHeaderCellDef> Currency </th>
+            <td mat-cell *matCellDef="let element"> {{element.currency}} </td>
+        </ng-container>     
+        <ng-container matColumnDef="reason">
+            <th mat-header-cell *matHeaderCellDef> Description </th>
+            <td mat-cell *matCellDef="let element"> {{element.reason}} </td>
+        </ng-container>   
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef> Status </th>
+            <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+        </ng-container>    
+        <ng-container matColumnDef="info">
+            <th mat-header-cell *matHeaderCellDef> Info </th>
+            <td mat-cell *matCellDef="let element"> {{element.additionalInfo}} </td>
+        </ng-container>                   
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr class="row" mat-row *matRowDef="let row; columns: displayedColumns;" (click)="open(row)"></tr>
+    </table>
+    <mat-paginator 
+        [length]="transactionsRecordCount"
+        [pageSize]="25"
+        [pageSizeOptions]="[25]"
+        (page)="changePage($event)">
+    </mat-paginator>
+</div>

@@ -783,6 +783,67 @@ export class DonateService {
         }
         return _observableOf<ApiResultOfInt32>(<any>null);
     }
+
+    /**
+     * @param orderId (optional) 
+     * @return Success
+     */
+    orderInfo(orderId: string | null | undefined): Observable<ApiResultOfPayPalResult> {
+        let url_ = this.baseUrl + "/v1/donate/order-info?";
+        if (orderId !== undefined)
+            url_ += "orderId=" + encodeURIComponent("" + orderId) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",			
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processOrderInfo(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processOrderInfo(<any>response_);
+                } catch (e) {
+                    return <Observable<ApiResultOfPayPalResult>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ApiResultOfPayPalResult>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processOrderInfo(response: HttpResponseBase): Observable<ApiResultOfPayPalResult> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result400 = ApiResultOfPayPalResult.fromJS(resultData400);
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ApiResultOfPayPalResult.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ApiResultOfPayPalResult>(<any>null);
+    }
 }
 
 @Injectable()
@@ -3157,6 +3218,60 @@ export class TransactionsService {
         }
         return _observableOf<ApiResultOfPagedResultDataOfIEnumerableOfTransactionAdminViewModel>(<any>null);
     }
+
+    /**
+     * @param id (optional) 
+     * @return Success
+     */
+    admin1(id: string | null | undefined): Observable<ApiResultOfTransactionAdminViewModel> {
+        let url_ = this.baseUrl + "/v1/transactions/admin1?";
+        if (id !== undefined)
+            url_ += "id=" + encodeURIComponent("" + id) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",			
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processAdmin1(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processAdmin1(<any>response_);
+                } catch (e) {
+                    return <Observable<ApiResultOfTransactionAdminViewModel>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ApiResultOfTransactionAdminViewModel>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processAdmin1(response: HttpResponseBase): Observable<ApiResultOfTransactionAdminViewModel> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ApiResultOfTransactionAdminViewModel.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ApiResultOfTransactionAdminViewModel>(<any>null);
+    }
 }
 
 @Injectable()
@@ -4279,6 +4394,94 @@ export interface IApiResultOfInt32 {
     data?: number | undefined;
     success?: boolean | undefined;
     errors?: string[] | undefined;
+}
+
+export class ApiResultOfPayPalResult implements IApiResultOfPayPalResult {
+    readonly data?: PayPalResult | undefined;
+    readonly success?: boolean | undefined;
+    readonly errors?: string[] | undefined;
+
+    constructor(data?: IApiResultOfPayPalResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            (<any>this).data = _data["data"] ? PayPalResult.fromJS(_data["data"]) : <any>undefined;
+            (<any>this).success = _data["success"];
+            if (Array.isArray(_data["errors"])) {
+                (<any>this).errors = [] as any;
+                for (let item of _data["errors"])
+                    (<any>this).errors!.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): ApiResultOfPayPalResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new ApiResultOfPayPalResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["data"] = this.data ? this.data.toJSON() : <any>undefined;
+        data["success"] = this.success;
+        if (Array.isArray(this.errors)) {
+            data["errors"] = [];
+            for (let item of this.errors)
+                data["errors"].push(item);
+        }
+        return data; 
+    }
+}
+
+export interface IApiResultOfPayPalResult {
+    data?: PayPalResult | undefined;
+    success?: boolean | undefined;
+    errors?: string[] | undefined;
+}
+
+export class PayPalResult implements IPayPalResult {
+    response?: string | undefined;
+
+    constructor(data?: IPayPalResult) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.response = _data["response"];
+        }
+    }
+
+    static fromJS(data: any): PayPalResult {
+        data = typeof data === 'object' ? data : {};
+        let result = new PayPalResult();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["response"] = this.response;
+        return data; 
+    }
+}
+
+export interface IPayPalResult {
+    response?: string | undefined;
 }
 
 export class ApiResultOfIEnumerableOfString implements IApiResultOfIEnumerableOfString {
@@ -6579,6 +6782,58 @@ export interface ITransactionAdminViewModel {
     targetInfo?: string | undefined;
     status?: string | undefined;
     additionalInfo?: string | undefined;
+}
+
+export class ApiResultOfTransactionAdminViewModel implements IApiResultOfTransactionAdminViewModel {
+    readonly data?: TransactionAdminViewModel | undefined;
+    readonly success?: boolean | undefined;
+    readonly errors?: string[] | undefined;
+
+    constructor(data?: IApiResultOfTransactionAdminViewModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            (<any>this).data = _data["data"] ? TransactionAdminViewModel.fromJS(_data["data"]) : <any>undefined;
+            (<any>this).success = _data["success"];
+            if (Array.isArray(_data["errors"])) {
+                (<any>this).errors = [] as any;
+                for (let item of _data["errors"])
+                    (<any>this).errors!.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): ApiResultOfTransactionAdminViewModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new ApiResultOfTransactionAdminViewModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["data"] = this.data ? this.data.toJSON() : <any>undefined;
+        data["success"] = this.success;
+        if (Array.isArray(this.errors)) {
+            data["errors"] = [];
+            for (let item of this.errors)
+                data["errors"].push(item);
+        }
+        return data; 
+    }
+}
+
+export interface IApiResultOfTransactionAdminViewModel {
+    data?: TransactionAdminViewModel | undefined;
+    success?: boolean | undefined;
+    errors?: string[] | undefined;
 }
 
 export class ApiResultOfPagedResultDataOfIEnumerableOfTransactionViewModel implements IApiResultOfPagedResultDataOfIEnumerableOfTransactionViewModel {

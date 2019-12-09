@@ -37,7 +37,12 @@ import { CreateImageObjectComponent } from './components/create-image-object/cre
 import { GameDownloadsComponent } from './pages/game-downloads/game-downloads.component';
 import { DownloadDetailComponent } from './components/download-detail/download-detail.component';
 import { TransactionsComponent } from './pages/transactions/transactions.compontent';
-
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material';
+import { TransactionDetailComponent } from './pages/transaction-detail/transaction-detail.component';
+import { NgxJsonViewerModule } from 'ngx-json-viewer';
+import { TransactionInfoListComponent } from './components/transaction-info-list/transaction-info-list.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +65,9 @@ import { TransactionsComponent } from './pages/transactions/transactions.compont
     CreateImageObjectComponent,
     GameDownloadsComponent,
     DownloadDetailComponent,
-    TransactionsComponent
+    TransactionsComponent,
+    TransactionDetailComponent,
+    TransactionInfoListComponent
   ],
   imports: [
     CommonModule,
@@ -83,7 +90,11 @@ import { TransactionsComponent } from './pages/transactions/transactions.compont
     MatDialogModule,
     FormsModule,
     MatSelectModule,
-    AngularEditorModule
+    AngularEditorModule,
+    MatExpansionModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    NgxJsonViewerModule
   ],
   entryComponents: [
     ChangeRolesComponent,
