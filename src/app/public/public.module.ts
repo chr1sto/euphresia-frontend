@@ -47,7 +47,6 @@ import { AccountSettingsComponent } from './pages/account/account-settings/accou
 import { IngameAccountsComponent } from './pages/account/ingame-accounts/ingame-accounts.component';
 import { WithdrawComponent } from './pages/account/withdraw/withdraw.component';
 import { NgxPayPalModule } from 'ngx-paypal';
-import { DonationService } from '../shared/services/donation.service';
 
 @NgModule({
     declarations: [

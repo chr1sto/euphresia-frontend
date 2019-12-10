@@ -1,5 +1,5 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { API_BASE_URL, AccountService, ServiceStatusService, GameEventService, NewsService, RolesService, GameAccountService, GenericService, VoteService, RankingService, TransactionsService, DonateService } from './shared/services/generated.services';
+import { API_BASE_URL, AccountService, ServiceStatusService, GameEventService, NewsService, RolesService, GameAccountService, GenericService, VoteService, RankingService, TransactionsService, DonateService, GameCharacterService, FileUploadService } from './shared/services/generated.services';
 import { JwtInterceptor } from './shared/helpers/jwt.interceptor';
 import { ModuleWithProviders, NgModule, Optional, SkipSelf, InjectionToken } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -12,12 +12,13 @@ import { RegisterGuardService } from './shared/guards/register-guard';
 import { RankingHelperService } from './shared/services/ranking-helper.service';
 import { SignalRService, SOCK_BASE_URL } from './shared/services/signal-r.service';
 import { LoginGuardService } from './shared/guards/login-guard';
-import { DonationService } from './shared/services/donation.service';
 
 export class AppConsts
 {
-  static apiUrl = "https://api.euphresia-flyff.com/api"
-  static sockUrl = "https://api.euphresia-flyff.com/sock"
+  //static apiUrl = "https://api.euphresia-flyff.com/api"
+  //static sockUrl = "https://api.euphresia-flyff.com/sock"
+  static apiUrl = "https://localhost:44345/api";
+  static sockUrl = "https://localhost:44345/sock"
 }
 
 export function getBaseUrl() : string {
@@ -72,10 +73,12 @@ export class CoreModule
                 GenericService,
                 SignalRService,
                 VoteService,
-                DonationService,
+                DonateService,
                 RankingService,
                 TransactionsService,
-                DonateService
+                DonateService,
+                GameCharacterService,
+                FileUploadService
             ]
         }
     }

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { IPayPalConfig, ICreateOrderRequest, ITransactionItem } from 'ngx-paypal';
-import { DonationService } from 'src/app/shared/services/donation.service';
 import { AuthenticationService } from 'src/app/shared/services/auth.service';
+import { DonateService } from 'src/app/shared/services/generated.services';
+import { pipe } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 export class Product
 {
@@ -56,7 +58,7 @@ export class ShopComponent implements OnInit{
     }
   ]
 
-  constructor(public donationService : DonationService, public authService : AuthenticationService)
+  constructor(public donationService : DonateService, public authService : AuthenticationService)
   {
     
   }
@@ -75,7 +77,7 @@ export class ShopComponent implements OnInit{
       var mail = this.authService.userInfo.Id;
       this.payPalConfig = {
           currency: 'EUR',
-          clientId: 'AbX3gxzBi8GtxByPp4u1N3P1wMhvafavEowWDQm2Zc0tSIOVuDrWp0Lj53mCpXf1vAcKvVZrY-GfZ-VG',
+          clientId: 'AfVGPTPTMsaXHyUdSkdM8n9iViKFauE1E8XEfKPQAznDF04C-U-yGcRwlHgb3w0XRlNMBl9jN8EuaOH7',
           createOrderOnClient: (data) => < ICreateOrderRequest > {
               intent: 'CAPTURE',
               purchase_units: [{
@@ -120,31 +122,29 @@ export class ShopComponent implements OnInit{
 
           },
           onClientAuthorization: (data) => {
-            this.donationService.verifyPaypalOrder(data.id).subscribe(() => {
-              if(this.donationService.ppResult != '' && this.donationService.ppResult != '0')
-              {
-                console.log(this.donationService.ppResult);
-                this.showSuccess = true;
-                this.authService.updateCurrencies();
-              }
-              else{
-                this.showError = true;
-              }
-            });
-            console.log(data);
-
+            this.donationService.verifyPpOrder(data.id).pipe(
+              map(
+                result => {
+                  if(result.data != '' && result.data != '0')
+                  {
+                    this.showSuccess = true;
+                    this.authService.updateCurrencies();
+                  }
+                  else
+                  {
+                    this.showError = true;
+                  }
+                }
+              )
+            ).subscribe();
           },
           onCancel: (data, actions) => {
-              console.log('OnCancel', data, actions);
               this.showCancel = true;
-
           },
           onError: err => {
-              console.log('OnError', err);
               this.showError = true;
           },
           onClick: (data, actions) => {
-              console.log('onClick', data, actions);
               this.resetStatus();
           }
       };
