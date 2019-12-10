@@ -77,7 +77,7 @@ export class ShopComponent implements OnInit{
       var mail = this.authService.userInfo.Id;
       this.payPalConfig = {
           currency: 'EUR',
-          clientId: 'AfVGPTPTMsaXHyUdSkdM8n9iViKFauE1E8XEfKPQAznDF04C-U-yGcRwlHgb3w0XRlNMBl9jN8EuaOH7',
+          clientId: 'AbX3gxzBi8GtxByPp4u1N3P1wMhvafavEowWDQm2Zc0tSIOVuDrWp0Lj53mCpXf1vAcKvVZrY-GfZ-VG',
           createOrderOnClient: (data) => < ICreateOrderRequest > {
               intent: 'CAPTURE',
               purchase_units: [{
