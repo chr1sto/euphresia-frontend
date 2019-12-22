@@ -10,12 +10,12 @@ import { map } from 'rxjs/operators';
   })
 export class FileUploadComponent implements OnInit{
     list : Array<string>;
-
+    urlBase : string;
     ngOnInit(): void {
         this.getAll();
-        console.log(this.baseUrl);
     }
     constructor(private fileUploadService : FileUploadService, private customFileUploadService : CustomFileUploadService,@Optional() @Inject(API_BASE_URL) private baseUrl?: string){
+      this.urlBase = 'https://api.euphresia-flyff.com/static'
     }
 
     getAll()

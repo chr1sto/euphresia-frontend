@@ -43,6 +43,8 @@ import {MatNativeDateModule} from '@angular/material';
 import { TransactionDetailComponent } from './pages/transaction-detail/transaction-detail.component';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { TransactionInfoListComponent } from './components/transaction-info-list/transaction-info-list.component';
+import { PlayerCountChartComponent } from './components/data/player-count-chart.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -67,7 +69,10 @@ import { TransactionInfoListComponent } from './components/transaction-info-list
     DownloadDetailComponent,
     TransactionsComponent,
     TransactionDetailComponent,
-    TransactionInfoListComponent
+    TransactionInfoListComponent,
+
+    //CHARTS
+    PlayerCountChartComponent
   ],
   imports: [
     CommonModule,
@@ -94,7 +99,8 @@ import { TransactionInfoListComponent } from './components/transaction-info-list
     MatExpansionModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    NgxJsonViewerModule
+    NgxJsonViewerModule,
+    NgxChartsModule
   ],
   entryComponents: [
     ChangeRolesComponent,

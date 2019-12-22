@@ -1,0 +1,54 @@
+<mat-card>
+    <mat-card-title>
+        Playercount per Channel
+    </mat-card-title>
+    <mat-divider></mat-divider>
+    <mat-card-content style="margin-bottom: 0px; margin-top: 40px !important;">
+            <mat-grid-list cols="4" rowHeight="300px">
+                <mat-grid-tile [colspan]="3">
+                    <div style="display: inline-block">
+                            <ngx-charts-area-chart-stacked *ngIf="multi" [view]="view" [scheme]="colorScheme" [legend]="legend"
+                                [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxis]="xAxis" [yAxis]="yAxis"
+                                [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" [timeline]="timeline" [results]="multi"
+                                (select)="onSelect($event)">
+                            </ngx-charts-area-chart-stacked>
+                        </div>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1">
+                    <div>
+                        <h3 class="t">Filter</h3>
+                        <mat-divider></mat-divider>
+                        <mat-form-field style="width: 100%; margin-top: 20px;">
+                            <input matInput [matDatepicker]="pickerFrom" placeholder="From" [value]="from" [(ngModel)]="from"
+                                (ngModelChange)="getData()">
+                            <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+                            <mat-datepicker #pickerFrom></mat-datepicker>
+                        </mat-form-field>
+                        <mat-form-field style="width: 100%;">
+                            <input matInput [matDatepicker]="pickerUntil" placeholder="Until" [value]="until" [(ngModel)]="until"
+                                (ngModelChange)="getData()">
+                            <mat-datepicker-toggle matSuffix [for]="pickerUntil"></mat-datepicker-toggle>
+                            <mat-datepicker #pickerUntil></mat-datepicker>
+                        </mat-form-field>
+                        <mat-form-field style="width: 100%;">
+                            <input matInput placeholder="Recordcount" value="count" [(ngModel)]="count" type="number"
+                                (change)="getData()">
+                        </mat-form-field>
+                        <mat-form-field style="width: 100%;">
+                            <mat-label>Intervals</mat-label>
+                            <mat-select [(ngModel)]="interval" (selectionChange)="getData()">
+                                <mat-option *ngFor="let c of intervals" [value]="c.value">
+                                {{c.displayValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+
+
+    </mat-card-content>
+    <mat-card-footer>
+        
+    </mat-card-footer>
+</mat-card>

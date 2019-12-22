@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
     styleUrls: ['./general-dashboard.component.scss']
   })
 export class GeneralDashboardComponent {
-
+    
 }

@@ -2843,10 +2843,11 @@ export class StatisticsService {
      * @param until (optional) 
      * @param statGroup (optional) 
      * @param statName (optional) 
+     * @param count (optional) 
      * @param interval (optional) 
      * @return Success
      */
-    statisticsGet(from: string | null | undefined, until: string | null | undefined, statGroup: string | null | undefined, statName: string | null | undefined, interval: string | null | undefined): Observable<ApiResultOfIEnumerableOfStatisticsEntryViewModel> {
+    statisticsGet(from: string | null | undefined, until: string | null | undefined, statGroup: string | null | undefined, statName: string | null | undefined, count: number | null | undefined, interval: string | null | undefined): Observable<ApiResultOfIEnumerableOfStatisticsEntryViewModel> {
         let url_ = this.baseUrl + "/v1/statistics?";
         if (from !== undefined)
             url_ += "from=" + encodeURIComponent("" + from) + "&"; 
@@ -2856,6 +2857,8 @@ export class StatisticsService {
             url_ += "statGroup=" + encodeURIComponent("" + statGroup) + "&"; 
         if (statName !== undefined)
             url_ += "statName=" + encodeURIComponent("" + statName) + "&"; 
+        if (count !== undefined)
+            url_ += "count=" + encodeURIComponent("" + count) + "&"; 
         if (interval !== undefined)
             url_ += "interval=" + encodeURIComponent("" + interval) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
