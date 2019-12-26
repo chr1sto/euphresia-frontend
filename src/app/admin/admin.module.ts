@@ -45,6 +45,7 @@ import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { TransactionInfoListComponent } from './components/transaction-info-list/transaction-info-list.component';
 import { PlayerCountChartComponent } from './components/data/player-count-chart.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { PlayerLogListComponent } from './components/player-log-list/player-log-list.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     TransactionsComponent,
     TransactionDetailComponent,
     TransactionInfoListComponent,
+    PlayerLogListComponent,
 
     //CHARTS
     PlayerCountChartComponent

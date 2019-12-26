@@ -53,7 +53,7 @@ export class AccountDetailComponent implements OnInit{
             )
         ).subscribe();
 
-        this.gameAccountService.gameAccountGetByid(id).pipe(
+        this.gameAccountService.gameAccountGetByid(id,"LIVE").pipe(
             map(
                 result => 
                 {

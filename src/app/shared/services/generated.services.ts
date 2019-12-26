@@ -1068,10 +1068,13 @@ export class GameAccountService {
     }
 
     /**
+     * @param server (optional) 
      * @return Success
      */
-    gameAccountGet(): Observable<ApiResultOfIPagedListOfGameAccountViewModel> {
-        let url_ = this.baseUrl + "/v1/game-account";
+    gameAccountGet(server: string | null | undefined): Observable<ApiResultOfIPagedListOfGameAccountViewModel> {
+        let url_ = this.baseUrl + "/v1/game-account?";
+        if (server !== undefined)
+            url_ += "server=" + encodeURIComponent("" + server) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -1245,13 +1248,16 @@ export class GameAccountService {
     }
 
     /**
+     * @param server (optional) 
      * @return Success
      */
-    gameAccountGetByid(id: string): Observable<ApiResultOfIPagedListOfGameAccountViewModel> {
-        let url_ = this.baseUrl + "/v1/game-account/{id}";
+    gameAccountGetByid(id: string, server: string | null | undefined): Observable<ApiResultOfIPagedListOfGameAccountViewModel> {
+        let url_ = this.baseUrl + "/v1/game-account/{id}?";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id)); 
+        if (server !== undefined)
+            url_ += "server=" + encodeURIComponent("" + server) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -2252,10 +2258,77 @@ export class PlayerLogService {
     }
 
     /**
+     * @param userId (optional) 
+     * @param index (optional) 
+     * @param count (optional) 
+     * @return Success
+     */
+    logPlayerGet(userId: string | null | undefined, index: number | null | undefined, count: number | null | undefined): Observable<ApiResultOfPagedResultDataOfIEnumerableOfPlayerLog> {
+        let url_ = this.baseUrl + "/v1/log-player?";
+        if (userId !== undefined)
+            url_ += "userId=" + encodeURIComponent("" + userId) + "&"; 
+        if (index !== undefined)
+            url_ += "index=" + encodeURIComponent("" + index) + "&"; 
+        if (count !== undefined)
+            url_ += "count=" + encodeURIComponent("" + count) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",			
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processLogPlayerGet(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processLogPlayerGet(<any>response_);
+                } catch (e) {
+                    return <Observable<ApiResultOfPagedResultDataOfIEnumerableOfPlayerLog>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ApiResultOfPagedResultDataOfIEnumerableOfPlayerLog>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processLogPlayerGet(response: HttpResponseBase): Observable<ApiResultOfPagedResultDataOfIEnumerableOfPlayerLog> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ApiResultOfPagedResultDataOfIEnumerableOfPlayerLog.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result400 = ApiResultOfPagedResultDataOfIEnumerableOfPlayerLog.fromJS(resultData400);
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ApiResultOfPagedResultDataOfIEnumerableOfPlayerLog>(<any>null);
+    }
+
+    /**
      * @param object (optional) 
      * @return Success
      */
-    logPlayer(object: any | null | undefined): Observable<ApiResultOfBoolean> {
+    logPlayerPost(object: any | null | undefined): Observable<ApiResultOfBoolean> {
         let url_ = this.baseUrl + "/v1/log-player";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -2272,11 +2345,11 @@ export class PlayerLogService {
         };
 
         return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processLogPlayer(response_);
+            return this.processLogPlayerPost(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processLogPlayer(<any>response_);
+                    return this.processLogPlayerPost(<any>response_);
                 } catch (e) {
                     return <Observable<ApiResultOfBoolean>><any>_observableThrow(e);
                 }
@@ -2285,7 +2358,7 @@ export class PlayerLogService {
         }));
     }
 
-    protected processLogPlayer(response: HttpResponseBase): Observable<ApiResultOfBoolean> {
+    protected processLogPlayerPost(response: HttpResponseBase): Observable<ApiResultOfBoolean> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
@@ -4671,6 +4744,7 @@ export class GameAccountViewModel implements IGameAccountViewModel {
     id?: string | undefined;
     alias!: string;
     account?: string | undefined;
+    server?: string | undefined;
 
     constructor(data?: IGameAccountViewModel) {
         if (data) {
@@ -4686,6 +4760,7 @@ export class GameAccountViewModel implements IGameAccountViewModel {
             this.id = _data["id"];
             this.alias = _data["alias"];
             this.account = _data["account"];
+            this.server = _data["server"];
         }
     }
 
@@ -4701,6 +4776,7 @@ export class GameAccountViewModel implements IGameAccountViewModel {
         data["id"] = this.id;
         data["alias"] = this.alias;
         data["account"] = this.account;
+        data["server"] = this.server;
         return data; 
     }
 }
@@ -4709,6 +4785,7 @@ export interface IGameAccountViewModel {
     id?: string | undefined;
     alias: string;
     account?: string | undefined;
+    server?: string | undefined;
 }
 
 export class ApiResultOfGameAccountViewModel implements IApiResultOfGameAccountViewModel {
@@ -5769,6 +5846,170 @@ export interface IApiResultOfNewsPostViewModel {
     data?: NewsPostViewModel | undefined;
     success?: boolean | undefined;
     errors?: string[] | undefined;
+}
+
+export class ApiResultOfPagedResultDataOfIEnumerableOfPlayerLog implements IApiResultOfPagedResultDataOfIEnumerableOfPlayerLog {
+    readonly data?: PagedResultDataOfIEnumerableOfPlayerLog | undefined;
+    readonly success?: boolean | undefined;
+    readonly errors?: string[] | undefined;
+
+    constructor(data?: IApiResultOfPagedResultDataOfIEnumerableOfPlayerLog) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            (<any>this).data = _data["data"] ? PagedResultDataOfIEnumerableOfPlayerLog.fromJS(_data["data"]) : <any>undefined;
+            (<any>this).success = _data["success"];
+            if (Array.isArray(_data["errors"])) {
+                (<any>this).errors = [] as any;
+                for (let item of _data["errors"])
+                    (<any>this).errors!.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): ApiResultOfPagedResultDataOfIEnumerableOfPlayerLog {
+        data = typeof data === 'object' ? data : {};
+        let result = new ApiResultOfPagedResultDataOfIEnumerableOfPlayerLog();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["data"] = this.data ? this.data.toJSON() : <any>undefined;
+        data["success"] = this.success;
+        if (Array.isArray(this.errors)) {
+            data["errors"] = [];
+            for (let item of this.errors)
+                data["errors"].push(item);
+        }
+        return data; 
+    }
+}
+
+export interface IApiResultOfPagedResultDataOfIEnumerableOfPlayerLog {
+    data?: PagedResultDataOfIEnumerableOfPlayerLog | undefined;
+    success?: boolean | undefined;
+    errors?: string[] | undefined;
+}
+
+export class PagedResultDataOfIEnumerableOfPlayerLog implements IPagedResultDataOfIEnumerableOfPlayerLog {
+    readonly content?: PlayerLog[] | undefined;
+    readonly recordCount?: number | undefined;
+    readonly currentIndex?: number | undefined;
+    readonly currentCountPerPage?: number | undefined;
+    readonly pageCount?: number | undefined;
+
+    constructor(data?: IPagedResultDataOfIEnumerableOfPlayerLog) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["content"])) {
+                (<any>this).content = [] as any;
+                for (let item of _data["content"])
+                    (<any>this).content!.push(PlayerLog.fromJS(item));
+            }
+            (<any>this).recordCount = _data["recordCount"];
+            (<any>this).currentIndex = _data["currentIndex"];
+            (<any>this).currentCountPerPage = _data["currentCountPerPage"];
+            (<any>this).pageCount = _data["pageCount"];
+        }
+    }
+
+    static fromJS(data: any): PagedResultDataOfIEnumerableOfPlayerLog {
+        data = typeof data === 'object' ? data : {};
+        let result = new PagedResultDataOfIEnumerableOfPlayerLog();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.content)) {
+            data["content"] = [];
+            for (let item of this.content)
+                data["content"].push(item.toJSON());
+        }
+        data["recordCount"] = this.recordCount;
+        data["currentIndex"] = this.currentIndex;
+        data["currentCountPerPage"] = this.currentCountPerPage;
+        data["pageCount"] = this.pageCount;
+        return data; 
+    }
+}
+
+export interface IPagedResultDataOfIEnumerableOfPlayerLog {
+    content?: PlayerLog[] | undefined;
+    recordCount?: number | undefined;
+    currentIndex?: number | undefined;
+    currentCountPerPage?: number | undefined;
+    pageCount?: number | undefined;
+}
+
+export class PlayerLog implements IPlayerLog {
+    userId?: string | undefined;
+    timeStamp?: Date | undefined;
+    info?: string | undefined;
+    ipAddress?: string | undefined;
+    readonly id?: string | undefined;
+
+    constructor(data?: IPlayerLog) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.userId = _data["userId"];
+            this.timeStamp = _data["timeStamp"] ? new Date(_data["timeStamp"].toString()) : <any>undefined;
+            this.info = _data["info"];
+            this.ipAddress = _data["ipAddress"];
+            (<any>this).id = _data["id"];
+        }
+    }
+
+    static fromJS(data: any): PlayerLog {
+        data = typeof data === 'object' ? data : {};
+        let result = new PlayerLog();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["userId"] = this.userId;
+        data["timeStamp"] = this.timeStamp ? this.timeStamp.toISOString() : <any>undefined;
+        data["info"] = this.info;
+        data["ipAddress"] = this.ipAddress;
+        data["id"] = this.id;
+        return data; 
+    }
+}
+
+export interface IPlayerLog {
+    userId?: string | undefined;
+    timeStamp?: Date | undefined;
+    info?: string | undefined;
+    ipAddress?: string | undefined;
+    id?: string | undefined;
 }
 
 export class ApiResultOfPagedResultDataOfIEnumerableOfCharacterViewModel implements IApiResultOfPagedResultDataOfIEnumerableOfCharacterViewModel {

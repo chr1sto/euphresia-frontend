@@ -6,6 +6,14 @@ h1
     margin: 40px;
 }
 
+.container
+{
+    overflow-y: auto;
+
+    height: 780px;
+    width: calc(100% - 10px);
+}
+
 .team-item
 {
     width: calc(100% - 54px);

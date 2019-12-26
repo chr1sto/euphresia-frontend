@@ -1,0 +1,33 @@
+<div class="container">
+    <table mat-table [dataSource]="data" class="mat-elevation-z8" multiTemplateDataRows>
+        <ng-container matColumnDef="timeStamp">
+            <th mat-header-cell *matHeaderCellDef> Timestamp </th>
+            <td mat-cell *matCellDef="let element"> {{element.timeStamp | date: 'short'}} </td>
+        </ng-container>   
+        <ng-container matColumnDef="info">
+            <th mat-header-cell *matHeaderCellDef> Info </th>
+            <td mat-cell *matCellDef="let element"> {{element.info.substring(0,60)}} ... </td>
+        </ng-container>  
+        <ng-container matColumnDef="expandedDetail">
+            <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+                <div class="example-element-detail"
+                    [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                    <ngx-json-viewer [json]="parse(element.info)"></ngx-json-viewer>
+                </div>
+            </td>
+        </ng-container>          
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr class="row" mat-row *matRowDef="let element; columns: displayedColumns;" 
+        class="example-element-row"
+        [class.example-expanded-row]="expandedElement === row"
+        (click)="expandedElement = expandedElement === element ? null : element"></tr>
+
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+    </table>
+    <mat-paginator 
+        [length]="totalCount"
+        [pageSize]="10"
+        [pageSizeOptions]="[10]"
+        (page)="changePage($event)">
+    </mat-paginator>
+</div>

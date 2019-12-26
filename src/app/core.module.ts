@@ -1,5 +1,5 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { API_BASE_URL, AccountService, ServiceStatusService, GameEventService, NewsService, RolesService, GameAccountService, GenericService, VoteService, RankingService, TransactionsService, DonateService, GameCharacterService, FileUploadService, AccountManagmentService, StatisticsService } from './shared/services/generated.services';
+import { API_BASE_URL, AccountService, ServiceStatusService, GameEventService, NewsService, RolesService, GameAccountService, GenericService, VoteService, RankingService, TransactionsService, DonateService, GameCharacterService, FileUploadService, AccountManagmentService, StatisticsService, PlayerLogService } from './shared/services/generated.services';
 import { JwtInterceptor } from './shared/helpers/jwt.interceptor';
 import { ModuleWithProviders, NgModule, Optional, SkipSelf, InjectionToken } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -80,7 +80,8 @@ export class CoreModule
                 GameCharacterService,
                 FileUploadService,
                 AccountManagmentService,
-                StatisticsService
+                StatisticsService,
+                PlayerLogService
             ]
         }
     }
