@@ -4,6 +4,7 @@ import { AuthenticationService } from 'src/app/shared/services/auth.service';
 import { DonateService } from 'src/app/shared/services/generated.services';
 import { pipe } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 export class Product
 {
@@ -58,7 +59,7 @@ export class ShopComponent implements OnInit{
     }
   ]
 
-  constructor(public donationService : DonateService, public authService : AuthenticationService)
+  constructor(private router : Router, public donationService : DonateService, public authService : AuthenticationService)
   {
     
   }
@@ -129,6 +130,7 @@ export class ShopComponent implements OnInit{
                   {
                     this.showSuccess = true;
                     this.authService.updateCurrencies();
+                    setTimeout(() =>  this.reloadComponent(),4000);
                   }
                   else
                   {
@@ -140,9 +142,11 @@ export class ShopComponent implements OnInit{
           },
           onCancel: (data, actions) => {
               this.showCancel = true;
+              setTimeout(() =>  this.reloadComponent(),4000);
           },
           onError: err => {
               this.showError = true;
+              setTimeout(() =>  this.reloadComponent(),4000);
           },
           onClick: (data, actions) => {
               this.resetStatus();
@@ -154,6 +158,12 @@ export class ShopComponent implements OnInit{
     public resetStatus() : void
     {
 
+    }
+
+    reloadComponent() {
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+      this.router.onSameUrlNavigation = 'reload';
+      this.router.navigate(['/shop']);
     }
 
     private getItems(product : Product) : ITransactionItem[]
