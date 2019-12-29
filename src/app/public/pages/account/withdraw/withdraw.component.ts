@@ -22,6 +22,8 @@ export class WithdrawComponent implements OnInit{
       ).subscribe();
     }
 
+    locked : boolean = false;
+
     characters : CharacterViewModel[] = [];
     selectedChar : string = "";
     amount : number = 0;
@@ -38,8 +40,9 @@ export class WithdrawComponent implements OnInit{
 
     submit()
     {
-      if(this.selectedChar && this.amount > 0)
+      if(this.selectedChar && this.amount > 0 && !this.locked)
       {
+        this.locked = true;
         let viewModel = new WithdrawCurrencyViewModel();
         viewModel.character = this.selectedChar;
         viewModel.amount = this.amount;
@@ -63,6 +66,7 @@ export class WithdrawComponent implements OnInit{
                 this.success = false;
                 console.log(this.errorMessages);
               }
+              this.locked = false;
             }
           )
         ).subscribe();
