@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewEncapsulation, Pipe, PipeTransform } from '@angular/core';
+import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { NewsService, NewsPostViewModel } from 'src/app/shared/services/generated.services';
 import { map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
-import { DomSanitizer } from '@angular/platform-browser';
 import { PageCaptionService } from '../../services/page-caption.service';
 
 @Component({
