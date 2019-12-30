@@ -7,7 +7,8 @@ import { PageCaptionService } from '../../services/page-caption.service';
 @Component({
     selector: 'news-detail',
     templateUrl: './news-detail.component.html',
-    styleUrls: ['./news-detail.component.scss']
+    styleUrls: ['./news-detail.component.scss'],
+    encapsulation: ViewEncapsulation.None
   })
 export class NewsDetailComponent implements OnInit {
     newsPost : NewsPostViewModel = new NewsPostViewModel();
