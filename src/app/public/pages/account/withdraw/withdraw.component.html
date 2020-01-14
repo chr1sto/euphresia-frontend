@@ -26,7 +26,8 @@
             <div class="label">
                 Amount:
             </div>
-            <input type="number" [(ngModel)]="amount" min="0">
+            <input *ngIf="currency == 'VP'" type="number" [(ngModel)]="amount" min="0" step="100">
+            <input *ngIf="currency == 'DP'" type="number" [(ngModel)]="amount" min="0">
         </div>
         <div class="button-wrap">
             <button type="submit" *ngIf="selectedChar && amount > 0" (click)="submit()">Submit</button>
