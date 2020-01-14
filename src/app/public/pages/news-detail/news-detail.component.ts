@@ -1,13 +1,15 @@
-import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Pipe, PipeTransform } from '@angular/core';
 import { NewsService, NewsPostViewModel } from 'src/app/shared/services/generated.services';
 import { map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
 import { PageCaptionService } from '../../services/page-caption.service';
 
 @Component({
     selector: 'news-detail',
     templateUrl: './news-detail.component.html',
-    styleUrls: ['./news-detail.component.scss']
+    styleUrls: ['./news-detail.component.scss'],
+    encapsulation: ViewEncapsulation.None
   })
 export class NewsDetailComponent implements OnInit {
     newsPost : NewsPostViewModel = new NewsPostViewModel();
